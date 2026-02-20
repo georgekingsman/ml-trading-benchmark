@@ -1,0 +1,49 @@
+Model,Regime,Days,CAGR (gross) %,Sharpe (gross),Sharpe (net),Max DD %
+LinearRegression,COVID Crash,104,35.12,1.049,0.013,18.78
+LinearRegression,Normalisation,497,-5.62,-0.353,-2.619,16.33
+LinearRegression,Rate Hikes,251,16.0,0.883,-0.922,10.82
+LinearRegression,Recovery,380,12.73,0.912,-1.441,10.86
+Ridge,COVID Crash,104,35.12,1.049,0.013,18.78
+Ridge,Normalisation,497,-5.62,-0.353,-2.619,16.33
+Ridge,Rate Hikes,251,16.0,0.883,-0.922,10.82
+Ridge,Recovery,380,12.73,0.912,-1.441,10.86
+LogisticRegression,COVID Crash,104,22.34,0.736,-0.235,14.94
+LogisticRegression,Normalisation,497,-7.39,-0.532,-3.051,18.77
+LogisticRegression,Rate Hikes,251,13.0,0.686,-0.972,16.29
+LogisticRegression,Recovery,380,21.14,1.471,-1.044,12.67
+RandomForest,COVID Crash,104,65.91,1.869,0.818,14.38
+RandomForest,Normalisation,497,-2.69,-0.191,-2.598,17.32
+RandomForest,Rate Hikes,251,4.86,0.384,-1.396,14.64
+RandomForest,Recovery,380,2.14,0.236,-2.113,11.8
+LightGBM,COVID Crash,104,47.58,1.406,0.406,13.64
+LightGBM,Normalisation,497,-4.05,-0.295,-2.513,18.24
+LightGBM,Rate Hikes,251,2.41,0.233,-1.582,9.85
+LightGBM,Recovery,380,6.75,0.543,-1.536,13.85
+MLP,COVID Crash,104,37.4,1.205,0.213,9.37
+MLP,Normalisation,497,-0.12,0.047,-1.974,14.21
+MLP,Rate Hikes,251,1.49,0.173,-1.716,15.21
+MLP,Recovery,380,4.43,0.419,-1.661,13.2
+LSTM,COVID Crash,104,2.33,0.232,-0.664,12.17
+LSTM,Normalisation,497,-2.44,-0.175,-2.666,16.81
+LSTM,Rate Hikes,251,-4.52,-0.22,-1.988,11.05
+LSTM,Recovery,380,-2.79,-0.177,-2.354,17.13
+MomentumBaseline,COVID Crash,104,44.37,1.015,0.661,17.11
+MomentumBaseline,Normalisation,497,-3.98,-0.194,-1.309,22.67
+MomentumBaseline,Rate Hikes,251,-23.88,-1.439,-2.394,32.51
+MomentumBaseline,Recovery,380,13.51,0.876,-0.135,10.05
+MeanReversionBaseline,COVID Crash,104,-44.27,-1.015,-1.37,30.47
+MeanReversionBaseline,Normalisation,497,1.81,0.194,-0.962,16.74
+MeanReversionBaseline,Rate Hikes,251,27.23,1.439,0.451,8.97
+MeanReversionBaseline,Recovery,380,-14.1,-0.876,-1.864,24.99
+BuyAndHold_SPY,COVID Crash,104,-7.49,0.083,0.083,33.72
+BuyAndHold_SPY,Normalisation,497,26.87,1.925,1.925,9.97
+BuyAndHold_SPY,Rate Hikes,251,-18.24,-0.709,-0.709,24.5
+BuyAndHold_SPY,Recovery,380,35.08,2.19,2.19,9.44
+EqualWeight,COVID Crash,104,-7.03,-0.039,-0.039,26.32
+EqualWeight,Normalisation,497,10.36,1.067,1.067,9.23
+EqualWeight,Rate Hikes,251,-12.17,-0.683,-0.683,17.66
+EqualWeight,Recovery,380,22.71,2.054,2.054,5.87
+Ensemble,COVID Crash,104,54.23,1.311,0.44,12.4
+Ensemble,Normalisation,497,-7.94,-0.566,-2.96,18.44
+Ensemble,Rate Hikes,251,7.24,0.469,-1.294,13.4
+Ensemble,Recovery,380,11.9,0.863,-1.479,13.2

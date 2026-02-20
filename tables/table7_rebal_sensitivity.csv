@@ -1,0 +1,25 @@
+Model,Rebal Freq (days),Sharpe (gross),Sharpe (net),Avg Turnover
+LogisticRegression,1,0.658,-5.276,2.0643
+LogisticRegression,5,0.469,-1.439,0.6899
+LogisticRegression,10,0.151,-0.669,0.2763
+LogisticRegression,20,0.34,-0.115,0.1503
+LightGBM,1,0.313,-5.786,1.756
+LightGBM,5,0.29,-1.511,0.5579
+LightGBM,10,0.312,-0.604,0.2777
+LightGBM,20,0.179,-0.312,0.1439
+MLP,1,0.306,-6.566,1.9993
+MLP,5,0.294,-1.439,0.5194
+MLP,10,-0.162,-1.093,0.2786
+MLP,20,-0.674,-1.162,0.1454
+LSTM,1,0.63,-2.819,1.1007
+LSTM,5,-0.167,-2.0,0.5571
+LSTM,10,-0.293,-1.462,0.3232
+LSTM,20,-0.824,-1.399,0.1596
+MomentumBaseline,1,-0.217,-2.211,0.8272
+MomentumBaseline,5,0.134,-0.693,0.3369
+MomentumBaseline,10,0.112,-0.468,0.2285
+MomentumBaseline,20,0.434,0.045,0.1555
+Ensemble,1,0.73,-5.072,1.9625
+Ensemble,5,0.347,-1.478,0.6598
+Ensemble,10,0.22,-0.711,0.3013
+Ensemble,20,0.123,-0.358,0.1598
