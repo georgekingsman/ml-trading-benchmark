@@ -63,6 +63,7 @@ from scripts.metrics import (
     permutation_importance,
     sharpe,
     pairwise_dm_matrix,
+    apply_fdr_correction,
 )
 from scripts.report import (
     generate_main_table,
@@ -441,7 +442,11 @@ def main():
     dm_pvals = pairwise_dm_matrix(all_bt_results, return_col="gross_return")
     sig_pairs = (dm_pvals < 0.05).sum().sum() // 2
     total_pairs = len(dm_pvals) * (len(dm_pvals) - 1) // 2
-    print(f"  {sig_pairs}/{total_pairs} pairs significant at 5%")
+    print(f"  {sig_pairs}/{total_pairs} pairs significant at 5% (raw)")
+
+    # Benjamini-Hochberg FDR correction
+    dm_pvals_bh, n_raw, n_bh = apply_fdr_correction(dm_pvals, alpha=0.05, method="fdr_bh")
+    print(f"  {n_bh}/{total_pairs} pairs significant at 5% (BH-corrected)")
 
     # ============================================================== #
     #  Step 11: Rebalance Frequency Sensitivity
@@ -533,8 +538,8 @@ def main():
     # Table 5: Long-only vs Long-short
     generate_longonly_comparison_table(all_metrics_main, all_metrics_lo, output_dir)
 
-    # Table 6: DM test
-    generate_dm_table(dm_pvals, output_dir)
+    # Table 6: DM test (raw + BH-corrected)
+    generate_dm_table(dm_pvals, output_dir, dm_pvals_bh=dm_pvals_bh)
 
     # Table 7: Rebalance sensitivity
     generate_rebalance_sensitivity_table(rebal_results, output_dir)

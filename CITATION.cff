@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this benchmark in your research, please cite it as below."
+type: software
+title: "ML Trading Benchmark: A Reproducible Evaluation Toolkit for ML in Quantitative Trading"
+authors:
+  - family-names: Zhang
+    given-names: Yuchen
+    email: georgekingsman030226@gmail.com
+    affiliation: "The University of Hong Kong"
+    orcid: ""
+repository-code: "https://github.com/georgekingsman/ml-trading-benchmark"
+license: MIT
+version: "1.0.0"
+date-released: "2025-02-21"
+keywords:
+  - machine learning
+  - quantitative trading
+  - benchmark
+  - backtesting
+  - reproducibility
+  - transaction costs
+  - regime analysis
+  - walk-forward evaluation
+abstract: >-
+  A reproducible benchmark toolkit for evaluating machine-learning models
+  in cross-sectional quantitative trading. Includes 9 models, 2 passive
+  baselines, walk-forward evaluation with embargo, multi-scenario cost
+  analysis, regime decomposition, hyperparameter sensitivity studies,
+  and statistical testing (bootstrap CI + Diebold-Mariano with
+  Benjamini-Hochberg FDR correction). One command produces 9 tables
+  and 9 figures.
+preferred-citation:
+  type: article
+  title: "A Reproducible Benchmark for Machine Learning in Cross-Sectional Quantitative Trading under Realistic Costs and Regime Shifts"
+  authors:
+    - family-names: Zhang
+      given-names: Yuchen
+  year: 2025
+  url: "https://github.com/georgekingsman/ml-trading-benchmark"

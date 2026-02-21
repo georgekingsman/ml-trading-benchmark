@@ -164,14 +164,14 @@ class LightGBMModel(BaseModel):
 class MLPModel(BaseModel):
     name = "MLP"
 
-    def __init__(self, hidden_dims: list[int] = None, epochs: int = 50,
-                 lr: float = 1e-3, batch_size: int = 256, **kw):
+    def __init__(self, hidden_dims: list[int] | None = None, epochs: int = 50,
+                 lr: float = 1e-3, batch_size: int = 256, **kw: Any):
         self.hidden_dims = hidden_dims or [128, 64]
         self.epochs = epochs
         self.lr = lr
         self.batch_size = batch_size
-        self.model = None
-        self.device = None
+        self.model: Any = None
+        self.device: Any = None
 
     def _build(self, input_dim: int):
         import torch
@@ -228,24 +228,24 @@ class LSTMModel(BaseModel):
         self.epochs = epochs
         self.lr = lr
         self.batch_size = batch_size
-        self.model = None
-        self.device = None
+        self.model: Any = None
+        self.device: Any = None
 
     def _build(self, input_dim: int):
         import torch
         import torch.nn as nn
 
         class _LSTM(nn.Module):
-            def __init__(self_, input_dim, hidden_dim, num_layers):
+            def __init__(self, input_dim, hidden_dim, num_layers):  # noqa: N805
                 super().__init__()
-                self_.lstm = nn.LSTM(input_dim, hidden_dim, num_layers,
-                                     batch_first=True, dropout=0.2)
-                self_.fc = nn.Linear(hidden_dim, 1)
+                self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers,
+                                    batch_first=True, dropout=0.2)
+                self.fc = nn.Linear(hidden_dim, 1)
 
-            def forward(self_, x):
+            def forward(self, x):  # noqa: N805
                 # x: (batch, seq_len, features)
-                out, _ = self_.lstm(x)
-                return self_.fc(out[:, -1, :])
+                out, _ = self.lstm(x)
+                return self.fc(out[:, -1, :])
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = _LSTM(input_dim, self.hidden_dim, self.num_layers).to(self.device)

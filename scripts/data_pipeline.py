@@ -73,8 +73,10 @@ def _download_yfinance_single(tkr: str, start: str, end: str, max_retries: int =
     import time as _time
     for attempt in range(max_retries):
         try:
-            df = yf.download(tkr, start=start, end=end, progress=False, auto_adjust=True)
-            return _normalise_df(df)
+            raw = yf.download(tkr, start=start, end=end, progress=False, auto_adjust=True)
+            if raw is None or raw.empty:
+                return None
+            return _normalise_df(raw)
         except Exception as e:
             err = str(e)
             if "Rate" in err or "Too Many" in err or "429" in err:
@@ -136,13 +138,13 @@ def download_prices(
                     batch, start=start, end=end,
                     progress=False, auto_adjust=True, group_by="ticker", threads=False,
                 )
-                if not batch_df.empty:
+                if batch_df is not None and not batch_df.empty:
                     for tkr in batch:
                         try:
                             if len(batch) == 1:
                                 df = _normalise_df(batch_df)
                             else:
-                                df = _normalise_df(batch_df[tkr])
+                                df = _normalise_df(batch_df[tkr])  # type: ignore[index]
                             if df is not None:
                                 out_path = os.path.join(raw_dir, f"{tkr}.parquet")
                                 df.to_parquet(out_path)

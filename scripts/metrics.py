@@ -13,6 +13,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 from scipy import stats
+from statsmodels.stats.multitest import multipletests
 
 
 # ================================================================== #
@@ -21,11 +22,11 @@ from scipy import stats
 
 def cagr(returns: pd.Series, periods_per_year: int = 252) -> float:
     """Compound Annual Growth Rate."""
-    cum = (1 + returns).prod()
+    cum = float((1 + returns).prod())  # type: ignore[arg-type]
     n_years = len(returns) / periods_per_year
     if n_years <= 0 or cum <= 0:
         return 0.0
-    return float(cum ** (1 / n_years) - 1)
+    return float(cum ** (1.0 / n_years) - 1.0)
 
 
 def sharpe(returns: pd.Series, rf: float = 0.0, periods_per_year: int = 252) -> float:
@@ -81,8 +82,9 @@ def information_coefficient(predictions: pd.Series, actuals: pd.Series) -> float
     """Rank IC: Spearman correlation between predictions and actual returns."""
     if len(predictions) < 3:
         return 0.0
-    corr, _ = stats.spearmanr(predictions, actuals)
-    return float(corr) if not np.isnan(corr) else 0.0
+    result = stats.spearmanr(predictions, actuals)
+    corr = float(result.statistic) if hasattr(result, 'statistic') else float(result[0])  # type: ignore[union-attr,arg-type]
+    return corr if not np.isnan(corr) else 0.0
 
 
 def compute_ic_icir(
@@ -297,7 +299,7 @@ def diebold_mariano_test(
     -------
     (DM statistic, p-value)
     """
-    d = returns_a.values - returns_b.values  # loss differential
+    d = np.asarray(returns_a.values, dtype=float) - np.asarray(returns_b.values, dtype=float)  # loss differential
     n = len(d)
     if n < 10:
         return 0.0, 1.0
@@ -339,6 +341,54 @@ def pairwise_dm_matrix(
             pvals.iloc[i, j] = p
             pvals.iloc[j, i] = p
     return pvals
+
+
+def apply_fdr_correction(
+    dm_pvals: pd.DataFrame,
+    alpha: float = 0.05,
+    method: str = "fdr_bh",
+) -> tuple[pd.DataFrame, int, int]:
+    """
+    Apply Benjamini–Hochberg (FDR) correction to pairwise DM p-values.
+
+    Parameters
+    ----------
+    dm_pvals : symmetric DataFrame of raw p-values from pairwise_dm_matrix
+    alpha    : significance level (default 0.05)
+    method   : correction method for statsmodels multipletests
+               'fdr_bh' = Benjamini-Hochberg, 'bonferroni' = Bonferroni
+
+    Returns
+    -------
+    (adjusted_pvals DataFrame, n_sig_raw, n_sig_corrected)
+    """
+    models = dm_pvals.index.tolist()
+    n = len(models)
+
+    # Extract upper triangle p-values
+    raw_ps = []
+    pairs = []
+    for i in range(n):
+        for j in range(i + 1, n):
+            raw_ps.append(dm_pvals.iloc[i, j])
+            pairs.append((i, j))
+
+    raw_ps_arr = np.array(raw_ps)
+    n_sig_raw = int((raw_ps_arr < alpha).sum())
+
+    # Apply correction
+    reject, adj_ps, _, _ = multipletests(raw_ps_arr, alpha=alpha, method=method)
+    n_sig_corrected = int(reject.sum())
+
+    # Build adjusted DataFrame
+    adj_df = pd.DataFrame(np.ones((n, n)), index=models, columns=models)
+    for idx, (i, j) in enumerate(pairs):
+        adj_df.iloc[i, j] = adj_ps[idx]
+        adj_df.iloc[j, i] = adj_ps[idx]
+    for i in range(n):
+        adj_df.iloc[i, i] = 1.0
+
+    return adj_df, n_sig_raw, n_sig_corrected
 
 
 # ================================================================== #

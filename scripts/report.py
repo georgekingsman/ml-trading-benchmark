@@ -100,7 +100,7 @@ def generate_main_table(
     print("\n" + "=" * 80)
     print("TABLE 1: Main Benchmark Results (Test Period)")
     print("=" * 80)
-    print(tabulate(df, headers="keys", tablefmt="github", floatfmt=".3f"))
+    print(tabulate(df, headers="keys", tablefmt="github", floatfmt=".3f"))  # type: ignore[arg-type]
     print()
     return df
 
@@ -137,7 +137,7 @@ def generate_cost_sensitivity_table(
     print("\n" + "=" * 80)
     print("TABLE 2: Cost Sensitivity — Sharpe (net)")
     print("=" * 80)
-    print(tabulate(pivot, headers="keys", tablefmt="github", floatfmt=".3f"))
+    print(tabulate(pivot, headers="keys", tablefmt="github", floatfmt=".3f"))  # type: ignore[arg-type]
     print()
     return df
 
@@ -173,7 +173,7 @@ def generate_regime_table(
     print("\n" + "=" * 80)
     print("TABLE 3: Regime Analysis")
     print("=" * 80)
-    print(tabulate(df, headers="keys", tablefmt="github", floatfmt=".3f", showindex=False))
+    print(tabulate(df, headers="keys", tablefmt="github", floatfmt=".3f", showindex=False))  # type: ignore[arg-type]
     print()
     return df
 
@@ -207,7 +207,7 @@ def generate_feature_importance_table(
     print("\n" + "=" * 80)
     print("TABLE 4: Feature Importance (top-10 by IC drop)")
     print("=" * 80)
-    print(tabulate(df, headers="keys", tablefmt="github", floatfmt=".4f", showindex=False))
+    print(tabulate(df, headers="keys", tablefmt="github", floatfmt=".4f", showindex=False))  # type: ignore[arg-type]
     print()
     return df
 
@@ -247,7 +247,7 @@ def generate_longonly_comparison_table(
     print("\n" + "=" * 80)
     print("TABLE 5: Long-Only vs Long-Short")
     print("=" * 80)
-    print(tabulate(df, headers="keys", tablefmt="github", floatfmt=".3f"))
+    print(tabulate(df, headers="keys", tablefmt="github", floatfmt=".3f"))  # type: ignore[arg-type]
     print()
     return df
 
@@ -423,7 +423,7 @@ def plot_feature_importance(
         ax.grid(True, axis="x", alpha=0.3)
 
     fig.suptitle("Permutation Feature Importance", fontweight="bold", fontsize=13)
-    fig.tight_layout(rect=[0, 0, 1, 0.95])
+    fig.tight_layout(rect=(0, 0, 1, 0.95))
     path = os.path.join(output_dir, "figures", "fig5_feature_importance.pdf")
     fig.savefig(path)
     plt.close()
@@ -486,19 +486,38 @@ def plot_regime_bars(
 def generate_dm_table(
     dm_pvals: "pd.DataFrame",
     output_dir: str,
+    dm_pvals_bh: "pd.DataFrame | None" = None,
 ) -> "pd.DataFrame":
     csv_path = os.path.join(output_dir, "tables", "table6_dm_test.csv")
     dm_pvals.to_csv(csv_path)
 
     latex_path = os.path.join(output_dir, "tables", "table6_dm_test.tex")
     with open(latex_path, "w") as f:
-        f.write("% Table 6: Diebold-Mariano pairwise p-values\n")
+        f.write("% Table 6: Diebold-Mariano pairwise p-values (raw)\n")
         f.write(dm_pvals.to_latex(float_format="%.3f"))
 
     print("\n" + "=" * 80)
     print("TABLE 6: Diebold-Mariano Pairwise p-values (gross returns)")
     print("=" * 80)
-    print(tabulate(dm_pvals, headers="keys", tablefmt="github", floatfmt=".3f"))
+    print(tabulate(dm_pvals, headers="keys", tablefmt="github", floatfmt=".3f"))  # type: ignore[arg-type]
+
+    # BH-corrected table
+    if dm_pvals_bh is not None:
+        csv_bh = os.path.join(output_dir, "tables", "table6b_dm_test_bh.csv")
+        dm_pvals_bh.to_csv(csv_bh)
+        latex_bh = os.path.join(output_dir, "tables", "table6b_dm_test_bh.tex")
+        with open(latex_bh, "w") as f:
+            f.write("% Table 6b: Diebold-Mariano pairwise p-values (BH-corrected)\n")
+            f.write(dm_pvals_bh.to_latex(float_format="%.3f"))
+        print("\nTABLE 6b: BH-Corrected p-values")
+        print("-" * 40)
+        n = len(dm_pvals_bh)
+        n_sig_raw = int((dm_pvals < 0.05).sum().sum()) // 2
+        n_sig_bh = int((dm_pvals_bh < 0.05).sum().sum()) // 2
+        total = n * (n - 1) // 2
+        print(f"  Raw significant: {n_sig_raw}/{total}")
+        print(f"  BH-corrected significant: {n_sig_bh}/{total}")
+
     print()
     return dm_pvals
 
@@ -539,7 +558,7 @@ def generate_rebalance_sensitivity_table(
     print("\n" + "=" * 80)
     print("TABLE 7: Rebalance Frequency Sensitivity — Sharpe (gross)")
     print("=" * 80)
-    print(tabulate(pivot, headers="keys", tablefmt="github", floatfmt=".3f"))
+    print(tabulate(pivot, headers="keys", tablefmt="github", floatfmt=".3f"))  # type: ignore[arg-type]
     print()
     return df
 
@@ -577,7 +596,7 @@ def generate_topk_sensitivity_table(
     print("\n" + "=" * 80)
     print("TABLE 8: Top-K Sensitivity — Sharpe (gross)")
     print("=" * 80)
-    print(tabulate(pivot, headers="keys", tablefmt="github", floatfmt=".3f"))
+    print(tabulate(pivot, headers="keys", tablefmt="github", floatfmt=".3f"))  # type: ignore[arg-type]
     print()
     return df
 
