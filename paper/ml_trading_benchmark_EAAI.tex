@@ -74,6 +74,7 @@ statistical testing
 \label{sec:intro}
 
 Machine learning is now central to quantitative trading, supporting signal discovery, portfolio construction, and execution under uncertainty and frictions~\citep{ref7,ref13,ref8}.
+We treat ML-based quantitative trading as an \emph{engineering system evaluation problem}, where protocol choices---data splits, cost assumptions, leakage controls, and multiple-testing corrections---dominate apparent performance differences between models.
 Yet a large fraction of reported ``alpha'' disappears once evaluation is made realistic.
 Common pitfalls include: look-ahead leakage through naive train/test splits, omission of transaction costs, lack of statistical significance testing, and neglect of regime-dependent fragility~\citep{ref41,ref42,ref5}.
 
@@ -126,7 +127,7 @@ Our benchmark integrates these methodological innovations into a unified, automa
 \paragraph{Positioning.}
 Unlike survey papers that prescribe best practices, our work \emph{demonstrates their consequences} in a concrete, reproducible setting.
 Unlike trading platforms, our focus is on controlled evaluation rather than strategy development.
-The closest analogue is a ``benchmark paper'' in the style of ImageNet~\citep{ref_imagenet} or GLUE~\citep{ref_glue} for NLP---adapted to the unique challenges of financial time series.
+The closest analogue is a standardised evaluation benchmark---adapted to the unique challenges of financial time series, in which non-stationarity, transaction costs, and regime shifts make controlled comparison especially difficult.
 
 
 % ================================================================== %
@@ -140,11 +141,14 @@ The ETF universe avoids individual-stock survivorship bias: all 50 ETFs remain l
 Daily OHLCV data are obtained from Stooq (primary; no API key, no rate limit) with yfinance as fallback.
 
 \paragraph{Data statement.}
-All data are freely available from public sources.
-Stooq provides adjusted OHLCV without survivorship filtering.
+All data used in this study are publicly accessible and require no paid subscription or institutional license.
+The primary source is Stooq (\url{https://stooq.com}), which provides adjusted daily OHLCV for US-listed ETFs; yfinance (\url{https://pypi.org/project/yfinance/}) serves as a fallback.
+The universe comprises 50 ETFs across equity, fixed-income, commodity, and currency sectors, covering the period January 2005 to December 2024.
+Stooq data are freely redistributable for non-commercial research; yfinance data are subject to Yahoo Finance terms of service.
 We do not use point-in-time fundamental data; all features are derived from price and volume (see below).
 Corporate actions (splits, dividends) are handled by the data provider's adjustment.
 Missing data (delistings, holidays) are forward-filled for at most 5 days; tickers with $>$10\% missing days are excluded.
+The complete download-and-processing pipeline is included in the released code, enabling full replication from raw data.
 
 \subsection{Features and Labels}
 
@@ -274,9 +278,9 @@ We apply the two-sided Diebold--Mariano (DM) test~\citep{ref_dm} pairwise across
 
 \paragraph{Multiple testing correction.}
 With $n=12$ models, we have $\binom{12}{2} = 66$ pairwise comparisons.
-Testing each at $\alpha=0.05$ inflates the family-wise Type I error rate.
-We apply the Benjamini--Hochberg (BH) procedure~\citep{ref_bh} to control the false discovery rate (FDR) at 5\%.
-This is a one-line addition to the pipeline but significantly strengthens the statistical rigour of model comparisons.
+Given this large number of simultaneous tests, testing each at $\alpha=0.05$ without correction would inflate the family-wise Type~I error rate substantially, making spurious ``significant'' differences likely even when no true performance gap exists.
+We therefore apply the Benjamini--Hochberg (BH) procedure~\citep{ref_bh} to control the false discovery rate (FDR) at 5\%.
+This is a one-line addition to the pipeline but significantly strengthens the statistical rigour of model comparisons and aligns with best practices advocated by Harvey et al.~\citep{ref_harvey} for factor evaluation in finance.
 
 \subsection{Regime Decomposition}
 
@@ -505,6 +509,12 @@ The pipeline produces:
 
 All code is released under MIT license at \url{https://github.com/georgekingsman/ml-trading-benchmark}.
 The repository includes \texttt{REPRODUCIBILITY.md} (step-by-step instructions), \texttt{ENVIRONMENT.md} (platform notes), and \texttt{CITATION.cff} (machine-readable citation).
+
+\paragraph{Shortest reproduction path.}
+After installing dependencies (\texttt{pip install -r requirements.txt}), a single command reproduces every result in this paper:
+\begin{center}
+\texttt{python run\_all.py} \quad$\longrightarrow$\quad Tables~\ref{tab:main}--\ref{tab:longonly} + Figures~\ref{fig:timeline}--\ref{fig:equity} in {$\sim$6~min} on CPU.
+\end{center}
 
 
 % ================================================================== %
