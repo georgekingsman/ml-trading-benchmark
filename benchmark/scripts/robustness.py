@@ -171,6 +171,7 @@ def pgd_attack(
             pred = model.model(X_adv_t)
             loss = loss_fn(pred, y_t)
             loss.backward()
+            assert delta.grad is not None
             grad_sign = delta.grad.data.sign()
             delta = delta.detach() + alpha_t * grad_sign
             # Project back to ε-ball
@@ -208,6 +209,7 @@ def pgd_attack(
             pred = model.model(X_adv_t)
             loss = loss_fn(pred, y_t)
             loss.backward()
+            assert delta.grad is not None
             grad_sign = delta.grad.data.sign()
             delta = delta.detach() + alpha_t * grad_sign
             delta = torch.clamp(delta, -eps_t, eps_t)
