@@ -1,0 +1,112 @@
+# ============================================================
+#  Benchmark Configuration — ML for Quantitative Trading
+# ============================================================
+
+# ------ Universe ------
+universe_file: "config/etf_universe.csv"
+
+# ------ Data ------
+data:
+  source: "yfinance"          # yfinance | stooq | csv
+  start_date: "2005-01-01"
+  end_date: "2024-12-31"
+  frequency: "daily"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+
+# ------ Task ------
+task:
+  type: "regression"           # regression | classification
+  horizons: [1, 5, 20]        # forward return horizons (trading days)
+  primary_horizon: 5           # the one used for main benchmark tables
+  label: "forward_return"      # forward_return | direction
+
+# ------ Walk-Forward Split ------
+split:
+  method: "walk_forward"       # walk_forward | rolling
+  train_start: "2005-01-01"
+  train_end:   "2016-12-31"
+  val_start:   "2017-01-01"
+  val_end:     "2019-12-31"
+  test_start:  "2020-01-01"
+  test_end:    "2024-12-31"
+  # Rolling window (used if method == rolling)
+  rolling_train_years: 10
+  rolling_val_years: 2
+  rolling_step_years: 1
+  embargo_days: 5              # gap between train/val and val/test
+
+# ------ Features ------
+features:
+  price_features:
+    - return_1d
+    - return_5d
+    - return_20d
+    - volatility_20d
+    - volatility_60d
+    - momentum_10d
+    - momentum_20d
+    - rsi_14
+    - ma_ratio_10
+    - ma_ratio_50
+    - volume_ratio_20d
+    - high_low_range
+    - close_open_range
+  normalize: "rolling"         # rolling | expanding | none
+  rolling_window: 252          # lookback for normalisation
+
+# ------ Models ------
+models:
+  - name: "LinearRegression"
+    enabled: true
+  - name: "Ridge"
+    enabled: true
+    params: {alpha: 1.0}
+  - name: "LogisticRegression"
+    enabled: true
+    params: {C: 1.0}
+  - name: "RandomForest"
+    enabled: true
+    params: {n_estimators: 200, max_depth: 8, random_state: 42}
+  - name: "LightGBM"
+    enabled: true
+    params: {n_estimators: 300, max_depth: 6, learning_rate: 0.05, random_state: 42}
+  - name: "MLP"
+    enabled: true
+    params: {hidden_dims: [128, 64], epochs: 50, lr: 0.001, batch_size: 256}
+  - name: "LSTM"
+    enabled: true
+    params: {hidden_dim: 64, num_layers: 2, seq_len: 20, epochs: 30, lr: 0.001, batch_size: 256}
+  - name: "MomentumBaseline"
+    enabled: true
+    params: {lookback: 20}
+  - name: "MeanReversionBaseline"
+    enabled: true
+    params: {lookback: 20}
+
+# ------ Backtest ------
+backtest:
+  strategy: "top_k_long_short"  # top_k_long_short | threshold
+  top_k: 10                     # long top-k, short bottom-k
+  rebalance_freq: 5             # rebalance every N days
+  cost_scenarios_bps: [0, 5, 10, 15, 25]   # basis points
+  slippage_bps: 5
+  initial_capital: 1000000
+
+# ------ Metrics ------
+metrics:
+  - cagr
+  - sharpe
+  - max_drawdown
+  - turnover
+  - net_return_after_costs
+  - calmar
+  - hit_rate
+  - ic                          # information coefficient (rank corr)
+  - icir                        # IC information ratio
+
+# ------ Output ------
+output:
+  tables_dir: "reports/tables"
+  figures_dir: "reports/figures"
+  seed: 42

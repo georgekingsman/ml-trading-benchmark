@@ -1,0 +1,51 @@
+ticker,name,sector,asset_class
+SPY,SPDR S&P 500 ETF,Broad Market,Equity
+QQQ,Invesco QQQ Trust,Technology,Equity
+IWM,iShares Russell 2000 ETF,Small Cap,Equity
+DIA,SPDR Dow Jones Industrial,Large Cap,Equity
+MDY,SPDR S&P MidCap 400,Mid Cap,Equity
+XLK,Technology Select Sector,Technology,Equity
+XLF,Financial Select Sector,Financials,Equity
+XLE,Energy Select Sector,Energy,Equity
+XLV,Health Care Select Sector,Healthcare,Equity
+XLI,Industrial Select Sector,Industrials,Equity
+XLY,Consumer Discretionary Select,Consumer Disc,Equity
+XLP,Consumer Staples Select,Consumer Staples,Equity
+XLU,Utilities Select Sector,Utilities,Equity
+XLB,Materials Select Sector,Materials,Equity
+XLRE,Real Estate Select Sector,Real Estate,Equity
+XLC,Communication Services Select,Communication,Equity
+VGT,Vanguard Information Technology,Technology,Equity
+VHT,Vanguard Health Care,Healthcare,Equity
+VNQ,Vanguard Real Estate,Real Estate,Equity
+VWO,Vanguard FTSE Emerging Markets,Emerging Markets,Equity
+EFA,iShares MSCI EAFE,International Developed,Equity
+EEM,iShares MSCI Emerging Markets,Emerging Markets,Equity
+IYR,iShares US Real Estate,Real Estate,Equity
+SMH,VanEck Semiconductor,Semiconductors,Equity
+XBI,SPDR S&P Biotech,Biotech,Equity
+ARKK,ARK Innovation,Innovation,Equity
+SOXX,iShares Semiconductor,Semiconductors,Equity
+KRE,SPDR S&P Regional Banking,Financials,Equity
+IBB,iShares Biotechnology,Biotech,Equity
+ITA,iShares US Aerospace & Defense,Industrials,Equity
+TLT,iShares 20+ Year Treasury Bond,Long Duration,Fixed Income
+IEF,iShares 7-10 Year Treasury Bond,Medium Duration,Fixed Income
+SHY,iShares 1-3 Year Treasury Bond,Short Duration,Fixed Income
+AGG,iShares Core US Aggregate Bond,Aggregate,Fixed Income
+LQD,iShares Investment Grade Corp,Corp IG,Fixed Income
+HYG,iShares High Yield Corp Bond,Corp HY,Fixed Income
+TIP,iShares TIPS Bond,Inflation Protected,Fixed Income
+BND,Vanguard Total Bond Market,Aggregate,Fixed Income
+GLD,SPDR Gold Shares,Gold,Commodity
+SLV,iShares Silver Trust,Silver,Commodity
+USO,United States Oil Fund,Crude Oil,Commodity
+DBA,Invesco DB Agriculture,Agriculture,Commodity
+GSG,iShares S&P GSCI Commodity,Broad Commodity,Commodity
+UNG,United States Natural Gas Fund,Natural Gas,Commodity
+UUP,Invesco DB US Dollar Index,USD Index,Currency
+FXE,Invesco CurrencyShares Euro,EUR/USD,Currency
+FXY,Invesco CurrencyShares Yen,JPY/USD,Currency
+FXB,Invesco CurrencyShares GBP,GBP/USD,Currency
+FXA,Invesco CurrencyShares AUD,AUD/USD,Currency
+FXC,Invesco CurrencyShares CAD,CAD/USD,Currency

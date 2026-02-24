@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: ml_trading_benchmark_EAAI.aux
+The style file: elsarticle-num.bst
+Database file #1: references_eswa_core60_filled.bib
+Warning--empty pages in ref41
+Warning--empty year in ref14
+Warning--empty year in ref16
+Warning--empty year in ref15
+Warning--empty year in ref11
+You've used 15 entries,
+            2952 wiz_defined-function locations,
+            757 strings with 7919 characters,
+and the built_in function-call counts, 3937 in all, are:
+= -- 376
+> -- 102
+< -- 0
++ -- 44
+- -- 29
+* -- 287
+:= -- 537
+add.period$ -- 25
+call.type$ -- 15
+change.case$ -- 15
+chr.to.int$ -- 0
+cite$ -- 20
+duplicate$ -- 131
+empty$ -- 477
+format.name$ -- 39
+if$ -- 1036
+int.to.chr$ -- 0
+int.to.str$ -- 15
+missing$ -- 11
+newline$ -- 71
+num.names$ -- 11
+pop$ -- 100
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 269
+stack$ -- 0
+substring$ -- 101
+swap$ -- 38
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 5
+while$ -- 21
+width$ -- 17
+write$ -- 144
+(There were 5 warnings)

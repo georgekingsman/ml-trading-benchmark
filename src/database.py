@@ -16,7 +16,8 @@ class database():
         
         self.embedding_model = SentenceTransformer(embedding_model, trust_remote_code=True)
 
-        self.embedding_model.to(torch.device('cuda'))
+        device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+        self.embedding_model.to(device)
 
         self.db = TinyDB(f'{db_path}/arxiv_paper_db.json')
         self.table = self.db.table('cs_paper_info')

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Environment
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Data files (too large for git)
+benchmark/data/raw/
+benchmark/data/processed/*.parquet
+benchmark/features/*.parquet
+
+# Large database files
+database/*.bin
+database/arxiv_paper_db.json
+database/arxivid_to_index_abs.json
+
+# Logs
+*.log
+run_output*.log
+
+# Build outputs
+*.egg-info/
+dist/
+build/

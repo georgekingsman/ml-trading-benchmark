@@ -1,0 +1,61 @@
+key,title
+ref1,Generating Synergistic Formulaic Alpha Collections via Reinforcement Learning
+ref2,Quantitative Stock Investment by Routing Uncertainty-Aware Trading Experts A Multi-Task Learning Approach
+ref3,The Limit Order Book Recreation Model (LOBRM) An Extended Analysis
+ref4,IMM An Imitative Reinforcement Learning Approach with Predictive Representation Learning for Automatic Market Making
+ref5,Improving the Robustness of Trading Strategy Backtesting with Boltzmann Machines and Generative Adversarial Networks
+ref7,Reinforcement Learning for Quantitative Trading
+ref8,Deep reinforcement learning for portfolio management
+ref9,"Balancing Profit, Risk, and Sustainability for Portfolio Management"
+ref10,Deep Stock Trading A Hierarchical Reinforcement Learning Framework for Portfolio Optimization and Order Execution
+ref12,FinRL-Podracer High Performance and Scalable Deep Reinforcement Learning for Quantitative Finance
+ref13,"Quant 4.0 Engineering Quantitative Investment with Automated, Explainable and Knowledge-driven Artificial Intelligence"
+ref18,Real-time Forecasting of Time Series in Financial Markets Using Sequentially Trained Many-to-one LSTMs
+ref19,From attention to profit quantitative trading strategy based on transformer
+ref27,Machine Learning for Forecasting Mid Price Movement using Limit Order Book Data
+ref28,Combining Deep Learning on Order Books with Reinforcement Learning for Profitable Trading
+ref29,Trading the Twitter Sentiment with Reinforcement Learning
+ref33,Market Making with Deep Reinforcement Learning from Limit Order Books
+ref36,Deep Reinforcement Learning Approach for Trading Automation in The Stock Market
+ref37,High-Dimensional Stock Portfolio Trading with Deep Reinforcement Learning
+ref38,An intelligent financial portfolio trading strategy using deep Q-learning
+ref39,Hierarchical Deep Reinforcement Learning for VWAP Strategy Optimization
+ref41,Improving Portfolio Performance Using a Novel Method for Predicting Financial Regimes
+ref42,Online learning techniques for prediction of temporal tabular datasets with regime changes
+ref43,Model-Agnostic Meta-Learning for Natural Language Understanding Tasks in Finance
+ref44,Safe-FinRL A Low Bias and Variance Deep Reinforcement Learning Implementation for High-Freq Stock Trading
+ref50,Theoretically Motivated Data Augmentation and Regularization for Portfolio Construction
+ref51,How Robust are Limit Order Book Representations under Data Perturbation
+ref58,Formal Algorithms for Transformers
+ref59,A Survey of Contextual Optimization Methods for Decision Making under Uncertainty
+ref71,Analyzing Machine Learning Models for Credit Scoring with Explainable AI and Optimizing Investment Decisions
+ref76,Exploring Opportunistic Meta-knowledge to Reduce Search Spaces for Automated Machine Learning
+ref81,Forecasting directional movements of stock prices for intraday trading using LSTM and random forests
+ref84,A Simple and Fast Baseline for Tuning Large XGBoost Models
+ref86,Leveraging Deep Learning and Online Source Sentiment for Financial Portfolio Management
+ref87,Portfolio Optimization with 2D Relative-Attentional Gated Transformer
+ref88,AlphaStock A Buying-Winners-and-Selling-Losers Investment Strategy using Interpretable Deep Reinforcement Attention Networks
+ref89,Deep Learning for Portfolio Optimization
+ref91,Reinforcement Learning for Portfolio Management
+ref92,Model-based Deep Reinforcement Learning for Dynamic Portfolio Optimization
+ref93,Causal Inference on Investment Constraints and Non-stationarity in Dynamic Portfolio Optimization through Reinforcement Learning
+ref94,Reinforcement Evolutionary Learning Method for self-learning
+ref96,FinRL-Meta A Universe of Near-Real Market Environments for Data-Driven Deep Reinforcement Learning in Quantitative Finance
+ref98,Application of deep reinforcement learning for Indian stock trading automation
+ref114,iQUANT Interactive Quantitative Investment Using Sparse Regression Factors
+ref117,Stock Market Sentiment Classification and Backtesting via Fine-tuned BERT
+ref119,Sentiment and Knowledge Based Algorithmic Trading with Deep Reinforcement Learning
+ref120,Learning the Market Sentiment-Based Ensemble Trading Agents
+ref126,NumHTML Numeric-Oriented Hierarchical Transformer Model for Multi-task Financial Forecasting
+ref129,Market-GAN Adding Control to Financial Market Data Generation with Semantic Context
+ref131,Get Real Realism Metrics for Robust Limit Order Book Market Simulations
+ref132,Model-based Reinforcement Learning for Predictions and Control for Limit Order Books
+ref140,Uncertainty-Aware Lookahead Factor Models for Quantitative Investing
+ref149,Explainable AI in Credit Risk Management
+ref155,Explainable AI for Trees From Local Explanations to Global Understanding
+ref156,LionForests Local Interpretation of Random Forests
+ref160,MetaTrader An Reinforcement Learning Approach Integrating Diverse Policies for Portfolio Optimization
+ref169,Large Language Model Adaptation for Financial Sentiment Analysis
+ref172,"A Comprehensive Overview and Comparative Analysis on Deep Learning Models CNN, RNN, LSTM, GRU"
+ref188,Applying QNLP to sentiment analysis in finance
+ref198,Asynchronous Deep Double Duelling Q-Learning for Trading-Signal Execution in Limit Order Book Markets

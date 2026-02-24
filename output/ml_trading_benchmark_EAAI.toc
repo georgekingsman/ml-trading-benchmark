@@ -1,0 +1,55 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {paragraph}{Contributions.}{3}{section*.2}%
+\contentsline {paragraph}{Paper organisation.}{3}{section*.3}%
+\contentsline {section}{\numberline {2}Related Work}{3}{section.2}%
+\contentsline {paragraph}{ML for trading surveys.}{3}{section*.4}%
+\contentsline {paragraph}{Quantitative trading platforms.}{3}{section*.5}%
+\contentsline {paragraph}{Evaluation methodology.}{4}{section*.6}%
+\contentsline {paragraph}{Positioning.}{4}{section*.7}%
+\contentsline {section}{\numberline {3}Benchmark Design}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Universe and Data}{4}{subsection.3.1}%
+\contentsline {paragraph}{Data statement.}{4}{section*.8}%
+\contentsline {subsection}{\numberline {3.2}Features and Labels}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Walk-Forward Split with Embargo}{5}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Cost Model}{5}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Models and Strategies}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Model Families}{6}{subsection.4.1}%
+\contentsline {paragraph}{Traditional ML (5 models).}{6}{section*.9}%
+\contentsline {paragraph}{Deep Learning (2 models).}{6}{section*.10}%
+\contentsline {paragraph}{Naive Strategies (2 baselines).}{6}{section*.11}%
+\contentsline {paragraph}{Ensemble.}{6}{section*.12}%
+\contentsline {paragraph}{Passive Benchmarks.}{6}{section*.13}%
+\contentsline {subsection}{\numberline {4.2}Strategy Construction}{6}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Evaluation Methodology}{7}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Performance Metrics}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Signal-Level Metrics}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Bootstrap Confidence Intervals}{7}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Diebold--Mariano Test with FDR Correction}{7}{subsection.5.4}%
+\contentsline {paragraph}{Multiple testing correction.}{7}{section*.14}%
+\contentsline {subsection}{\numberline {5.5}Regime Decomposition}{7}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Hyperparameter Sensitivity}{8}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Results}{8}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Main Results}{8}{subsection.6.1}%
+\contentsline {paragraph}{Observations.}{8}{section*.15}%
+\contentsline {subsection}{\numberline {6.2}Cost Sensitivity}{9}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Regime Analysis}{9}{subsection.6.3}%
+\contentsline {paragraph}{Observations.}{9}{section*.16}%
+\contentsline {subsection}{\numberline {6.4}Hyperparameter Sensitivity}{10}{subsection.6.4}%
+\contentsline {paragraph}{Observations.}{10}{section*.17}%
+\contentsline {subsection}{\numberline {6.5}Statistical Significance}{10}{subsection.6.5}%
+\contentsline {paragraph}{Raw results.}{10}{section*.18}%
+\contentsline {paragraph}{After BH correction.}{10}{section*.19}%
+\contentsline {subsection}{\numberline {6.6}Long-Only Variant}{10}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Equity Curves}{11}{subsection.6.7}%
+\contentsline {section}{\numberline {7}Reproducibility Package}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Pipeline Overview}{11}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Runtime and Environment}{11}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Output}{12}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Code and License}{12}{subsection.7.4}%
+\contentsline {paragraph}{Shortest reproduction path.}{12}{section*.20}%
+\contentsline {section}{\numberline {8}Discussion and Limitations}{12}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Key Takeaways}{12}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Implications for the Research Community}{13}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Limitations}{13}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Future Work}{13}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Conclusion}{14}{section.9}%

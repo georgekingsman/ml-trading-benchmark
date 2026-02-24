@@ -1,0 +1,106 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{ref7}
+S.~Sun, R.~Wang, B.~An, \href{https://doi.org/10.1145/3582560}{Reinforcement
+  learning for quantitative trading}, ACM Transactions on Intelligent Systems
+  and Technology (2023).
+\newblock \href {https://doi.org/10.1145/3582560} {\path{doi:10.1145/3582560}}.
+\newline\urlprefix\url{https://doi.org/10.1145/3582560}
+
+\bibitem{ref13}
+J.~Guo, S.~Wang, L.~M. Ni, H.-Y. Shum,
+  \href{https://doi.org/10.1631/fitee.2300720}{Quant 4.0: engineering
+  quantitative investment with automated, explainable, and knowledge-driven
+  artificial intelligence}, Frontiers of Information Technology &amp;
+  Electronic Engineering (2024).
+\newblock \href {https://doi.org/10.1631/fitee.2300720}
+  {\path{doi:10.1631/fitee.2300720}}.
+\newline\urlprefix\url{https://doi.org/10.1631/fitee.2300720}
+
+\bibitem{ref8}
+S.~Yang, \href{https://doi.org/10.1016/j.knosys.2023.110905}{Deep reinforcement
+  learning for portfolio management}, Knowledge-Based Systems (2023).
+\newblock \href {https://doi.org/10.1016/j.knosys.2023.110905}
+  {\path{doi:10.1016/j.knosys.2023.110905}}.
+\newline\urlprefix\url{https://doi.org/10.1016/j.knosys.2023.110905}
+
+\bibitem{ref41}
+P.~Pomorski, D.~Gorse,
+  \href{https://doi.org/10.1007/978-3-031-53966-4_8}{Improving portfolio
+  performance using a novel method for predicting financial regimes}, in:
+  Artificial Neural Networks and Machine Learning (ICANN 2024), Lecture Notes
+  in Computer Science, Springer, 2024.
+\newblock \href {https://doi.org/10.1007/978-3-031-53966-4_8}
+  {\path{doi:10.1007/978-3-031-53966-4_8}}.
+\newline\urlprefix\url{https://doi.org/10.1007/978-3-031-53966-4_8}
+
+\bibitem{ref42}
+J.~Haworth, R.~Sheridan, \href{https://jmlr.org/papers/v25/23-0917.html}{Online
+  learning techniques for prediction of temporal tabular datasets with regime
+  changes}, Journal of Machine Learning Research 25 (2024) 1--35.
+\newline\urlprefix\url{https://jmlr.org/papers/v25/23-0917.html}
+
+\bibitem{ref5}
+E.~Lezmi, J.~Roche, T.~Roncalli, J.~Xu,
+  \href{https://doi.org/10.2139/ssrn.3645473}{Improving the robustness of
+  trading strategy backtesting with boltzmann machines and generative
+  adversarial networks}, SSRN Electronic Journal (2020).
+\newblock \href {https://doi.org/10.2139/ssrn.3645473}
+  {\path{doi:10.2139/ssrn.3645473}}.
+\newline\urlprefix\url{https://doi.org/10.2139/ssrn.3645473}
+
+\bibitem{ref_dm}
+F.~X. Diebold, R.~S. Mariano, Comparing predictive accuracy, Journal of
+  Business \& Economic Statistics 13~(3) (1995) 253--263.
+\newblock \href {https://doi.org/10.1080/07350015.1995.10524599}
+  {\path{doi:10.1080/07350015.1995.10524599}}.
+
+\bibitem{ref_bh}
+Y.~Benjamini, Y.~Hochberg, Controlling the false discovery rate: A practical
+  and powerful approach to multiple testing, Journal of the Royal Statistical
+  Society: Series B (Methodological) 57~(1) (1995) 289--300.
+\newblock \href {https://doi.org/10.1111/j.2517-6161.1995.tb02031.x}
+  {\path{doi:10.1111/j.2517-6161.1995.tb02031.x}}.
+
+\bibitem{ref14}
+Deep learning for financial applications a survey.
+
+\bibitem{ref16}
+Financial time series forecasting with deep learning a systematic literature
+  review 2005-2019.
+
+\bibitem{ref10}
+R.~Li, J.~Hu, G.~Li, \href{https://doi.org/10.1016/j.ins.2023.03.067}{Deep
+  stock trading: A hierarchical reinforcement learning framework for portfolio
+  optimization and order execution}, Information Sciences 633 (2023) 61--79.
+\newblock \href {https://doi.org/10.1016/j.ins.2023.03.067}
+  {\path{doi:10.1016/j.ins.2023.03.067}}.
+\newline\urlprefix\url{https://doi.org/10.1016/j.ins.2023.03.067}
+
+\bibitem{ref15}
+Asset pricing and deep learning.
+
+\bibitem{ref11}
+Qlib an ai-oriented quantitative investment platform.
+
+\bibitem{ref81}
+P.~Ghosh, A.~Neufeld, J.~K. Sahoo,
+  \href{https://doi.org/10.1016/j.frl.2021.102280}{Forecasting directional
+  movements of stock prices for intraday trading using lstm and random
+  forests}, Finance Research Letters (2022).
+\newblock \href {https://doi.org/10.1016/j.frl.2021.102280}
+  {\path{doi:10.1016/j.frl.2021.102280}}.
+\newline\urlprefix\url{https://doi.org/10.1016/j.frl.2021.102280}
+
+\bibitem{ref_harvey}
+C.~R. Harvey, Y.~Liu, H.~Zhu, ... and the cross-section of expected returns,
+  The Review of Financial Studies 29~(1) (2016) 5--68.
+\newblock \href {https://doi.org/10.1093/rfs/hhv059}
+  {\path{doi:10.1093/rfs/hhv059}}.
+
+\end{thebibliography}

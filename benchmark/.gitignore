@@ -1,0 +1,23 @@
+# Benchmark toolkit outputs
+data/raw/
+data/processed/
+features/
+backtest/*.parquet
+models/*.pkl
+reports/tables/
+reports/figures/
+reports/all_metrics.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

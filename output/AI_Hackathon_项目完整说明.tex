@@ -1,0 +1,193 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{CJKutf8}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=black}
+\setstretch{1.25}
+
+\title{AI Hackathon 项目完整说明书\\\large ML Trading Benchmark：可复现的机器学习量化交易评测系统}
+\author{项目团队：AutoSurvey / Benchmark 组}
+\date{\today}
+
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+\maketitle
+
+\section{一、产品简介（Product Overview）}
+
+\subsection{1.1 项目定位}
+本项目是一个面向\textbf{量化交易 AI 模型评测}的工程化基准系统（Benchmark Toolkit），核心目标是：
+\begin{itemize}[leftmargin=2em]
+    \item 在统一协议下公平比较不同机器学习模型在真实交易场景中的表现；
+    \item 显式纳入\textbf{交易成本、市场状态切换、数据泄漏控制}等现实因素；
+    \item 产出可直接用于论文、竞赛答辩和工程复现的标准化结果（表格+图+JSON）。
+\end{itemize}
+
+\subsection{1.2 待解决问题}
+传统量化 AI 评估常见问题包括：
+\begin{itemize}[leftmargin=2em]
+    \item 仅比较“模型彼此之间”，缺少对被动基准（如 SPY Buy-and-Hold）的对照；
+    \item 忽视交易成本后“纸面收益高、实盘收益差”；
+    \item 存在前瞻偏差、标签泄漏，导致结果不可落地；
+    \item 不同论文评估协议不一致，结论难以横向比较。
+\end{itemize}
+
+本系统以\textbf{评估协议标准化}为抓手，解决上述问题。
+
+\subsection{1.3 应用场景}
+\begin{itemize}[leftmargin=2em]
+    \item AI 量化策略研发团队：用于模型筛选与回测基线建设；
+    \item 高校/科研团队：用于可复现实验与论文实验章节；
+    \item 竞赛评审场景：用于直观展示“模型效果 + 工程严谨性 + 可落地性”。
+\end{itemize}
+
+\section{二、核心功能（Core Functions）}
+
+\subsection{2.1 一站式流水线}
+系统支持从数据到报告的全自动流程：
+\begin{enumerate}[leftmargin=2em]
+    \item 数据下载与清洗（50只美股ETF，约20年日频）；
+    \item 特征工程（13个技术特征）；
+    \item Walk-forward 训练/验证/测试划分（含5天embargo）；
+    \item 9类模型训练与预测（传统ML + 深度学习 + 策略基线）；
+    \item 回测执行（Top-K多空、可配置调仓与成本）；
+    \item 指标计算（CAGR、Sharpe、Max Drawdown、IC/ICIR等）；
+    \item 自动生成图表、LaTeX表格、JSON结果文件。
+\end{enumerate}
+
+\subsection{2.2 可配置实验协议}
+通过配置文件统一管理关键参数：
+\begin{itemize}[leftmargin=2em]
+    \item 数据范围、任务定义（1/5/20日收益预测）；
+    \item 数据切分与embargo长度；
+    \item 启用模型与超参数；
+    \item 回测规则（Top-K、调仓频率、成本场景）；
+    \item 指标集合与报告输出格式。
+\end{itemize}
+
+\subsection{2.3 结果可复现与可审计}
+\begin{itemize}[leftmargin=2em]
+    \item 全流程脚本化执行，支持\texttt{--skip-download}、\texttt{--skip-features}加速复跑；
+    \item 输出结构化文件（CSV/TeX/PDF/JSON），便于评审抽查；
+    \item 固定协议后可重复获得同类结论，降低“偶然性结果”风险。
+\end{itemize}
+
+\section{三、产品亮点（Highlights）}
+
+\subsection{3.1 亮点一：真实交易约束下的评估}
+系统将交易成本设置为0/5/10/15/25 bps多场景评估，显式考察“策略对摩擦成本的脆弱性”，避免仅在无成本假设下得出乐观结论。
+
+\subsection{3.2 亮点二：严格防止数据泄漏}
+采用\textbf{rolling标准化 + walk-forward + embargo}的组合：
+\begin{itemize}[leftmargin=2em]
+    \item 仅使用历史窗口参数标准化，杜绝未来信息；
+    \item 训练/验证/测试按时间前向推进；
+    \item 通过embargo防止标签时间重叠。
+\end{itemize}
+
+\subsection{3.3 亮点三：不仅看收益，还看信号质量}
+除了策略层指标（Sharpe/CAGR/MaxDD），还计算\textbf{IC/ICIR}评估预测信号与未来收益的横截面相关性，更精准定位“模型弱在预测还是弱在执行”。
+
+\subsection{3.4 亮点四：完整实验矩阵}
+项目包含主结果、成本敏感性、市场状态分解、长短仓对比、特征重要性、集成模型、调仓频率敏感度、Top-K敏感度、统计检验等多维实验，覆盖“性能、稳定性、鲁棒性、统计显著性”四个维度。
+
+\subsection{3.5 亮点五：结果对外表达友好}
+系统自动生成可直接用于论文与答辩的图表和表格，显著降低整理工作量，提升团队产出效率。
+
+\section{四、技术方案特色（Technical Design）}
+
+\subsection{4.1 总体架构}
+\begin{center}
+\begin{tabular}{p{0.18\linewidth}p{0.74\linewidth}}
+\toprule
+模块 & 功能说明 \\
+\midrule
+数据层 & 获取并清洗ETF OHLCV数据，构建统一时间索引与数据字典 \\
+特征层 & 构造13个技术因子并进行严格历史窗口标准化 \\
+建模层 & 统一\texttt{fit/predict}接口，支持9类模型并行评估 \\
+策略层 & Top-K多空组合构建、调仓执行、成本扣减 \\
+评估层 & 绩效指标、IC/ICIR、置信区间、统计检验 \\
+报告层 & 自动输出CSV/LaTeX/PDF/JSON结果与可视化图表 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{4.2 数据与特征方案}
+\begin{itemize}[leftmargin=2em]
+    \item 资产池：50只美国ETF，覆盖权益、固收、商品、货币多资产类别；
+    \item 时间跨度：2005-01 至 2024-12（约20年）；
+    \item 特征集合：收益率、波动率、动量、RSI、均线偏离、量价关系等13项；
+    \item 标准化：252日滚动z-score（严格回溯窗口）。
+\end{itemize}
+
+\subsection{4.3 模型与策略方案}
+\textbf{模型池（9类）}：
+\begin{itemize}[leftmargin=2em]
+    \item 传统机器学习：Linear/Ridge/Logistic Regression、Random Forest、LightGBM；
+    \item 深度学习：MLP、LSTM；
+    \item 策略基线：Momentum、Mean Reversion。
+\end{itemize}
+
+\textbf{默认交易策略}：
+\begin{itemize}[leftmargin=2em]
+    \item 每5个交易日调仓；
+    \item 预测排序后做多前10、做空后10（等权）；
+    \item 成本模型：\(\text{cost}=(\text{fee}+\text{slippage})\times \sum |\Delta w|\)。
+\end{itemize}
+
+\subsection{4.4 评估与统计方案}
+\begin{itemize}[leftmargin=2em]
+    \item 绩效指标：CAGR、Sharpe、MaxDD、Calmar、Turnover、Hit Rate；
+    \item 信号指标：IC、ICIR；
+    \item 置信度分析：Bootstrap置信区间；
+    \item 显著性分析：Diebold-Mariano检验 + BH-FDR多重比较校正。
+\end{itemize}
+
+\subsection{4.5 工程可复现性方案}
+\begin{itemize}[leftmargin=2em]
+    \item 单命令全流程执行（\texttt{run\_all.py} / \texttt{run\_robustness.py}）；
+    \item 配置驱动实验，避免“脚本散落式”不可维护问题；
+    \item 统一目录结构输出，支持复查、复跑与二次分析。
+\end{itemize}
+
+\section{五、阶段性结果与价值（Evidence \& Value）}
+
+\subsection{5.1 阶段性结果（示例）}
+基于当前实验文档和报告输出，系统已形成完整主结果表与鲁棒性分析表。主要观察包括：
+\begin{itemize}[leftmargin=2em]
+    \item 在无成本条件下，部分ML模型可获得正收益，但整体Sharpe仍显著受限；
+    \item 在15bps成本下，多空策略普遍出现绩效明显下滑，证明成本建模必要性；
+    \item IC/ICIR整体偏低，说明问题核心在于信号弱而非单一回测参数设置。
+\end{itemize}
+
+\subsection{5.2 项目价值}
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{对评委可理解：} 结构化流程+可视化输出，便于快速理解方法有效性；
+    \item \textbf{对团队可落地：} 可直接扩展新模型/新市场/新频率，形成持续评估平台；
+    \item \textbf{对行业有意义：} 强调“严谨评估优先于单次高收益展示”，有助于减少过拟合叙事。
+\end{itemize}
+
+\section{六、未来规划（Roadmap）}
+
+\begin{itemize}[leftmargin=2em]
+    \item 接入更多数据模态：基本面、新闻文本、宏观因子；
+    \item 引入在线学习与时变参数模型，提高市场切换适应性；
+    \item 增加风险约束（行业暴露/波动目标/换手上限）与组合优化模块；
+    \item 开放标准任务集，建设可持续对比榜单（Leaderboard）。
+\end{itemize}
+
+\section{七、结语}
+本项目不仅是“模型跑分工具”，更是面向真实交易环境的\textbf{评估基础设施}。我们希望通过可复现、可解释、可审计的实验范式，为AI在量化交易领域的工程落地提供一套可复制的方法论。
+
+\vspace{1em}
+\noindent\textbf{附：建议答辩口径（30秒）}\\
+我们做的不是“再发明一个模型”，而是搭建了一套可复现、可审计、面向真实成本约束的AI量化评测系统。它把数据、特征、训练、回测、统计检验和报告生成打通成标准化流水线，能够快速回答“这个模型在真实世界是否有效”这一核心问题。
+
+\end{CJK*}
+\end{document}

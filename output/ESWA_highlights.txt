@@ -1,0 +1,9 @@
+Four-axis taxonomy for ML-driven quantitative trading research
+
+Checklist for data leakage, backtesting validity, and robustness
+
+Review of DL/RL/transformer paradigms for signals and portfolio control
+
+Benchmark table with data access, licenses, and reproducible baselines
+
+Frontier agenda: LLMs, synthetic data, and hardware-aware backtesting

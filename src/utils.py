@@ -16,11 +16,19 @@ class tokenCounter():
         self.model_price = {}
         
     def num_tokens_from_string(self, string:str) -> int:
+        if string is None:
+            return 0
+        if not isinstance(string, str):
+            string = str(string)
         return len(self.encoding.encode(string))
 
     def num_tokens_from_list_string(self, list_of_string:List[str]) -> int:
         num = 0
         for s in list_of_string:
+            if s is None:
+                continue
+            if not isinstance(s, str):
+                s = str(s)
             num += len(self.encoding.encode(s))
         return num
     

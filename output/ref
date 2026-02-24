@@ -1,0 +1,551 @@
+{[}1{]} Generating Synergistic Formulaic Alpha Collections via
+Reinforcement Learning
+
+{[}2{]} Quantitative Stock Investment by Routing Uncertainty-Aware
+Trading Experts A Multi-Task Learning Approach
+
+{[}3{]} The Limit Order Book Recreation Model (LOBRM) An Extended
+Analysis
+
+{[}4{]} IMM An Imitative Reinforcement Learning Approach with Predictive
+Representation Learning for Automatic Market Making
+
+{[}5{]} Improving the Robustness of Trading Strategy Backtesting with
+Boltzmann Machines and Generative Adversarial Networks
+
+{[}6{]} A Generic Methodology for the Statistically Uniform \&
+Comparable Evaluation of Automated Trading Platform Components
+
+{[}7{]} Reinforcement Learning for Quantitative Trading
+
+{[}8{]} Deep reinforcement learning for portfolio management
+
+{[}9{]} Balancing Profit, Risk, and Sustainability for Portfolio
+Management
+
+{[}10{]} Deep Stock Trading A Hierarchical Reinforcement Learning
+Framework for Portfolio Optimization and Order Execution
+
+{[}11{]} Qlib An AI-oriented Quantitative Investment Platform
+
+{[}12{]} FinRL-Podracer High Performance and Scalable Deep Reinforcement
+Learning for Quantitative Finance
+
+{[}13{]} Quant 4.0 Engineering Quantitative Investment with Automated,
+Explainable and Knowledge-driven Artificial Intelligence
+
+{[}14{]} Deep Learning for Financial Applications A Survey
+
+{[}15{]} Asset Pricing and Deep Learning
+
+{[}16{]} Financial Time Series Forecasting with Deep Learning A
+Systematic Literature Review 2005-2019
+
+{[}17{]} Long Short-Term Memory Pattern Recognition in Currency Trading
+
+{[}18{]} Real-time Forecasting of Time Series in Financial Markets Using
+Sequentially Trained Many-to-one LSTMs
+
+{[}19{]} From attention to profit quantitative trading strategy based on
+transformer
+
+{[}20{]} Real-Time Online Stock Forecasting Utilizing Integrated
+Quantitative and Qualitative Analysis
+
+{[}21{]} FinGPT Democratizing Internet-scale Data for Financial Large
+Language Models
+
+{[}22{]} Compute Trends Across Three Eras of Machine Learning
+
+{[}23{]} Low-power option Greeks Efficiency-driven market risk analysis
+using FPGAs
+
+{[}24{]} Deep Empirical Risk Minimization in finance looking into the
+future
+
+{[}25{]} A Hypothesis on Good Practices for AI-based Systems for
+Financial Time Series Forecasting Towards Domain-Driven XAI Methods
+
+{[}26{]} Deep Learning for Mean Field Games and Mean Field Control with
+Applications to Finance
+
+{[}27{]} Machine Learning for Forecasting Mid Price Movement using Limit
+Order Book Data
+
+{[}28{]} Combining Deep Learning on Order Books with Reinforcement
+Learning for Profitable Trading
+
+{[}29{]} Trading the Twitter Sentiment with Reinforcement Learning
+
+{[}30{]} Discovering material information using hierarchical Reformer
+model on financial regulatory filings
+
+{[}31{]} Deep Learning for Predicting Asset Returns
+
+{[}32{]} Symphony in the Latent Space Provably Integrating
+High-dimensional Techniques with Non-linear Machine Learning Models
+
+{[}33{]} Market Making with Deep Reinforcement Learning from Limit Order
+Books
+
+{[}34{]} DoubleEnsemble A New Ensemble Method Based on Sample
+Reweighting and Feature Selection for Financial Data Analysis
+
+{[}35{]} QuantAgent Seeking Holy Grail in Trading by Self-Improving
+Large Language Model
+
+{[}36{]} Deep Reinforcement Learning Approach for Trading Automation in
+The Stock Market
+
+{[}37{]} High-Dimensional Stock Portfolio Trading with Deep
+Reinforcement Learning
+
+{[}38{]} An intelligent financial portfolio trading strategy using deep
+Q-learning
+
+{[}39{]} Hierarchical Deep Reinforcement Learning for VWAP Strategy
+Optimization
+
+{[}40{]} Harnessing Deep Q-Learning for Enhanced Statistical Arbitrage
+in High-Frequency Trading A Comprehensive Exploration
+
+{[}41{]} Improving Portfolio Performance Using a Novel Method for
+Predicting Financial Regimes
+
+{[}42{]} Online learning techniques for prediction of temporal tabular
+datasets with regime changes
+
+{[}43{]} Model-Agnostic Meta-Learning for Natural Language Understanding
+Tasks in Finance
+
+{[}44{]} Safe-FinRL A Low Bias and Variance Deep Reinforcement Learning
+Implementation for High-Freq Stock Trading
+
+{[}45{]} WATTNet Learning to Trade FX via Hierarchical Spatio-Temporal
+Representation of Highly Multivariate Time Series
+
+{[}46{]} Style Transfer with Time Series Generating Synthetic Financial
+Data
+
+{[}47{]} Conservative Predictions on Noisy Financial Data
+
+{[}48{]} Trade When Opportunity Comes Price Movement Forecasting via
+Locality-Aware Attention and Iterative Refinement Labeling
+
+{[}49{]} Learning low-frequency temporal patterns for quantitative
+trading
+
+{[}50{]} Theoretically Motivated Data Augmentation and Regularization
+for Portfolio Construction
+
+{[}51{]} How Robust are Limit Order Book Representations under Data
+Perturbation
+
+{[}52{]} Bilinear Input Normalization for Neural Networks in Financial
+Forecasting
+
+{[}53{]} Data Normalization for Bilinear Structures in High-Frequency
+Financial Time-series
+
+{[}54{]} A high-bias, low-variance introduction to Machine Learning for
+physicists
+
+{[}55{]} Machine Learning The Basics
+
+{[}56{]} Forecast Evaluation for Data Scientists Common Pitfalls and
+Best Practices
+
+{[}57{]} A Rigorous Machine Learning Analysis Pipeline for Biomedical
+Binary Classification Application in Pancreatic Cancer Nested
+Case-control Studies with Implications for Bias Assessments
+
+{[}58{]} Formal Algorithms for Transformers
+
+{[}59{]} A Survey of Contextual Optimization Methods for Decision Making
+under Uncertainty
+
+{[}60{]} JANOS An Integrated Predictive and Prescriptive Modeling
+Framework
+
+{[}61{]} Clairvoyance A Pipeline Toolkit for Medical Time Series
+
+{[}62{]} Multimodal Machine Learning in Image-Based and Clinical
+Biomedicine Survey and Prospects
+
+{[}63{]} Who Needs MLOps What Data Scientists Seek to Accomplish and How
+Can MLOps Help
+
+{[}64{]} Management of Machine Learning Lifecycle Artifacts A Survey
+
+{[}65{]} MLSys The New Frontier of Machine Learning Systems
+
+{[}66{]} Looper An end-to-end ML platform for product decisions
+
+{[}67{]} Model Share AI An Integrated Toolkit for Collaborative Machine
+Learning Model Development, Provenance Tracking, and Deployment in
+Python
+
+{[}68{]} Ensemble Committees for Stock Return Classification and
+Prediction
+
+{[}69{]} American Option Pricing using Self-Attention GRU and Shapley
+Value Interpretation
+
+{[}70{]} Compatible deep neural network framework with financial time
+series data, including data preprocessor, neural network model and
+trading strategy
+
+{[}71{]} Analyzing Machine Learning Models for Credit Scoring with
+Explainable AI and Optimizing Investment Decisions
+
+{[}72{]} Shai-am A Machine Learning Platform for Investment Strategies
+
+{[}73{]} Set-to-Sequence Methods in Machine Learning a Review
+
+{[}74{]} Deep recommender engine based on efficient product embeddings
+neural pipeline
+
+{[}75{]} Multi-Modal Federated Learning for Cancer Staging over Non-IID
+Datasets with Unbalanced Modalities
+
+{[}76{]} Exploring Opportunistic Meta-knowledge to Reduce Search Spaces
+for Automated Machine Learning
+
+{[}77{]} FLUID A Unified Evaluation Framework for Flexible Sequential
+Data
+
+{[}78{]} On Leakage in Machine Learning Pipelines
+
+{[}79{]} Machine Learning for Reliability Engineering and Safety
+Applications Review of Current Status and Future Opportunities
+
+{[}80{]} ML-Enabled Systems Model Deployment and Monitoring Status Quo
+and Problems
+
+{[}81{]} Forecasting directional movements of stock prices for intraday
+trading using LSTM and random forests
+
+{[}82{]} Building Cross-Sectional Systematic Strategies By Learning to
+Rank
+
+{[}83{]} Trading via Selective Classification
+
+{[}84{]} A Simple and Fast Baseline for Tuning Large XGBoost Models
+
+{[}85{]} Tabular Data Deep Learning is Not All You Need
+
+{[}86{]} Leveraging Deep Learning and Online Source Sentiment for
+Financial Portfolio Management
+
+{[}87{]} Portfolio Optimization with 2D Relative-Attentional Gated
+Transformer
+
+{[}88{]} AlphaStock A Buying-Winners-and-Selling-Losers Investment
+Strategy using Interpretable Deep Reinforcement Attention Networks
+
+{[}89{]} Deep Learning for Portfolio Optimization
+
+{[}90{]} Sum and Tensor of Quantitative Effects
+
+{[}91{]} Reinforcement Learning for Portfolio Management
+
+{[}92{]} Model-based Deep Reinforcement Learning for Dynamic Portfolio
+Optimization
+
+{[}93{]} Causal Inference on Investment Constraints and Non-stationarity
+in Dynamic Portfolio Optimization through Reinforcement Learning
+
+{[}94{]} Reinforcement Evolutionary Learning Method for self-learning
+
+{[}95{]} FinBrain When Finance Meets AI 2.0
+
+{[}96{]} FinRL-Meta A Universe of Near-Real Market Environments for
+Data-Driven Deep Reinforcement Learning in Quantitative Finance
+
+{[}97{]} Quantitative Trading using Deep Q Learning
+
+{[}98{]} Application of deep reinforcement learning for Indian stock
+trading automation
+
+{[}99{]} Deep Reinforcement Learning for Trading
+
+{[}100{]} Commodities Trading through Deep Policy Gradient Methods
+
+{[}101{]} Towards Generalizable Reinforcement Learning for Trade
+Execution
+
+{[}102{]} TradeR Practical Deep Hierarchical Reinforcement Learning for
+Trade Execution
+
+{[}103{]} Robo-Advising Enhancing Investment with Inverse Optimization
+and Deep Reinforcement Learning
+
+{[}104{]} Interpretability in Safety-Critical FinancialTrading Systems
+
+{[}105{]} Deep incremental learning models for financial temporal
+tabular datasets with distribution shifts
+
+{[}106{]} An Ensemble Method of Deep Reinforcement Learning for
+Automated Cryptocurrency Trading
+
+{[}107{]} Modeling Long- and Short-Term Temporal Patterns with Deep
+Neural Networks
+
+{[}108{]} A Memory-Network Based Solution for Multivariate Time-Series
+Forecasting
+
+{[}109{]} Toward Abstraction from Multi-modal Data Empirical Studies on
+Multiple Time-scale Recurrent Models
+
+{[}110{]} DeepSITH Efficient Learning via Decomposition of What and When
+Across Time Scales
+
+{[}111{]} Recurrent Neural Networks and Long Short-Term Memory Networks
+Tutorial and Survey
+
+{[}112{]} Empirical Evaluation of Gated Recurrent Neural Networks on
+Sequence Modeling
+
+{[}113{]} A note on VIX for postprocessing quantitative strategies
+
+{[}114{]} iQUANT Interactive Quantitative Investment Using Sparse
+Regression Factors
+
+{[}115{]} QuantNet Transferring Learning Across Systematic Trading
+Strategies
+
+{[}116{]} RCURRENCY Live Digital Asset Trading Using a Recurrent Neural
+Network-based Forecasting System
+
+{[}117{]} Stock Market Sentiment Classification and Backtesting via
+Fine-tuned BERT
+
+{[}118{]} Forecasting Tech Sector Market Downturns based on
+Macroeconomic Indicators
+
+{[}119{]} Sentiment and Knowledge Based Algorithmic Trading with Deep
+Reinforcement Learning
+
+{[}120{]} Learning the Market Sentiment-Based Ensemble Trading Agents
+
+{[}121{]} Learning to Abstain From Uninformative Data
+
+{[}122{]} STREAMLINE A Simple, Transparent, End-To-End Automated Machine
+Learning Pipeline Facilitating Data Analysis and Algorithm Comparison
+
+{[}123{]} Joint Latent Topic Discovery and Expectation Modeling for
+Financial Markets
+
+{[}124{]} Stock Trend Prediction A Semantic Segmentation Approach
+
+{[}125{]} Ploutos Towards interpretable stock movement prediction with
+financial large language model
+
+{[}126{]} NumHTML Numeric-Oriented Hierarchical Transformer Model for
+Multi-task Financial Forecasting
+
+{[}127{]} RiskLabs Predicting Financial Risk Using Large Language Model
+Based on Multi-Sources Data
+
+{[}128{]} A Multimodal Foundation Agent for Financial Trading
+Tool-Augmented, Diversified, and Generalist
+
+{[}129{]} Market-GAN Adding Control to Financial Market Data Generation
+with Semantic Context
+
+{[}130{]} AI in Finance Challenges, Techniques and Opportunities
+
+{[}131{]} Get Real Realism Metrics for Robust Limit Order Book Market
+Simulations
+
+{[}132{]} Model-based Reinforcement Learning for Predictions and Control
+for Limit Order Books
+
+{[}133{]} Reinforced Deep Markov Models With Applications in Automatic
+Trading
+
+{[}134{]} Economic Dynamics of Agents
+
+{[}135{]} On Fairness and Interpretability
+
+{[}136{]} A Survey of Visual Analytics Techniques for Machine Learning
+
+{[}137{]} SUBPLEX Towards a Better Understanding of Black Box Model
+Explanations at the Subpopulation Level
+
+{[}138{]} When Mitigating Bias is Unfair A Comprehensive Study on the
+Impact of Bias Mitigation Algorithms
+
+{[}139{]} Interactivity and Transparency in Medical Risk Assessment with
+Supersparse Linear Integer Models
+
+{[}140{]} Uncertainty-Aware Lookahead Factor Models for Quantitative
+Investing
+
+{[}141{]} From Bandits Model to Deep Deterministic Policy Gradient,
+Reinforcement Learning with Contextual Information
+
+{[}142{]} Robust Classification of Financial Risk
+
+{[}143{]} PermuteAttack Counterfactual Explanation of Machine Learning
+Credit Scorecards
+
+{[}144{]} Hidden Technical Debts for Fair Machine Learning in Financial
+Services
+
+{[}145{]} Automatic Generation of Attention Rules For Containment of
+Machine Learning Model Errors
+
+{[}146{]} Assuring the Machine Learning Lifecycle Desiderata, Methods,
+and Challenges
+
+{[}147{]} MLModelScope A Distributed Platform for Model Evaluation and
+Benchmarking at Scale
+
+{[}148{]} Bayesian Optimization of ESG Financial Investments
+
+{[}149{]} Explainable AI in Credit Risk Management
+
+{[}150{]} Risk-Sensitive Compact Decision Trees for Autonomous Execution
+in Presence of Simulated Market Response
+
+{[}151{]} Can Interpretable Reinforcement Learning Manage Prosperity
+Your Way
+
+{[}152{]} The Double-Edged Sword of Big Data and Information Technology
+for the Disadvantaged A Cautionary Tale from Open Banking
+
+{[}153{]} FreaAI Automated extraction of data slices to test machine
+learning models
+
+{[}154{]} Real-world Machine Learning Systems A survey from a
+Data-Oriented Architecture Perspective
+
+{[}155{]} Explainable AI for Trees From Local Explanations to Global
+Understanding
+
+{[}156{]} LionForests Local Interpretation of Random Forests
+
+{[}157{]} Combining Machine Learning Classifiers for Stock Trading with
+Effective Feature Extraction
+
+{[}158{]} Machine Learning Advances for Time Series Forecasting
+
+{[}159{]} Supervised Machine Learning Techniques An Overview with
+Applications to Banking
+
+{[}160{]} MetaTrader An Reinforcement Learning Approach Integrating
+Diverse Policies for Portfolio Optimization
+
+{[}161{]} Game Dynamics and Nash Equilibria
+
+{[}162{]} Performative Prediction
+
+{[}163{]} Many learning agents interacting with an agent-based market
+model
+
+{[}164{]} Instability and network effects in innovative markets
+
+{[}165{]} The Physics of Financial Networks
+
+{[}166{]} Expander \(\ell_0\)-Decoding
+
+{[}167{]} Computing the theta function
+
+{[}168{]} Learning a functional control for high-frequency finance
+
+{[}169{]} Large Language Model Adaptation for Financial Sentiment
+Analysis
+
+{[}170{]} A Visual Technique to Analyze Flow of Information in a Machine
+Learning System
+
+{[}171{]} A Tensor Compiler for Unified Machine Learning Prediction
+Serving
+
+{[}172{]} A Comprehensive Overview and Comparative Analysis on Deep
+Learning Models CNN, RNN, LSTM, GRU
+
+{[}173{]} Recurrent Neural Networks for Multivariate Time Series with
+Missing Values
+
+{[}174{]} Visualizing and Understanding Recurrent Networks
+
+{[}175{]} Effective Quantization Approaches for Recurrent Neural
+Networks
+
+{[}176{]} Memristive LSTM network hardware architecture for time-series
+predictive modeling problem
+
+{[}177{]} Learning to Diagnose with LSTM Recurrent Neural Networks
+
+{[}178{]} Adding Attentiveness to the Neurons in Recurrent Neural
+Networks
+
+{[}179{]} EA-LSTM Evolutionary Attention-based LSTM for Time Series
+Prediction
+
+{[}180{]} Gated Recurrent Neural Tensor Network
+
+{[}181{]} The Statistical Recurrent Unit
+
+{[}182{]} Independently Recurrent Neural Network (IndRNN) Building A
+Longer and Deeper RNN
+
+{[}183{]} Recent Advances in Recurrent Neural Networks
+
+{[}184{]} seq2graph Discovering Dynamic Dependencies from Multivariate
+Time Series with Multi-level Attention
+
+{[}185{]} Real-time Trading System based on Selections of Potentially
+Profitable, Uncorrelated, and Balanced Stocks by NP-hard Combinatorial
+Optimization
+
+{[}186{]} Generative Adversarial Networks for Financial Trading
+Strategies Fine-Tuning and Combination
+
+{[}187{]} Quantum Machine Learning for Finance
+
+{[}188{]} Applying QNLP to sentiment analysis in finance
+
+{[}189{]} Generative Machine Learning for Multivariate Equity Returns
+
+{[}190{]} Detecting ESG topics using domain-specific language models and
+data augmentation approaches
+
+{[}191{]} The FinBen An Holistic Financial Benchmark for Large Language
+Models
+
+{[}192{]} Metadata Representations for Queryable ML Model Zoos
+
+{[}193{]} The State of the Art in Enhancing Trust in Machine Learning
+Models with the Use of Visualizations
+
+{[}194{]} AI-Enabled Software and System Architecture Frameworks
+Focusing on smart Cyber-Physical Systems (CPS)
+
+{[}195{]} Dynamic Advisor-Based Ensemble (dynABE) Case study in stock
+trend prediction of critical metal companies
+
+{[}196{]} Predictive intraday correlations in stable and volatile market
+environments Evidence from deep learning
+
+{[}197{]} Online Ensemble of Models for Optimal Predictive Performance
+with Applications to Sector Rotation Strategy
+
+{[}198{]} Asynchronous Deep Double Duelling Q-Learning for
+Trading-Signal Execution in Limit Order Book Markets
+
+{[}199{]} Deep Reinforcement Learning for Active High Frequency Trading
+
+{[}200{]} Agent Performing Autonomous Stock Trading under Good and Bad
+Situations
+
+{[}201{]} Behavioral Machine Learning Computer Predictions of Corporate
+Earnings also Overreact
+
+{[}202{]} Data Cross-Segmentation for Improved Generalization in
+Reinforcement Learning Based Algorithmic Trading
+
+{[}203{]} Benchmarking Machine Learning Models to Predict Corporate
+Bankruptcy

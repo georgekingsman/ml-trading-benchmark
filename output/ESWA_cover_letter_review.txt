@@ -1,0 +1,28 @@
+Dear Editor-in-Chief,
+
+Please consider my manuscript entitled “Machine Learning for Quantitative Trading: Models, Data, Evaluation, and Practical Frontiers” for publication as a Review Article in Expert Systems with Applications.
+
+This survey provides a structured, reusable synthesis of machine learning (ML) for quantitative trading. Beyond summarizing model families (supervised learning, deep learning, reinforcement learning, and emerging directions such as large language models), the paper contributes three concrete artifacts designed for direct reuse by ESWA readers: (i) a four-axis task–data–model–evaluation taxonomy to organize the literature along actionable dimensions, (ii) a submission-critical evaluation checklist covering leakage, regime shift, transaction costs, and market impact, and (iii) an actionable frontier agenda that highlights near-term, testable research problems.
+
+To enhance reproducibility and practical adoption, the manuscript also provides a curated list of open datasets and reproducible benchmarks with links and access/licensing notes, enabling readers to rapidly align experiments with common baselines.
+
+Author expertise and suitability (mandatory for Review Articles).
+I am Zhang Yuchen (single author), affiliated with the AI, Ethics and Society Programme, Faculty of Arts, The University of Hong Kong. My academic training and research focus on machine learning systems and empirical evaluation, including robustness/generalization and reproducibility in applied ML settings. For this review, I conducted a systematic literature search and screening (2015–2026; initial retrieval ≈850 records; refined to a core set of 60 anchor papers), and report the selection process following PRISMA-style reporting for transparency.
+
+Five most recent closely related papers (title / DOI / year; mandatory for Review Articles).
+1) Quantformer: From Attention to Profit with a Quantitative Transformer Trading Strategy — DOI: 10.1016/j.eswa.2026.131567 — 2026
+2) Quant 4.0: Engineering Quantitative Investment with Automated, Explainable, and Knowledge-Driven Artificial Intelligence — DOI: 10.1631/fitee.2300720 — 2024
+3) Improving Portfolio Performance Using a Novel Method for Predicting Financial Regimes — DOI: 10.1007/978-3-031-53966-4_8 — 2024
+4) Real-Time Forecasting of Time Series in Financial Markets Using Sequentially Trained Dual-LSTMs — DOI: 10.1016/j.eswa.2023.119879 — 2023
+5) Reinforcement Learning for Quantitative Trading — DOI: 10.1145/3582560 — 2023
+
+Mandatory institutional email.
+u3663696@connect.hku.hk
+
+The manuscript is original, has not been published previously, and is not under consideration elsewhere. I declare no conflicts of interest and received no specific grant for this work.
+
+Sincerely,
+Zhang Yuchen
+AI, Ethics and Society Programme, Faculty of Arts
+The University of Hong Kong
+u3663696@connect.hku.hk

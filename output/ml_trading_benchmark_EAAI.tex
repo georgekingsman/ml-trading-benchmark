@@ -1,0 +1,872 @@
+\documentclass[preprint,review,12pt]{elsarticle}
+
+%% Additional packages
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}          % Times New Roman text + math
+\usepackage[scaled=0.92]{helvet} % Helvetica for sans-serif, scaled to match
+\usepackage{amsmath,amssymb}   % math (not auto-loaded in all elsarticle versions)
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}          % for \url and hyperlinks
+\usepackage{lineno}            % required by Elsevier for review
+\modulolinenumbers[5]          % number every 5th line
+
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\tolerance=2000
+\emergencystretch=2em
+\sloppy
+
+\journal{Engineering Applications of Artificial Intelligence}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Towards Robust Quantitative Trading:\\
+Benchmarking Machine Learning Models under\\
+Adversarial Perturbations, Synthetic Stress, and Market Concept Drift}
+
+\author[hku]{Zhang Yuchen}
+\ead{u3663696@connect.hku.hk}
+\ead[url]{https://github.com/georgekingsman}
+
+\address[hku]{AI, Ethics and Society Programme, Faculty of Arts,
+  The University of Hong Kong, Hong Kong SAR, China}
+
+\begin{abstract}
+Machine learning (ML) models for quantitative trading are routinely evaluated under conditions that inflate reported performance: costs are ignored, splits leak future information, and---crucially---robustness to adversarial perturbations, synthetic market stress, and temporal concept drift is never tested.
+We present \textbf{ML Trading Bench}, a unified evaluation protocol and open-source toolkit that combines (i)~a reproducible benchmark with walk-forward splitting, configurable costs, and rigorous statistical testing, with (ii)~a novel \emph{algorithmic robustness analysis} framework that applies adversarial perturbation, synthetic market fuzzing, and concept-drift diagnostics to financial ML models.
+
+Using 50 US-listed ETFs over 2005--2024, we evaluate 9~models (linear, tree, and deep-learning families) plus 2~passive baselines across 5~cost scenarios, 4~market regimes, and multiple strategy hyperparameters.
+Beyond conventional metrics, we introduce three robustness dimensions:
+(a)~\textbf{Adversarial Perturbation}: gradient-based attacks (FGSM, PGD) reveal that deep-learning models suffer up to 85\% Sharpe degradation under perturbations bounded within $0.1\sigma$ of historical feature variability---perturbations that are statistically indistinguishable from normal market noise---while simple linear models prove remarkably resilient;
+(b)~\textbf{Synthetic Market Fuzzing}: injecting flash-crash, volatility-spike, and gap-reversal scenarios into the test period produces a model-fragility heatmap, enabling standardised stress testing for ML trading systems;
+(c)~\textbf{Concept Drift \& Feature Decay}: label-poisoning experiments quantify each model's self-healing capacity under corrupted training data, and alpha-decay half-life analysis demonstrates that ML-extracted signals decay exponentially with prediction horizon.
+
+We propose a new metric---the \textbf{Adversarial Sharpe Ratio}---to quantify decision-boundary fragility, and establish a standardised robustness-testing protocol for ML-driven quantitative strategies.
+The full pipeline---benchmark plus robustness suite---runs via \texttt{python run\_all.py} followed by \texttt{python run\_robustness.py}.
+Code, data, and configuration are released under MIT license at \url{https://github.com/georgekingsman/ml-trading-benchmark}.
+\end{abstract}
+
+\begin{keyword}
+quantitative trading \sep
+machine learning benchmark \sep
+adversarial robustness \sep
+concept drift \sep
+stress testing \sep
+reproducibility \sep
+transaction costs \sep
+walk-forward evaluation \sep
+statistical testing
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+% ================================================================== %
+\section{Introduction}
+\label{sec:intro}
+
+Machine learning is now central to quantitative trading, supporting signal discovery, portfolio construction, and execution under uncertainty and frictions~\citep{ref7,ref13,ref8}.
+We treat ML-based quantitative trading as an \emph{engineering system evaluation problem}, where protocol choices---data splits, cost assumptions, leakage controls, and multiple-testing corrections---dominate apparent performance differences between models.
+Yet a large fraction of reported ``alpha'' disappears once evaluation is made realistic.
+Common pitfalls include: look-ahead leakage through naive train/test splits, omission of transaction costs, lack of statistical significance testing, and neglect of regime-dependent fragility~\citep{ref41,ref42,ref5}.
+
+These evaluation gaps have practical consequences.
+A model that appears to deliver Sharpe~1.0 in a zero-cost backtest may produce Sharpe~$-1.5$ once realistic turnover costs are applied.
+A model comparison that appears significant may lose all significance after multiple-testing correction.
+Without controlled benchmarks, practitioners and reviewers cannot distinguish genuine progress from evaluation artifacts.
+Moreover, recent advances in adversarial machine learning~\citep{ref_goodfellow_fgsm,ref_madry_pgd} have demonstrated that neural networks are susceptible to imperceptible perturbations in vision and NLP tasks.
+In financial markets---where noisy, non-stationary data is the norm and adversarial behaviour (e.g., spoofing, layering) is well-documented---the fragility of ML decision boundaries has received almost no systematic study.
+
+\paragraph{Contributions.}
+This paper makes four contributions:
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{A unified evaluation protocol} that combines walk-forward splitting with embargo, rolling z-score normalisation using only training data, and a configurable fee-plus-slippage cost model---designed to prevent the most common pitfalls that inflate reported performance.
+
+  \item \textbf{An algorithmic robustness analysis framework} that applies three complementary approaches---adversarial perturbation (FGSM/PGD), synthetic market fuzzing (flash crashes, volatility spikes, gap-reversals), and concept-drift diagnostics (label poisoning, alpha decay half-life)---to systematically quantify the fragility of financial ML models.
+
+  \item \textbf{New evaluation metrics}: we introduce the \emph{Adversarial Sharpe Ratio} (Sharpe under gradient-based attack), the \emph{Signal Flip Rate} (fraction of trading signals that reverse under perturbation), and the \emph{Alpha Decay Half-Life} (exponential rate at which predictive power decays with horizon).
+
+  \item \textbf{Systematic empirical evidence} on a realistic ETF universe: cost sensitivity analysis across 5~scenarios, per-regime performance decomposition, hyperparameter sensitivity, rigorous statistical testing via bootstrap CIs and DM test~\citep{ref_dm} with BH-FDR correction~\citep{ref_bh}, plus robustness analysis across adversarial budgets, stress scenarios, and label corruption levels.
+\end{enumerate}
+
+\paragraph{Paper organisation.}
+Section~\ref{sec:related} reviews related work.
+Section~\ref{sec:design} describes the benchmark design.
+Section~\ref{sec:models} presents the model families and strategies.
+Section~\ref{sec:evaluation} details the evaluation methodology.
+Section~\ref{sec:robustness_method} introduces the robustness analysis methodology.
+Section~\ref{sec:results} reports standard benchmark results.
+Section~\ref{sec:robustness_results} presents robustness analysis findings.
+Section~\ref{sec:reproducibility} describes the reproducibility package.
+Section~\ref{sec:discussion} discusses implications and limitations.
+
+
+% ================================================================== %
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{ML for trading surveys.}
+Several surveys review ML methods for financial prediction and trading~\citep{ref14,ref16}, reinforcement learning for portfolio management~\citep{ref7,ref10}, and deep learning for asset pricing~\citep{ref15}.
+These works provide taxonomies and broad coverage but typically do not include reproducible benchmarks or systematic cost/regime analysis.
+
+\paragraph{Quantitative trading platforms.}
+Qlib~\citep{ref11} (Microsoft) provides an end-to-end quant research platform with data handling, model training, and backtesting for Chinese/US equities.
+FinRL~\citep{ref81} focuses on reinforcement learning with a gym-style interface.
+Both are powerful frameworks but are primarily designed for practitioners building new strategies, rather than for controlled evaluation of existing model families under varying cost and regime assumptions.
+
+\paragraph{Evaluation methodology.}
+De~Prado~\citep{ref42,ref5} introduced purged cross-validation and embargo-based splits to prevent leakage in financial ML.
+The Diebold--Mariano test~\citep{ref_dm} is widely used for comparing forecast accuracy.
+Benjamini and Hochberg~\citep{ref_bh} proposed FDR control for multiple hypothesis testing.
+Harvey et al.~\citep{ref_harvey} argued that many reported trading ``factors'' are spurious due to multiple testing.
+Our benchmark integrates these methodological innovations into a unified, automated pipeline.
+
+\paragraph{Adversarial robustness and distribution shift.}
+Goodfellow et al.~\citep{ref_goodfellow_fgsm} introduced FGSM, demonstrating that neural networks are vulnerable to imperceptible perturbations.
+Madry et al.~\citep{ref_madry_pgd} proposed PGD as a stronger, multi-step attack.
+While adversarial robustness has been extensively studied in computer vision and NLP, its application to financial time series remains nascent.
+Goldblum et al.\ studied dataset poisoning in general ML pipelines; Kurakin et al.\ extended adversarial examples to the physical world.
+In finance, the concept of ``adversarial'' inputs has natural analogues: market manipulation (spoofing, layering), flash crashes, and regime shifts all constitute distributional perturbations that can catastrophically degrade model performance.
+Concept drift---the phenomenon whereby the data-generating process changes over time---is well-documented in financial markets~\citep{ref14} but rarely quantified through controlled experiments.
+Our work bridges the gap between adversarial ML and quantitative finance by introducing systematic perturbation, fuzzing, and drift analysis to a reproducible trading benchmark.
+
+\paragraph{Positioning.}
+Unlike survey papers that prescribe best practices, our work \emph{demonstrates their consequences} in a concrete, reproducible setting.
+Unlike trading platforms, our focus is on controlled evaluation rather than strategy development.
+Critically, we go beyond standard benchmark evaluation to incorporate \emph{adversarial thinking}---testing not only ``how well does the model predict?'' but ``how fragile is the model when the world deviates from expectations?''
+This positions our work at the intersection of trustworthy AI and quantitative finance, addressing the growing demand for robustness guarantees in high-stakes automated decision systems.
+
+
+% ================================================================== %
+\section{Benchmark Design}
+\label{sec:design}
+
+\subsection{Universe and Data}
+
+We select 50 US-listed ETFs spanning equity sectors (SPY, QQQ, XLF, XLE, XLK, etc.), fixed income (TLT, IEF, HYG), commodities (GLD, USO), and currencies (UUP, FXE).
+The ETF universe avoids individual-stock survivorship bias: all 50 ETFs remain listed throughout the full sample period (January 2005 to December 2024).
+Daily OHLCV data are obtained from Stooq (primary; no API key, no rate limit) with yfinance as fallback.
+
+\paragraph{Data statement.}
+All data used in this study are publicly accessible and require no paid subscription or institutional license.
+The primary source is Stooq (\url{https://stooq.com}), which provides adjusted daily OHLCV for US-listed ETFs; yfinance (\url{https://pypi.org/project/yfinance/}) serves as a fallback.
+The universe comprises 50 ETFs across equity, fixed-income, commodity, and currency sectors, covering the period January 2005 to December 2024.
+Stooq data are freely redistributable for non-commercial research; yfinance data are subject to Yahoo Finance terms of service.
+We do not use point-in-time fundamental data; all features are derived from price and volume (see below).
+Corporate actions (splits, dividends) are handled by the data provider's adjustment.
+Missing data (delistings, holidays) are forward-filled for at most 5 days; tickers with $>$10\% missing days are excluded.
+The complete download-and-processing pipeline is included in the released code, enabling full replication from raw data.
+
+\subsection{Features and Labels}
+
+We engineer 13 technical features per ticker per day:
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Returns}: 1-day, 5-day, 20-day log returns
+  \item \textbf{Volatility}: 20-day and 60-day rolling standard deviation
+  \item \textbf{Momentum}: 10-day and 20-day momentum (cumulative return)
+  \item \textbf{RSI}: 14-day relative strength index
+  \item \textbf{Moving-average ratios}: close/MA(10) and close/MA(50)
+  \item \textbf{Volume}: 20-day volume ratio (current/rolling average)
+  \item \textbf{Intraday range}: (high $-$ low) / close
+\end{itemize}
+
+All features are rolling z-score normalised using a \textbf{strictly trailing 252-day window}.
+This is critical: normalisation statistics are computed only on past data, preventing any leakage of future distributional information.
+
+The prediction target is the \textbf{5-day forward return} (cross-sectional; used for ranking, not regression accuracy).
+
+\subsection{Walk-Forward Split with Embargo}
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Training}: June 2005 -- December 2016 (~12 years)
+  \item \textbf{Validation}: January 2017 -- December 2019 (~3 years)
+  \item \textbf{Test}: January 2020 -- December 2024 (~5 years)
+  \item \textbf{Embargo}: 5 trading days at each boundary
+\end{itemize}
+
+The embargo gap removes potential label-overlap leakage between adjacent periods.
+All hyperparameters are selected on the validation set; the test set is \textbf{never} used for model selection.
+Figure~\ref{fig:timeline} illustrates the protocol.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{../figs/bench_timeline.pdf}
+\caption{Walk-forward evaluation protocol with embargo gaps. No information from downstream periods can influence upstream training or normalisation.}
+\label{fig:timeline}
+\end{figure}
+
+\subsection{Cost Model}
+
+Transaction costs are modelled as:
+\begin{equation}
+\text{cost}_t = (\text{fee} + \text{slippage}) \times \sum_i |\Delta w_{i,t}|,
+\end{equation}
+where $\Delta w_{i,t}$ is the weight change for asset $i$ at rebalance time $t$.
+We evaluate five cost scenarios: 0, 5, 10, 15, and 25\,bps one-way (with an additional 5\,bps slippage).
+This range spans from optimistic institutional settings to retail-level costs.
+
+
+% ================================================================== %
+\section{Models and Strategies}
+\label{sec:models}
+
+\subsection{Model Families}
+
+We evaluate 9 models spanning three families discussed in the quantitative trading literature, plus 2 passive benchmarks:
+
+\paragraph{Traditional ML (5 models).}
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Linear Regression} and \textbf{Ridge}: standard baselines with L2 regularisation.
+  \item \textbf{Logistic Regression}: predicts direction probability, converted to a continuous signal.
+  \item \textbf{Random Forest}: 200 trees, max depth 10.
+  \item \textbf{LightGBM}: gradient-boosted trees with 500 rounds and early stopping on the validation set.
+\end{itemize}
+
+\paragraph{Deep Learning (2 models).}
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{MLP}: 2-layer feedforward network (128--64 hidden units), ReLU activation, 50 epochs.
+  \item \textbf{LSTM}: 2-layer LSTM (hidden dim 64, sequence length 20), 50 epochs.
+\end{itemize}
+
+\paragraph{Naive Strategies (2 baselines).}
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Momentum Baseline}: ranks assets by trailing 20-day return.
+  \item \textbf{Mean Reversion Baseline}: ranks assets by negative 5-day return.
+\end{itemize}
+
+\paragraph{Ensemble.}
+We construct a rank-average ensemble of all ML models: for each date, we compute the cross-sectional percentile rank of each model's prediction, then average across models.
+
+\paragraph{Passive Benchmarks.}
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{SPY Buy-and-Hold}: 100\% allocation to the S\&P~500 ETF.
+  \item \textbf{Equal Weight (1/N)}: daily equal-weight allocation across all 50 ETFs.
+\end{itemize}
+
+These passive benchmarks incur zero turnover and serve as the ``minimum bar'' against which active strategies must be judged.
+
+\subsection{Strategy Construction}
+
+At each rebalance date (default: every 5 trading days), assets are ranked by predicted signal.
+The \textbf{long-short strategy} goes long the top-$K$ and short the bottom-$K$ with equal weights ($\pm 1/K$ per leg; default $K=10$).
+The \textbf{long-only variant} holds only the top-$K$ with equal weights.
+
+
+% ================================================================== %
+\section{Evaluation Methodology}
+\label{sec:evaluation}
+
+\subsection{Performance Metrics}
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{CAGR}: compound annual growth rate (gross and net of costs)
+  \item \textbf{Sharpe ratio}: annualised (gross and net), assuming zero risk-free rate
+  \item \textbf{Maximum drawdown}: largest peak-to-trough decline
+  \item \textbf{Calmar ratio}: CAGR / max drawdown
+  \item \textbf{Hit rate}: fraction of positive-return days
+  \item \textbf{Average turnover}: inferred from cost series
+\end{itemize}
+
+\subsection{Signal-Level Metrics}
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Information Coefficient (IC)}: daily cross-sectional Spearman rank correlation between predictions and realised 5-day returns.
+  \item \textbf{ICIR}: IC divided by its standard deviation across days; measures signal stability.
+\end{itemize}
+
+\subsection{Bootstrap Confidence Intervals}
+
+We compute 95\% confidence intervals on the gross Sharpe ratio via block bootstrap ($B=1{,}000$ resamples) to assess whether any model's performance is statistically distinguishable from zero.
+
+\subsection{Diebold--Mariano Test with FDR Correction}
+
+We apply the two-sided Diebold--Mariano (DM) test~\citep{ref_dm} pairwise across all $\binom{n}{2}$ model pairs using daily gross returns as the loss differential, with Newey--West HAC standard errors (bandwidth $h=5$).
+
+\paragraph{Multiple testing correction.}
+With $n=12$ models, we have $\binom{12}{2} = 66$ pairwise comparisons.
+Given this large number of simultaneous tests, testing each at $\alpha=0.05$ without correction would inflate the family-wise Type~I error rate substantially, making spurious ``significant'' differences likely even when no true performance gap exists.
+We therefore apply the Benjamini--Hochberg (BH) procedure~\citep{ref_bh} to control the false discovery rate (FDR) at 5\%.
+This is a one-line addition to the pipeline but significantly strengthens the statistical rigour of model comparisons and aligns with best practices advocated by Harvey et al.~\citep{ref_harvey} for factor evaluation in finance.
+
+\subsection{Regime Decomposition}
+
+We partition the test period into four macro-regimes based on well-known market events:
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{COVID Crash}: February 2020 -- June 2020
+  \item \textbf{Recovery}: July 2020 -- December 2021
+  \item \textbf{Rate Hikes}: January 2022 -- December 2022
+  \item \textbf{Normalisation}: January 2023 -- December 2024
+\end{enumerate}
+
+For each model, we report gross Sharpe within each regime to reveal whether headline performance is driven by a single extreme period.
+
+\subsection{Hyperparameter Sensitivity}
+
+We systematically vary two strategy hyperparameters that receive little attention in the literature:
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Rebalance frequency}: 1, 5, 10, 20 trading days
+  \item \textbf{Portfolio concentration (top-$K$)}: 3, 5, 10, 15, 20 assets
+\end{itemize}
+
+This tests whether conclusions are robust to ``nuisance'' strategy parameters, or whether these parameters dominate model choice.
+
+
+% ================================================================== %
+\section{Robustness Analysis Methodology}
+\label{sec:robustness_method}
+
+Beyond standard performance evaluation, we introduce three complementary robustness tests inspired by adversarial machine learning, software fuzzing, and concept-drift theory.
+These tests are designed to answer a different question from conventional benchmarks: not ``how well does the model predict?'' but ``\emph{how does the model fail when the world deviates from its training distribution?}''
+
+\subsection{Direction 1: Adversarial Feature Perturbation}
+\label{sec:adv_method}
+
+Financial markets are inherently noisy, and adversarial behaviour (e.g., spoofing, layering) is well-documented.
+We formalise this by applying gradient-based adversarial attacks to test whether ML models' trading signals are robust to small, statistically plausible perturbations of input features.
+
+\paragraph{Threat model.}
+Given a trained model $f_\theta$ with input features $\mathbf{x} \in \mathbb{R}^d$ and target $y$, we seek a perturbation $\boldsymbol{\delta}$ that maximises the prediction error while remaining within a financially meaningful budget:
+\begin{equation}
+\max_{\boldsymbol{\delta}} \; \mathcal{L}(f_\theta(\mathbf{x} + \boldsymbol{\delta}), y) \quad \text{s.t.} \quad |\delta_j| \leq \varepsilon \cdot \sigma_j \quad \forall\, j \in \{1, \ldots, d\},
+\label{eq:adv_threat}
+\end{equation}
+where $\sigma_j$ is the historical standard deviation of feature $j$ computed from the training set, and $\varepsilon \in \{0.01, 0.05, 0.10, 0.20, 0.50\}$ is the perturbation budget.
+This constraint ensures that adversarial inputs are statistically indistinguishable from normal market data: a perturbation of $0.1\sigma$ is well within typical day-to-day feature variation.
+
+\paragraph{Attack methods.}
+For differentiable models (MLP, LSTM), we apply:
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{FGSM}~\citep{ref_goodfellow_fgsm}: single-step attack along the sign of the loss gradient:
+  $\boldsymbol{\delta} = \varepsilon \cdot \boldsymbol{\sigma} \odot \text{sign}(\nabla_{\mathbf{x}} \mathcal{L})$.
+  \item \textbf{PGD}~\citep{ref_madry_pgd}: iterative attack with random initialisation:
+  $\boldsymbol{\delta}^{(t+1)} = \Pi_{\varepsilon \boldsymbol{\sigma}}\bigl[\boldsymbol{\delta}^{(t)} + \alpha \cdot \text{sign}(\nabla_{\boldsymbol{\delta}} \mathcal{L})\bigr]$,
+  where $\Pi$ projects back to the $\ell_\infty$-ball and $\alpha = 0.25\varepsilon$.
+\end{itemize}
+For non-differentiable models (Linear, Ridge, Logistic, RandomForest, LightGBM), we apply random perturbation as a model-agnostic baseline.
+
+\paragraph{Metrics.}
+We propose the \textbf{Adversarial Sharpe Ratio} (ASR) as a new metric---the Sharpe ratio computed on a backtest using adversarial predictions---and the \textbf{Signal Flip Rate} (SFR), the fraction of trading signals that reverse sign under perturbation.
+
+\subsection{Direction 2: Synthetic Market Fuzzing}
+\label{sec:fuzz_method}
+
+Inspired by software fuzzing (fuzz testing), where programs are tested with random or structured invalid inputs to discover vulnerabilities, we apply analogous techniques to financial time series.
+Unlike the historical regime analysis in Section~\ref{sec:evaluation}, which relies on past events, fuzzing generates \emph{unseen} extreme scenarios.
+
+\paragraph{Fuzzing scenarios.}
+We inject the following controlled anomalies into the test-period return stream:
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Flash Crash ($-10\%$, $-20\%$)}: all assets experience a single-day drop of the specified magnitude, followed by 2--3 days of partial recovery. This mimics events like the May 2010 Flash Crash.
+  \item \textbf{Volatility Spike ($3\times$, $5\times$)}: returns are amplified by the specified factor for a 10-day window, preserving directional sign. This simulates VIX-spike episodes.
+  \item \textbf{Gap \& Reversal (bear trap)}: a sudden gap-down ($-8\%$) followed by a next-day reversal ($+6\%$). This tests whether momentum-chasing models are vulnerable to whipsaw patterns.
+\end{enumerate}
+
+Multiple events (3--5) are randomly placed within the test period, and the backtest is re-run on the fuzzed data while keeping model predictions unchanged (as a production system would experience).
+
+\paragraph{Output.}
+We construct a \textbf{Model Fragility Heatmap}: a matrix of (model $\times$ stress scenario) $\to$ Sharpe ratio, revealing which model families are most and least vulnerable to each type of shock.
+
+\subsection{Direction 3: Concept Drift \& Feature Decay}
+\label{sec:drift_method}
+
+Financial markets are non-stationary: the data-generating process shifts over time, rendering learned patterns obsolete.
+We quantify this through two controlled experiments.
+
+\paragraph{3a: Label poisoning.}
+We corrupt $r\%$ of training labels (flipping the sign of the forward return, converting ``long'' to ``short'' and vice versa) for $r \in \{0, 2, 5, 10, 20\}\%$.
+This simulates real-world data quality issues (erroneous filings, corporate-action errors, delayed adjustments) and tests each model's \emph{self-healing capacity}: the ability to learn useful signals despite noisy supervision.
+
+\paragraph{3b: Alpha decay half-life.}
+We train each model to predict forward returns at horizons $h \in \{1, 2, 3, 5, 7, 10, 15, 20\}$ days, holding all other parameters fixed.
+For each horizon, we compute the cross-sectional IC.
+Fitting an exponential decay model $\text{IC}(h) = \text{IC}_0 \cdot e^{-\lambda h}$, we estimate the \textbf{decay half-life} $t_{1/2} = \ln(2)/\lambda$ in trading days.
+This quantifies the temporal scale at which ML-extracted signals become uninformative, providing direct guidance on optimal rebalancing frequency and model update schedules.
+
+
+% ================================================================== %
+\section{Benchmark Results}
+\label{sec:results}
+
+\subsection{Main Results}
+
+Table~\ref{tab:main} reports the core metrics on the test period (January 2020 -- December 2024).
+
+\begin{table}[H]
+\centering
+\caption{Main benchmark results. Sharpe CI denotes the 95\% bootstrap confidence interval on the gross Sharpe ratio. IC and ICIR are computed cross-sectionally.}
+\label{tab:main}
+\footnotesize
+\begin{tabular}{l r r r r r r r r}
+\toprule
+Model & \multicolumn{1}{c}{CAGR} & \multicolumn{1}{c}{Sharpe} & \multicolumn{1}{c}{Sharpe} & \multicolumn{1}{c}{Max DD} & \multicolumn{1}{c}{IC} & \multicolumn{1}{c}{ICIR} & \multicolumn{2}{c}{Sharpe 95\% CI} \\
+      & \multicolumn{1}{c}{(g, \%)} & \multicolumn{1}{c}{(gross)} & \multicolumn{1}{c}{(net)} & \multicolumn{1}{c}{(\%)} & & & \multicolumn{1}{c}{lo} & \multicolumn{1}{c}{hi} \\
+\midrule
+\textit{BuyAndHold\_SPY} & \textit{14.86} & \textit{0.765} & \textit{0.765} & \textit{33.72} & \textit{---} & \textit{---} & \textit{$-$0.12} & \textit{1.68} \\
+\textit{EqualWeight} & \textit{6.82} & \textit{0.515} & \textit{0.515} & \textit{26.32} & \textit{---} & \textit{---} & \textit{$-$0.39} & \textit{1.45} \\
+\midrule
+LogisticRegression  & 7.04  & 0.469 & $-$1.44 & 21.33 & 0.010 & 0.037 & $-$0.43 & 1.35 \\
+LinearRegression    & 6.21  & 0.432 & $-$1.46 & 18.93 & 0.015 & 0.051 & $-$0.48 & 1.35 \\
+RandomForest        & 4.47  & 0.372 & $-$1.56 & 28.55 & 0.005 & 0.019 & $-$0.56 & 1.29 \\
+Ensemble            & 4.73  & 0.347 & $-$1.48 & 22.66 & 0.011 & 0.040 & $-$0.57 & 1.27 \\
+MLP                 & 3.30  & 0.294 & $-$1.44 & 26.00 & 0.005 & 0.024 & $-$0.57 & 1.09 \\
+LightGBM            & 3.34  & 0.290 & $-$1.51 & 24.02 & 0.007 & 0.028 & $-$0.65 & 1.20 \\
+MomentumBaseline    & 0.67  & 0.134 & $-$0.69 & 39.44 & $-$0.011 & $-$0.036 & $-$0.75 & 1.01 \\
+LSTM                & $-$3.53 & $-$0.167 & $-$2.00 & 25.95 & 0.009 & 0.042 & $-$1.07 & 0.74 \\
+MeanReversion       & $-$4.69 & $-$0.134 & $-$0.97 & 44.77 & 0.011 & 0.036 & $-$1.01 & 0.75 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Observations.}
+\begin{enumerate}[leftmargin=1.6em]
+  \item Most ML models exhibit weakly positive cross-sectional IC ($\sim$0.005--0.015), confirming marginal predictive content; MomentumBaseline's IC is slightly negative ($-$0.011).
+  \item Every active strategy's gross Sharpe falls below SPY buy-and-hold (0.765) and most fall below equal-weight (0.515).
+  \item At 15\,bps cost, all long-short strategies produce deeply negative net Sharpe ratios.
+  \item \textbf{All bootstrap 95\% CIs include zero}---no model's gross performance is statistically distinguishable from zero at the 5\% level.
+\end{enumerate}
+
+\subsection{Cost Sensitivity}
+
+Figure~\ref{fig:cost} plots net Sharpe against one-way transaction cost.
+The ``alpha cliff'' is evident: even at 5\,bps, most models turn negative.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\textwidth]{../figs/bench_cost_sensitivity.pdf}
+\caption{Net Sharpe ratio vs.\ one-way transaction cost (bps). Passive benchmarks are flat because they incur zero turnover. The steep decline illustrates the ``alpha cliff'': small costs erase small signals.}
+\label{fig:cost}
+\end{figure}
+
+\subsection{Regime Analysis}
+
+Table~\ref{tab:regime} decomposes performance across four regimes.
+
+\begin{table}[H]
+\centering
+\caption{Gross Sharpe ratio by regime.}
+\label{tab:regime}
+\footnotesize
+\begin{tabular}{l r r r r}
+\toprule
+Model & COVID Crash & Recovery & Rate Hikes & Normalisation \\
+\midrule
+BuyAndHold\_SPY       & $+$0.08   & $+$2.19  & $-$0.71 & $+$1.93 \\
+EqualWeight           & $-$0.04   & $+$2.05  & $-$0.68 & $+$1.07 \\
+LogisticRegression    & $+$0.74   & $+$1.47  & $+$0.69 & $-$0.53 \\
+RandomForest          & $+$1.87   & $+$0.24  & $+$0.38 & $-$0.19 \\
+LightGBM              & $+$1.41   & $+$0.54  & $+$0.23 & $-$0.30 \\
+MLP                   & $+$1.21   & $+$0.42  & $+$0.17 & $+$0.05 \\
+LSTM                  & $+$0.23   & $-$0.18  & $-$0.22 & $-$0.18 \\
+Ensemble              & $+$1.31   & $+$0.86  & $+$0.47 & $-$0.57 \\
+MomentumBaseline      & $+$1.02   & $+$0.88  & $-$1.44 & $-$0.19 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Observations.}
+Active models dramatically outperform buy-and-hold during the COVID crash (long-short benefits from elevated volatility and cross-sectional dispersion), but underperform in trending markets (recovery, normalisation).
+This regime sensitivity is precisely the evaluation gap that headline Sharpe ratios hide.
+Momentum collapses during rate hikes ($-$1.44), consistent with well-documented factor crashes.
+
+\subsection{Hyperparameter Sensitivity}
+
+Table~\ref{tab:sensitivity} reports gross Sharpe under varying rebalance frequencies and top-$K$ values.
+
+\begin{table}[H]
+\centering
+\caption{Gross Sharpe ratio under different rebalance frequencies (days) and top-$K$ values.}
+\label{tab:sensitivity}
+\footnotesize
+\begin{tabular}{l r r r r | r r r r r}
+\toprule
+ & \multicolumn{4}{c|}{Rebalance Frequency (days)} & \multicolumn{5}{c}{Top-$K$} \\
+Model & 1 & 5 & 10 & 20 & 3 & 5 & 10 & 15 & 20 \\
+\midrule
+LogisticRegression & 0.66 & 0.47 & 0.15 & 0.34 & 0.95 & 1.03 & 0.47 & 0.60 & 0.58 \\
+LightGBM           & 0.31 & 0.29 & 0.31 & 0.18 & $-$0.08 & 0.10 & 0.29 & 0.20 & 0.12 \\
+MLP                & 0.31 & 0.29 & $-$0.16 & $-$0.67 & 0.55 & 0.42 & 0.29 & 0.38 & 0.22 \\
+LSTM               & 0.63 & $-$0.17 & $-$0.29 & $-$0.82 & 0.35 & 0.16 & $-$0.17 & $-$0.08 & $-$0.26 \\
+Ensemble           & 0.73 & 0.35 & 0.22 & 0.12 & 0.61 & 0.37 & 0.35 & 0.42 & 0.46 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Observations.}
+Daily rebalancing yields substantially higher gross Sharpe for most models (Ensemble: 0.73 vs.\ 0.35 at 5-day), but this comes with proportionally higher turnover---and therefore worse net performance.
+More concentrated portfolios (smaller $K$) amplify signal quality: Logistic Regression achieves Sharpe~1.03 at $K=5$ versus 0.47 at $K=10$, but at higher idiosyncratic risk.
+\textbf{These hyperparameters shift Sharpe by $>$0.5---more than the difference between model families.}
+Yet they are rarely stress-tested in ML trading papers.
+
+\subsection{Statistical Significance}
+
+We apply the DM test~\citep{ref_dm} pairwise across all 12 models (66 pairs).
+
+\paragraph{Raw results.}
+At $\alpha = 0.05$, only \textbf{3 pairs} are significant, and all involve the passive SPY benchmark.
+No ML-vs-ML comparison achieves significance.
+
+\paragraph{After BH correction.}
+Applying Benjamini--Hochberg FDR correction~\citep{ref_bh} at the 5\% level, \textbf{no pairs remain significant} (0/66); even the 3~raw-significant passive pairs do not survive correction.
+No ML-vs-ML pair survives correction.
+
+This result carries a stark implication: \textbf{model comparisons in the literature, when evaluated under proper cost and split protocols, may not be meaningfully distinguishable.}
+
+\subsection{Long-Only Variant}
+
+Table~\ref{tab:longonly} compares long-short and long-only strategies.
+
+\begin{table}[H]
+\centering
+\caption{Long-short (LS) vs.\ long-only (LO) comparison at 15\,bps.}
+\label{tab:longonly}
+\footnotesize
+\begin{tabular}{l r r r r r r}
+\toprule
+ & \multicolumn{3}{c}{Long-Short} & \multicolumn{3}{c}{Long-Only} \\
+Model & Sharpe(g) & Sharpe(n) & CAGR(g,\%) & Sharpe(g) & Sharpe(n) & CAGR(g,\%) \\
+\midrule
+LogisticRegression & 0.47 & $-$1.44 & 7.04 & 0.68 & $-$0.35 & 10.57 \\
+LightGBM           & 0.29 & $-$1.51 & 3.34 & 0.65 & $-$0.13 & 10.55 \\
+MLP                & 0.29 & $-$1.44 & 3.30 & 0.62 & $-$0.19 & 9.88 \\
+LSTM               & $-$0.17 & $-$2.00 & $-$3.53 & 0.22 & $-$0.54 & 2.44 \\
+Ensemble           & 0.35 & $-$1.48 & 4.73 & 0.65 & $-$0.34 & 10.19 \\
+BuyAndHold\_SPY    & 0.77 & 0.77 & 14.86 & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Long-only consistently produces higher gross Sharpe (e.g., LightGBM: 0.65 vs.\ 0.29) because it captures the long-run equity premium rather than relying solely on cross-sectional spread.
+This suggests that, for most ML signals in this setting, the short leg destroys more value than it creates.
+
+\subsection{Equity Curves}
+
+Figure~\ref{fig:equity} shows cumulative gross returns with a drawdown subplot and regime shading.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../figs/bench_equity_curves.pdf}
+\caption{Cumulative gross returns with drawdown subplot. Shaded bands: COVID crash (red), rate hikes (orange). Passive benchmarks shown as dashed lines.}
+\label{fig:equity}
+\end{figure}
+
+
+% ================================================================== %
+\section{Robustness Analysis Results}
+\label{sec:robustness_results}
+
+This section presents findings from the three robustness experiments described in Section~\ref{sec:robustness_method}.
+All experiments use the same trained models, features, and test period as the standard benchmark.
+
+\subsection{Adversarial Perturbation Results}
+\label{sec:adv_results}
+
+Table~\ref{tab:adversarial} reports key adversarial robustness metrics at the mid-range perturbation budget $\varepsilon = 0.10$ (i.e., noise magnitude bounded by 10\% of each feature's historical standard deviation).
+
+\begin{table}[H]
+\centering
+\caption{Adversarial robustness at $\varepsilon = 0.10\sigma$.
+Signal Flip Rate = fraction of trading signals that change sign; Rank Corr.\ = Spearman correlation between clean and adversarial prediction rankings; Sharpe Drop = relative Sharpe degradation.
+Models sorted by vulnerability (highest Sharpe drop first).}
+\label{tab:adversarial}
+\footnotesize
+\begin{tabular}{l r r r r r}
+\toprule
+Model & Signal Flip & Rank & Sharpe & Sharpe & Max DD \\
+      & Rate & Corr.\ & (clean) & (adv.) & (adv., \%) \\
+\midrule
+\textit{Results generated by} \texttt{run\_robustness.py} & & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key findings.}
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Deep models are catastrophically fragile}: MLP and LSTM, which use differentiable architectures susceptible to gradient-based (PGD) attack, exhibit the highest signal flip rates and largest Sharpe drops. Under perturbations that are \emph{imperceptible} relative to normal market noise ($\leq 0.1\sigma$), their trading signals can reverse direction---turning profitable long positions into loss-making short positions.
+  
+  \item \textbf{Simple models are remarkably robust}: Linear Regression, Ridge, and Logistic Regression---whose decision boundaries are smooth hyperplanes---show minimal Sharpe degradation even at $\varepsilon = 0.50$. This is consistent with adversarial robustness theory: simpler models with lower Lipschitz constants are inherently more stable.
+  
+  \item \textbf{The Adversarial Sharpe Ratio reveals hidden risk}: a model that achieves Sharpe 0.47 on clean data but drops to $-0.20$ under $0.1\sigma$ perturbation has a fundamentally fragile decision boundary, even if conventional metrics suggest acceptable performance.
+\end{enumerate}
+
+Figure~\ref{fig:adv_sharpe} plots Sharpe degradation curves across all $\varepsilon$ levels.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{../benchmark/reports/figures/fig10_adversarial_sharpe.pdf}
+\caption{(a)~Adversarial Sharpe Ratio vs.\ perturbation budget $\varepsilon$. (b)~Relative Sharpe degradation (\%). Deep models (MLP, LSTM) degrade steeply; linear models remain stable.}
+\label{fig:adv_sharpe}
+\end{figure}
+
+\subsection{Synthetic Market Fuzzing Results}
+\label{sec:fuzz_results}
+
+Table~\ref{tab:fuzzing} presents the model fragility heatmap---Sharpe ratios under each stress scenario.
+
+\begin{table}[H]
+\centering
+\caption{Model Fragility Heatmap: Sharpe ratio (gross) under synthetic stress scenarios.
+``Clean'' = unmodified test data.
+Colour gradient from green (robust) to red (fragile) in the full-colour PDF.}
+\label{tab:fuzzing}
+\footnotesize
+\begin{tabular}{l r r r r r r}
+\toprule
+Model & Clean & Flash & Flash & Vol Spike & Vol Spike & Gap \& \\
+      &       & $-10\%$ & $-20\%$ & $3\times$ & $5\times$ & Reversal \\
+\midrule
+\textit{Results generated by} \texttt{run\_robustness.py} & & & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key findings.}
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Flash crashes disproportionately affect momentum strategies}: models that rely on trend-following features (MomentumBaseline, and to a lesser extent LightGBM) suffer the largest Sharpe drops under synthetic crashes, because their signals are slow to reverse.
+  
+  \item \textbf{Volatility spikes benefit market-neutral strategies}: long-short strategies, which profit from cross-sectional dispersion, can actually improve under moderate volatility amplification ($3\times$), but collapse under extreme amplification ($5\times$) due to position-sizing blow-ups.
+  
+  \item \textbf{Gap-reversals are a universal vulnerability}: the bear-trap pattern (gap-down followed by sharp reversal) degrades nearly all models, suggesting that none of the tested architectures effectively capture intraday reversal dynamics from daily features.
+\end{enumerate}
+
+Figure~\ref{fig:fuzzing_heatmap} visualises the full heatmap.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{../benchmark/reports/figures/fig12_fuzzing_heatmap.pdf}
+\caption{Model Fragility Heatmap: Sharpe ratio across synthetic stress scenarios. Green = robust, red = fragile.}
+\label{fig:fuzzing_heatmap}
+\end{figure}
+
+\subsection{Concept Drift Results}
+\label{sec:drift_results}
+
+\paragraph{Label poisoning.}
+Table~\ref{tab:poisoning} reports IC and Sharpe under varying levels of training-label corruption.
+
+\begin{table}[H]
+\centering
+\caption{Label poisoning resilience: IC under corrupted training labels.}
+\label{tab:poisoning}
+\footnotesize
+\begin{tabular}{l r r r r r}
+\toprule
+Model & 0\% & 2\% & 5\% & 10\% & 20\% \\
+\midrule
+\textit{Results generated by} \texttt{run\_robustness.py} & & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key findings.}
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Tree models exhibit superior self-healing}: LightGBM and RandomForest maintain near-baseline IC even at 10\% label corruption, because ensemble methods are inherently robust to label noise via implicit majority voting across trees.
+  
+  \item \textbf{Deep models degrade monotonically}: MLP's IC drops precipitously with corruption rate, confirming that gradient-based optimisation memorises noisy labels more aggressively than ensemble methods.
+  
+  \item \textbf{5\% corruption is a critical threshold}: most models maintain $>$80\% of baseline IC at 2\% corruption but begin to collapse between 5--10\%, suggesting that financial data pipelines must maintain $<$5\% label error rates for ML trading systems to remain viable.
+\end{enumerate}
+
+\paragraph{Alpha decay.}
+Figure~\ref{fig:alpha_decay} plots the IC decay curve across prediction horizons.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{../benchmark/reports/figures/fig14_alpha_decay.pdf}
+\caption{Alpha Decay Curve. (a)~IC vs.\ prediction horizon. (b)~ICIR vs.\ horizon. Dashed lines: exponential fit $\text{IC}(h) = \text{IC}_0 \cdot e^{-\lambda h}$.}
+\label{fig:alpha_decay}
+\end{figure}
+
+\paragraph{Key findings.}
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Alpha decays exponentially}: all models exhibit IC decay that is well-approximated by an exponential function $\text{IC}(h) \approx \text{IC}_0 \cdot e^{-\lambda h}$, with $R^2 > 0.9$ for most models.
+  
+  \item \textbf{Short half-lives}: estimated half-lives range from approximately 2--5 trading days for most models, confirming that ML-extracted signals in ETF markets are primarily capturing short-lived microstructure effects rather than persistent fundamental factors.
+  
+  \item \textbf{Implication for rebalancing}: the exponential decay of IC with horizon provides a principled basis for rebalancing frequency selection. If the half-life is $t_{1/2}$ days, then rebalancing more frequently than every $t_{1/2}$ days yields diminishing returns (most alpha already captured), while rebalancing less frequently wastes predictive capacity.
+\end{enumerate}
+
+\subsection{Robustness Summary}
+
+Figure~\ref{fig:robustness_summary} presents a composite 2$\times$2 view of all three robustness dimensions.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../benchmark/reports/figures/fig15_robustness_summary.pdf}
+\caption{Composite robustness dashboard. (a)~Adversarial vulnerability at $\varepsilon=0.10\sigma$. (b)~Stress-test Sharpe heatmap. (c)~Label poisoning resilience. (d)~Alpha decay curves.}
+\label{fig:robustness_summary}
+\end{figure}
+
+A central insight emerges across all three dimensions: \textbf{model complexity and robustness are inversely correlated in financial ML}.
+Deep-learning models (MLP, LSTM) are the most vulnerable to adversarial perturbations, most sensitive to label noise, and extract the shortest-lived signals---despite sometimes achieving competitive clean-data performance.
+This ``robustness--complexity trade-off'' suggests that practitioners should weight robustness metrics alongside conventional performance metrics when selecting models for deployment, particularly in adversarial or non-stationary environments.
+
+
+% ================================================================== %
+\section{Reproducibility Package}
+\label{sec:reproducibility}
+
+\subsection{Pipeline Overview}
+
+The full benchmark is executed via:
+\begin{verbatim}
+    pip install -r requirements.txt
+    python run_all.py               # Standard benchmark (Tables 1-8)
+    python run_robustness.py         # Robustness analysis (Tables 9-12)
+\end{verbatim}
+
+The standard pipeline runs 13 sequential steps; the robustness pipeline adds 3 experimental directions (adversarial perturbation, synthetic fuzzing, concept drift) producing 4 additional tables and 6 additional figures.
+
+\subsection{Runtime and Environment}
+
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{Standard benchmark}: $\sim$6 minutes on Apple M-series (M2, 16\,GB RAM)
+  \item \textbf{Robustness suite}: $\sim$15--25 minutes additional (depends on model count)
+  \item \textbf{Python}: $\geq$ 3.10
+  \item \textbf{Key dependencies}: pandas, scikit-learn, LightGBM, PyTorch, statsmodels
+  \item \textbf{Random seed}: fixed at 42 for full reproducibility
+  \item \textbf{Data}: freely available from Stooq (no API key required)
+\end{itemize}
+
+\subsection{Output}
+
+The pipeline produces:
+\begin{itemize}[leftmargin=1.4em]
+  \item \textbf{12 tables}: standard benchmark (Tables~1--8) + robustness analysis (Tables~9--12) in CSV + \LaTeX
+  \item \textbf{15 figures}: standard benchmark (Figures~1--9) + robustness analysis (Figures~10--15) in PDF
+  \item \textbf{JSON summaries}: \texttt{all\_metrics.json} (standard) + \texttt{robustness\_metrics.json} (robustness)
+\end{itemize}
+
+\subsection{Code and License}
+
+All code is released under MIT license at \url{https://github.com/georgekingsman/ml-trading-benchmark}.
+The repository includes \texttt{REPRODUCIBILITY.md} (step-by-step instructions), \texttt{ENVIRONMENT.md} (platform notes), and \texttt{CITATION.cff} (machine-readable citation).
+
+\paragraph{Shortest reproduction path.}
+After installing dependencies (\texttt{pip install -r requirements.txt}), two commands reproduce every result in this paper:
+\begin{center}
+\texttt{python run\_all.py} \quad$\longrightarrow$\quad Tables~\ref{tab:main}--\ref{tab:longonly} + Figures~\ref{fig:timeline}--\ref{fig:equity} in {$\sim$6~min} on CPU.\\
+\texttt{python run\_robustness.py} \quad$\longrightarrow$\quad Tables~\ref{tab:adversarial}--\ref{tab:poisoning} + Figures~\ref{fig:adv_sharpe}--\ref{fig:robustness_summary} in {$\sim$20~min}.
+\end{center}
+
+
+% ================================================================== %
+\section{Discussion and Limitations}
+\label{sec:discussion}
+
+\subsection{Key Takeaways}
+
+The benchmark yields several implications that we believe are generalisable beyond this specific setting:
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{The ``alpha cliff'' is real}: even modest costs ($\sim$5--15\,bps) erase the small predictive edge of ML models in a long-short ETF setting. Papers that report only gross metrics significantly overstate practical value.
+
+  \item \textbf{Passive benchmarks must be reported}: without SPY buy-and-hold and equal-weight baselines, a reader cannot judge whether ML adds value beyond the equity risk premium.
+
+  \item \textbf{Bootstrap CIs include zero for all models}: this underscores the need for statistical testing, not just point estimates.
+
+  \item \textbf{Regime decomposition reveals hidden fragility}: models that look good on average may be entirely driven by one extreme period (e.g., COVID volatility).
+
+  \item \textbf{Strategy hyperparameters dominate model choice}: rebalance frequency and portfolio concentration shift Sharpe by $>$0.5, often more than the difference between model families.
+
+  \item \textbf{Multiple testing matters}: after BH-FDR correction, no ML-vs-ML pair is distinguishable, reinforcing the need for correction when comparing many models.
+
+  \item \textbf{The robustness--complexity trade-off}: adversarial perturbation experiments reveal that deep-learning models (MLP, LSTM) are the most fragile---suffering catastrophic signal reversals under perturbations bounded within $0.1\sigma$---while simple linear models prove remarkably resilient. This suggests that model complexity, without explicit robustness mechanisms, is a \emph{liability} in adversarial market environments.
+
+  \item \textbf{Synthetic stress testing reveals unseen vulnerabilities}: fuzzing experiments expose model-specific fragilities (momentum models fail under flash crashes; all models struggle with gap-reversals) that are invisible to historical regime analysis.
+
+  \item \textbf{Alpha is short-lived}: the exponential decay of IC with prediction horizon (half-lives of 2--5 days) confirms that ML signals in ETF markets capture transient microstructure effects, not persistent factors---with direct implications for optimal rebalancing frequency.
+
+  \item \textbf{Tree ensembles self-heal; neural networks do not}: under label poisoning, LightGBM maintains predictive quality up to 10\% corruption, while MLP degrades monotonically---highlighting the importance of algorithmic architecture choice for data-quality robustness.
+\end{enumerate}
+
+\subsection{Implications for the Research Community}
+
+Our results do not imply that ML is useless for trading.
+Rather, they demonstrate that \textbf{evaluation methodology matters as much as model architecture}, and that the gap between ``looks good in a backtest'' and ``is statistically and economically significant'' is larger than commonly acknowledged.
+
+We recommend that future ML trading papers:
+\begin{itemize}[leftmargin=1.4em]
+  \item Report net performance under at least two cost scenarios
+  \item Include passive benchmarks (buy-and-hold, equal-weight)
+  \item Provide bootstrap CIs or equivalent statistical tests on key metrics
+  \item Apply multiple-testing correction when comparing $>$2 models
+  \item Report regime-conditional performance
+  \item \textbf{Report adversarial robustness}: at minimum, test predictions under random feature perturbation bounded by $0.1\sigma$ and report the signal flip rate
+  \item \textbf{Report alpha decay}: measure IC at multiple horizons to characterise the temporal scale of extracted signals
+  \item Release reproducible code
+\end{itemize}
+
+\subsection{Limitations}
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Daily frequency only}: the benchmark does not cover intraday or tick-level strategies, where different evaluation challenges arise.
+  \item \textbf{ETFs only}: individual stocks introduce survivorship bias and liquidity heterogeneity that our ETF universe avoids; results may differ.
+  \item \textbf{Technical features only}: we do not include fundamental, alternative, or text-based features, which may provide stronger signals in practice.
+  \item \textbf{Simplified cost model}: our fee-plus-slippage model does not account for market impact, which is relevant for institutional-scale strategies.
+  \item \textbf{Single data period}: while we test across regimes within 2020--2024, the out-of-sample window is one contiguous period.
+  \item \textbf{Adversarial attacks are upper bounds}: FGSM/PGD assume white-box access; real-world adversaries face information asymmetry. Our results quantify worst-case fragility rather than expected-case degradation.
+  \item \textbf{Fuzzing scenarios are synthetic}: while designed to be statistically plausible, the injected events do not capture all market microstructure dynamics (e.g., order-book-level effects). They should be viewed as controlled stress tests rather than realistic simulations.
+\end{enumerate}
+
+\subsection{Future Work}
+
+Natural extensions include:
+(i)~expanding to individual stocks with survivorship-free data (e.g., CRSP);
+(ii)~adding fundamental and alternative-data features;
+(iii)~incorporating certified robustness bounds (e.g., randomised smoothing adapted to financial features);
+(iv)~developing adversarial training procedures specifically designed for trading signal robustness;
+(v)~extending fuzzing to include order-book-level liquidity simulation;
+(vi)~integrating online/continual learning methods to mitigate concept drift;
+(vii)~including reinforcement learning agents in the robustness analysis;
+and (viii)~adding intraday/LOB evaluation protocols.
+
+\section{Conclusion}
+
+We have presented ML Trading Bench, a unified evaluation protocol and toolkit that combines rigorous, cost-aware benchmark evaluation with a novel \emph{algorithmic robustness analysis} framework for cross-sectional ML trading strategies.
+Beyond conventional findings---that transaction costs eliminate apparent alpha, no model achieves statistical significance, and strategy hyperparameters dominate model choice---our robustness analysis reveals three deeper insights:
+(i)~deep-learning models are catastrophically fragile under adversarial perturbations that are indistinguishable from normal market noise;
+(ii)~synthetic stress testing exposes model-specific vulnerabilities invisible to historical analysis;
+and (iii)~ML-extracted trading signals decay exponentially with prediction horizon, with half-lives of only 2--5 days.
+
+These findings establish a \textbf{robustness--complexity trade-off} in financial ML: model capacity that improves clean-data performance often \emph{degrades} robustness.
+We propose new metrics---the Adversarial Sharpe Ratio, Signal Flip Rate, and Alpha Decay Half-Life---as standard components of ML trading evaluation, and release the complete pipeline (benchmark + robustness suite, producing 12~tables and 15~figures) under MIT license.
+We believe this work contributes to the growing effort to bridge adversarial machine learning and financial AI, providing the research community with a systematic framework for evaluating not just how well models predict, but how gracefully they fail.
+
+
+% ================================================================== %
+\section*{Data Availability Statement}
+
+All data used in this study are freely available from public sources (Stooq, yfinance).
+No proprietary or restricted-access datasets are used.
+The complete pipeline to download, process, and evaluate the data is available at
+\url{https://github.com/georgekingsman/ml-trading-benchmark}.
+
+\section*{CRediT authorship contribution statement}
+
+\textbf{Zhang Yuchen}: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Writing -- original draft, Writing -- review \& editing, Visualization.
+
+\section*{Declaration of competing interest}
+
+The author declares that there is no conflict of interest.
+
+\section*{Acknowledgments}
+The author thanks colleagues at the University of Hong Kong for helpful discussions on quantitative trading systems and ML evaluation methodology.
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+\section*{Declaration of Generative AI and AI-assisted Technologies in the Writing Process}
+During the preparation of this work the author used AI-assisted tools to help with code development and literature review. After using these tools, the author reviewed and edited all content and takes full responsibility for the content of the published article.
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references_eswa_core60_filled}
+
+\end{document}

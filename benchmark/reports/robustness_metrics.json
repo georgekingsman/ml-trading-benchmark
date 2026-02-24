@@ -1,0 +1,1716 @@
+{
+  "adversarial": {
+    "LinearRegression": {
+      "0.01": {
+        "signal_flip_rate": 0.0017,
+        "rank_correlation": 1.0,
+        "prediction_rmse": 1.3e-05,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.434,
+        "sharpe_drop_%": -0.5,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 18.64
+      },
+      "0.05": {
+        "signal_flip_rate": 0.0084,
+        "rank_correlation": 0.9991,
+        "prediction_rmse": 6.7e-05,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.379,
+        "sharpe_drop_%": 12.3,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 20.15
+      },
+      "0.1": {
+        "signal_flip_rate": 0.0161,
+        "rank_correlation": 0.9966,
+        "prediction_rmse": 0.000134,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.431,
+        "sharpe_drop_%": 0.2,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 18.8
+      },
+      "0.2": {
+        "signal_flip_rate": 0.0323,
+        "rank_correlation": 0.9865,
+        "prediction_rmse": 0.000268,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.293,
+        "sharpe_drop_%": 32.2,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 22.9
+      },
+      "0.5": {
+        "signal_flip_rate": 0.0807,
+        "rank_correlation": 0.9253,
+        "prediction_rmse": 0.00067,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.465,
+        "sharpe_drop_%": -7.6,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 20.27
+      }
+    },
+    "Ridge": {
+      "0.01": {
+        "signal_flip_rate": 0.0017,
+        "rank_correlation": 1.0,
+        "prediction_rmse": 1.3e-05,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.434,
+        "sharpe_drop_%": -0.5,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 18.64
+      },
+      "0.05": {
+        "signal_flip_rate": 0.0085,
+        "rank_correlation": 0.9991,
+        "prediction_rmse": 6.7e-05,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.379,
+        "sharpe_drop_%": 12.3,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 20.15
+      },
+      "0.1": {
+        "signal_flip_rate": 0.0161,
+        "rank_correlation": 0.9966,
+        "prediction_rmse": 0.000134,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.431,
+        "sharpe_drop_%": 0.2,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 18.8
+      },
+      "0.2": {
+        "signal_flip_rate": 0.0323,
+        "rank_correlation": 0.9865,
+        "prediction_rmse": 0.000268,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.293,
+        "sharpe_drop_%": 32.2,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 22.9
+      },
+      "0.5": {
+        "signal_flip_rate": 0.0808,
+        "rank_correlation": 0.9253,
+        "prediction_rmse": 0.00067,
+        "sharpe_clean": 0.432,
+        "sharpe_adversarial": 0.465,
+        "sharpe_drop_%": -7.6,
+        "max_dd_clean": 18.93,
+        "max_dd_adversarial": 20.27
+      }
+    },
+    "LogisticRegression": {
+      "0.01": {
+        "signal_flip_rate": 0.0004,
+        "rank_correlation": 0.9999,
+        "prediction_rmse": 0.000226,
+        "sharpe_clean": 0.469,
+        "sharpe_adversarial": 0.516,
+        "sharpe_drop_%": -10.0,
+        "max_dd_clean": 21.33,
+        "max_dd_adversarial": 21.69
+      },
+      "0.05": {
+        "signal_flip_rate": 0.002,
+        "rank_correlation": 0.9984,
+        "prediction_rmse": 0.001128,
+        "sharpe_clean": 0.469,
+        "sharpe_adversarial": 0.376,
+        "sharpe_drop_%": 19.8,
+        "max_dd_clean": 21.33,
+        "max_dd_adversarial": 26.48
+      },
+      "0.1": {
+        "signal_flip_rate": 0.0043,
+        "rank_correlation": 0.9935,
+        "prediction_rmse": 0.002257,
+        "sharpe_clean": 0.469,
+        "sharpe_adversarial": 0.453,
+        "sharpe_drop_%": 3.4,
+        "max_dd_clean": 21.33,
+        "max_dd_adversarial": 26.53
+      },
+      "0.2": {
+        "signal_flip_rate": 0.009,
+        "rank_correlation": 0.9748,
+        "prediction_rmse": 0.004513,
+        "sharpe_clean": 0.469,
+        "sharpe_adversarial": 0.562,
+        "sharpe_drop_%": -19.8,
+        "max_dd_clean": 21.33,
+        "max_dd_adversarial": 26.81
+      },
+      "0.5": {
+        "signal_flip_rate": 0.0246,
+        "rank_correlation": 0.8704,
+        "prediction_rmse": 0.011279,
+        "sharpe_clean": 0.469,
+        "sharpe_adversarial": 0.455,
+        "sharpe_drop_%": 3.0,
+        "max_dd_clean": 21.33,
+        "max_dd_adversarial": 29.17
+      }
+    },
+    "RandomForest": {
+      "0.01": {
+        "signal_flip_rate": 0.0021,
+        "rank_correlation": 0.9974,
+        "prediction_rmse": 0.000299,
+        "sharpe_clean": 0.372,
+        "sharpe_adversarial": 0.365,
+        "sharpe_drop_%": 1.9,
+        "max_dd_clean": 28.55,
+        "max_dd_adversarial": 27.32
+      },
+      "0.05": {
+        "signal_flip_rate": 0.0079,
+        "rank_correlation": 0.9819,
+        "prediction_rmse": 0.000751,
+        "sharpe_clean": 0.372,
+        "sharpe_adversarial": 0.489,
+        "sharpe_drop_%": -31.5,
+        "max_dd_clean": 28.55,
+        "max_dd_adversarial": 28.0
+      },
+      "0.1": {
+        "signal_flip_rate": 0.0155,
+        "rank_correlation": 0.9552,
+        "prediction_rmse": 0.001216,
+        "sharpe_clean": 0.372,
+        "sharpe_adversarial": 0.565,
+        "sharpe_drop_%": -51.9,
+        "max_dd_clean": 28.55,
+        "max_dd_adversarial": 28.1
+      },
+      "0.2": {
+        "signal_flip_rate": 0.0287,
+        "rank_correlation": 0.8943,
+        "prediction_rmse": 0.001966,
+        "sharpe_clean": 0.372,
+        "sharpe_adversarial": 0.517,
+        "sharpe_drop_%": -39.0,
+        "max_dd_clean": 28.55,
+        "max_dd_adversarial": 30.79
+      },
+      "0.5": {
+        "signal_flip_rate": 0.0692,
+        "rank_correlation": 0.6759,
+        "prediction_rmse": 0.003659,
+        "sharpe_clean": 0.372,
+        "sharpe_adversarial": 0.763,
+        "sharpe_drop_%": -105.1,
+        "max_dd_clean": 28.55,
+        "max_dd_adversarial": 24.17
+      }
+    },
+    "LightGBM": {
+      "0.01": {
+        "signal_flip_rate": 0.0002,
+        "rank_correlation": 0.9943,
+        "prediction_rmse": 3.8e-05,
+        "sharpe_clean": 0.29,
+        "sharpe_adversarial": 0.279,
+        "sharpe_drop_%": 3.8,
+        "max_dd_clean": 24.02,
+        "max_dd_adversarial": 25.99
+      },
+      "0.05": {
+        "signal_flip_rate": 0.001,
+        "rank_correlation": 0.9702,
+        "prediction_rmse": 7.7e-05,
+        "sharpe_clean": 0.29,
+        "sharpe_adversarial": 0.303,
+        "sharpe_drop_%": -4.5,
+        "max_dd_clean": 24.02,
+        "max_dd_adversarial": 24.56
+      },
+      "0.1": {
+        "signal_flip_rate": 0.002,
+        "rank_correlation": 0.9426,
+        "prediction_rmse": 0.000104,
+        "sharpe_clean": 0.29,
+        "sharpe_adversarial": 0.27,
+        "sharpe_drop_%": 6.9,
+        "max_dd_clean": 24.02,
+        "max_dd_adversarial": 24.68
+      },
+      "0.2": {
+        "signal_flip_rate": 0.004,
+        "rank_correlation": 0.8886,
+        "prediction_rmse": 0.000147,
+        "sharpe_clean": 0.29,
+        "sharpe_adversarial": 0.356,
+        "sharpe_drop_%": -22.8,
+        "max_dd_clean": 24.02,
+        "max_dd_adversarial": 19.28
+      },
+      "0.5": {
+        "signal_flip_rate": 0.0097,
+        "rank_correlation": 0.7243,
+        "prediction_rmse": 0.000244,
+        "sharpe_clean": 0.29,
+        "sharpe_adversarial": 0.558,
+        "sharpe_drop_%": -92.4,
+        "max_dd_clean": 24.02,
+        "max_dd_adversarial": 23.18
+      }
+    },
+    "MLP": {
+      "0.01": {
+        "signal_flip_rate": 0.0063,
+        "rank_correlation": 0.9765,
+        "prediction_rmse": 0.000326,
+        "sharpe_clean": 0.755,
+        "sharpe_adversarial": 0.355,
+        "sharpe_drop_%": 53.0,
+        "max_dd_clean": 21.2,
+        "max_dd_adversarial": 23.29
+      },
+      "0.05": {
+        "signal_flip_rate": 0.0293,
+        "rank_correlation": 0.8762,
+        "prediction_rmse": 0.001592,
+        "sharpe_clean": 0.755,
+        "sharpe_adversarial": -0.988,
+        "sharpe_drop_%": 230.9,
+        "max_dd_clean": 21.2,
+        "max_dd_adversarial": 57.84
+      },
+      "0.1": {
+        "signal_flip_rate": 0.0553,
+        "rank_correlation": 0.7681,
+        "prediction_rmse": 0.003115,
+        "sharpe_clean": 0.755,
+        "sharpe_adversarial": -2.154,
+        "sharpe_drop_%": 385.3,
+        "max_dd_clean": 21.2,
+        "max_dd_adversarial": 83.01
+      },
+      "0.2": {
+        "signal_flip_rate": 0.0826,
+        "rank_correlation": 0.626,
+        "prediction_rmse": 0.00611,
+        "sharpe_clean": 0.755,
+        "sharpe_adversarial": -3.092,
+        "sharpe_drop_%": 509.5,
+        "max_dd_clean": 21.2,
+        "max_dd_adversarial": 91.89
+      },
+      "0.5": {
+        "signal_flip_rate": 0.1328,
+        "rank_correlation": 0.426,
+        "prediction_rmse": 0.015053,
+        "sharpe_clean": 0.755,
+        "sharpe_adversarial": -4.073,
+        "sharpe_drop_%": 639.5,
+        "max_dd_clean": 21.2,
+        "max_dd_adversarial": 96.03
+      }
+    },
+    "LSTM": {
+      "0.01": {
+        "signal_flip_rate": 0.0135,
+        "rank_correlation": 0.9989,
+        "prediction_rmse": 0.000453,
+        "sharpe_clean": 0.849,
+        "sharpe_adversarial": 0.515,
+        "sharpe_drop_%": 39.3,
+        "max_dd_clean": 14.49,
+        "max_dd_adversarial": 17.0
+      },
+      "0.05": {
+        "signal_flip_rate": 0.0595,
+        "rank_correlation": 0.9768,
+        "prediction_rmse": 0.002381,
+        "sharpe_clean": 0.849,
+        "sharpe_adversarial": -0.775,
+        "sharpe_drop_%": 191.3,
+        "max_dd_clean": 14.49,
+        "max_dd_adversarial": 47.51
+      },
+      "0.1": {
+        "signal_flip_rate": 0.1099,
+        "rank_correlation": 0.9279,
+        "prediction_rmse": 0.005136,
+        "sharpe_clean": 0.849,
+        "sharpe_adversarial": -2.39,
+        "sharpe_drop_%": 381.5,
+        "max_dd_clean": 14.49,
+        "max_dd_adversarial": 82.84
+      },
+      "0.2": {
+        "signal_flip_rate": 0.1839,
+        "rank_correlation": 0.8184,
+        "prediction_rmse": 0.011526,
+        "sharpe_clean": 0.849,
+        "sharpe_adversarial": -3.566,
+        "sharpe_drop_%": 520.0,
+        "max_dd_clean": 14.49,
+        "max_dd_adversarial": 93.06
+      },
+      "0.5": {
+        "signal_flip_rate": 0.3049,
+        "rank_correlation": 0.5961,
+        "prediction_rmse": 0.030428,
+        "sharpe_clean": 0.849,
+        "sharpe_adversarial": -4.329,
+        "sharpe_drop_%": 609.9,
+        "max_dd_clean": 14.49,
+        "max_dd_adversarial": 96.52
+      }
+    },
+    "MomentumBaseline": {
+      "0.01": {
+        "signal_flip_rate": 0.0023,
+        "rank_correlation": 1.0,
+        "prediction_rmse": 0.00633,
+        "sharpe_clean": 0.134,
+        "sharpe_adversarial": 0.143,
+        "sharpe_drop_%": -6.7,
+        "max_dd_clean": 39.44,
+        "max_dd_adversarial": 38.49
+      },
+      "0.05": {
+        "signal_flip_rate": 0.0116,
+        "rank_correlation": 0.9994,
+        "prediction_rmse": 0.031648,
+        "sharpe_clean": 0.134,
+        "sharpe_adversarial": 0.153,
+        "sharpe_drop_%": -14.2,
+        "max_dd_clean": 39.44,
+        "max_dd_adversarial": 39.04
+      },
+      "0.1": {
+        "signal_flip_rate": 0.0236,
+        "rank_correlation": 0.9978,
+        "prediction_rmse": 0.063296,
+        "sharpe_clean": 0.134,
+        "sharpe_adversarial": 0.232,
+        "sharpe_drop_%": -73.1,
+        "max_dd_clean": 39.44,
+        "max_dd_adversarial": 36.64
+      },
+      "0.2": {
+        "signal_flip_rate": 0.0473,
+        "rank_correlation": 0.9911,
+        "prediction_rmse": 0.126593,
+        "sharpe_clean": 0.134,
+        "sharpe_adversarial": 0.242,
+        "sharpe_drop_%": -80.6,
+        "max_dd_clean": 39.44,
+        "max_dd_adversarial": 36.47
+      },
+      "0.5": {
+        "signal_flip_rate": 0.1123,
+        "rank_correlation": 0.9482,
+        "prediction_rmse": 0.316482,
+        "sharpe_clean": 0.134,
+        "sharpe_adversarial": 0.075,
+        "sharpe_drop_%": 44.0,
+        "max_dd_clean": 39.44,
+        "max_dd_adversarial": 32.08
+      }
+    },
+    "MeanReversionBaseline": {
+      "0.01": {
+        "signal_flip_rate": 0.0023,
+        "rank_correlation": 1.0,
+        "prediction_rmse": 0.00633,
+        "sharpe_clean": -0.134,
+        "sharpe_adversarial": -0.143,
+        "sharpe_drop_%": 6.7,
+        "max_dd_clean": 44.77,
+        "max_dd_adversarial": 44.77
+      },
+      "0.05": {
+        "signal_flip_rate": 0.0116,
+        "rank_correlation": 0.9994,
+        "prediction_rmse": 0.031648,
+        "sharpe_clean": -0.134,
+        "sharpe_adversarial": -0.153,
+        "sharpe_drop_%": 14.2,
+        "max_dd_clean": 44.77,
+        "max_dd_adversarial": 44.73
+      },
+      "0.1": {
+        "signal_flip_rate": 0.0236,
+        "rank_correlation": 0.9978,
+        "prediction_rmse": 0.063296,
+        "sharpe_clean": -0.134,
+        "sharpe_adversarial": -0.232,
+        "sharpe_drop_%": 73.1,
+        "max_dd_clean": 44.77,
+        "max_dd_adversarial": 47.08
+      },
+      "0.2": {
+        "signal_flip_rate": 0.0473,
+        "rank_correlation": 0.9911,
+        "prediction_rmse": 0.126593,
+        "sharpe_clean": -0.134,
+        "sharpe_adversarial": -0.242,
+        "sharpe_drop_%": 80.6,
+        "max_dd_clean": 44.77,
+        "max_dd_adversarial": 46.65
+      },
+      "0.5": {
+        "signal_flip_rate": 0.1123,
+        "rank_correlation": 0.9482,
+        "prediction_rmse": 0.316482,
+        "sharpe_clean": -0.134,
+        "sharpe_adversarial": -0.075,
+        "sharpe_drop_%": -44.0,
+        "max_dd_clean": 44.77,
+        "max_dd_adversarial": 34.14
+      }
+    }
+  },
+  "fuzzing": {
+    "Clean": {
+      "LinearRegression": {
+        "CAGR (gross)": 6.21,
+        "CAGR (net)": -24.05,
+        "Sharpe (gross)": 0.432,
+        "Sharpe (net)": -1.461,
+        "Max DD": 18.93,
+        "Calmar": 0.328,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6641
+      },
+      "Ridge": {
+        "CAGR (gross)": 6.21,
+        "CAGR (net)": -24.05,
+        "Sharpe (gross)": 0.432,
+        "Sharpe (net)": -1.461,
+        "Max DD": 18.93,
+        "Calmar": 0.328,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6641
+      },
+      "LogisticRegression": {
+        "CAGR (gross)": 7.04,
+        "CAGR (net)": -24.46,
+        "Sharpe (gross)": 0.469,
+        "Sharpe (net)": -1.439,
+        "Max DD": 21.33,
+        "Calmar": 0.33,
+        "Hit Rate": 50.2,
+        "Avg Turnover": 0.6899
+      },
+      "RandomForest": {
+        "CAGR (gross)": 4.47,
+        "CAGR (net)": -21.66,
+        "Sharpe (gross)": 0.372,
+        "Sharpe (net)": -1.557,
+        "Max DD": 28.55,
+        "Calmar": 0.157,
+        "Hit Rate": 49.4,
+        "Avg Turnover": 0.57
+      },
+      "LightGBM": {
+        "CAGR (gross)": 3.34,
+        "CAGR (net)": -22.02,
+        "Sharpe (gross)": 0.29,
+        "Sharpe (net)": -1.511,
+        "Max DD": 24.02,
+        "Calmar": 0.139,
+        "Hit Rate": 49.0,
+        "Avg Turnover": 0.5579
+      },
+      "MLP": {
+        "CAGR (gross)": 11.32,
+        "CAGR (net)": -14.57,
+        "Sharpe (gross)": 0.755,
+        "Sharpe (net)": -0.894,
+        "Max DD": 21.2,
+        "Calmar": 0.534,
+        "Hit Rate": 50.52,
+        "Avg Turnover": 0.5242
+      },
+      "LSTM": {
+        "CAGR (gross)": 12.63,
+        "CAGR (net)": -13.22,
+        "Sharpe (gross)": 0.849,
+        "Sharpe (net)": -0.818,
+        "Max DD": 14.49,
+        "Calmar": 0.872,
+        "Hit Rate": 52.12,
+        "Avg Turnover": 0.5161
+      },
+      "MomentumBaseline": {
+        "CAGR (gross)": 0.67,
+        "CAGR (net)": -15.1,
+        "Sharpe (gross)": 0.134,
+        "Sharpe (net)": -0.693,
+        "Max DD": 39.44,
+        "Calmar": 0.017,
+        "Hit Rate": 51.48,
+        "Avg Turnover": 0.3369
+      },
+      "MeanReversionBaseline": {
+        "CAGR (gross)": -4.69,
+        "CAGR (net)": -19.59,
+        "Sharpe (gross)": -0.134,
+        "Sharpe (net)": -0.969,
+        "Max DD": 44.77,
+        "Calmar": -0.105,
+        "Hit Rate": 48.44,
+        "Avg Turnover": 0.3369
+      }
+    },
+    "Flash Crash (\u221210%)": {
+      "LinearRegression": {
+        "CAGR (gross)": 6.6,
+        "CAGR (net)": -23.77,
+        "Sharpe (gross)": 0.454,
+        "Sharpe (net)": -1.447,
+        "Max DD": 18.78,
+        "Calmar": 0.351,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6641
+      },
+      "Ridge": {
+        "CAGR (gross)": 6.6,
+        "CAGR (net)": -23.77,
+        "Sharpe (gross)": 0.454,
+        "Sharpe (net)": -1.447,
+        "Max DD": 18.78,
+        "Calmar": 0.351,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6641
+      },
+      "LogisticRegression": {
+        "CAGR (gross)": 7.41,
+        "CAGR (net)": -24.2,
+        "Sharpe (gross)": 0.49,
+        "Sharpe (net)": -1.428,
+        "Max DD": 21.29,
+        "Calmar": 0.348,
+        "Hit Rate": 50.04,
+        "Avg Turnover": 0.6899
+      },
+      "RandomForest": {
+        "CAGR (gross)": 4.7,
+        "CAGR (net)": -21.49,
+        "Sharpe (gross)": 0.388,
+        "Sharpe (net)": -1.55,
+        "Max DD": 28.62,
+        "Calmar": 0.164,
+        "Hit Rate": 49.4,
+        "Avg Turnover": 0.57
+      },
+      "LightGBM": {
+        "CAGR (gross)": 2.97,
+        "CAGR (net)": -22.3,
+        "Sharpe (gross)": 0.267,
+        "Sharpe (net)": -1.539,
+        "Max DD": 24.18,
+        "Calmar": 0.123,
+        "Hit Rate": 48.84,
+        "Avg Turnover": 0.5579
+      },
+      "MLP": {
+        "CAGR (gross)": 11.56,
+        "CAGR (net)": -14.38,
+        "Sharpe (gross)": 0.772,
+        "Sharpe (net)": -0.884,
+        "Max DD": 21.2,
+        "Calmar": 0.545,
+        "Hit Rate": 50.52,
+        "Avg Turnover": 0.5242
+      },
+      "LSTM": {
+        "CAGR (gross)": 12.33,
+        "CAGR (net)": -13.45,
+        "Sharpe (gross)": 0.832,
+        "Sharpe (net)": -0.836,
+        "Max DD": 14.49,
+        "Calmar": 0.851,
+        "Hit Rate": 52.28,
+        "Avg Turnover": 0.5161
+      },
+      "MomentumBaseline": {
+        "CAGR (gross)": 0.19,
+        "CAGR (net)": -15.51,
+        "Sharpe (gross)": 0.11,
+        "Sharpe (net)": -0.72,
+        "Max DD": 41.23,
+        "Calmar": 0.004,
+        "Hit Rate": 51.4,
+        "Avg Turnover": 0.3369
+      },
+      "MeanReversionBaseline": {
+        "CAGR (gross)": -4.2,
+        "CAGR (net)": -19.18,
+        "Sharpe (gross)": -0.11,
+        "Sharpe (net)": -0.947,
+        "Max DD": 45.08,
+        "Calmar": -0.093,
+        "Hit Rate": 48.52,
+        "Avg Turnover": 0.3369
+      }
+    },
+    "Flash Crash (\u221220%)": {
+      "LinearRegression": {
+        "CAGR (gross)": 5.87,
+        "CAGR (net)": -24.29,
+        "Sharpe (gross)": 0.414,
+        "Sharpe (net)": -1.482,
+        "Max DD": 18.93,
+        "Calmar": 0.31,
+        "Hit Rate": 51.48,
+        "Avg Turnover": 0.6641
+      },
+      "Ridge": {
+        "CAGR (gross)": 5.87,
+        "CAGR (net)": -24.29,
+        "Sharpe (gross)": 0.414,
+        "Sharpe (net)": -1.482,
+        "Max DD": 18.93,
+        "Calmar": 0.31,
+        "Hit Rate": 51.48,
+        "Avg Turnover": 0.6641
+      },
+      "LogisticRegression": {
+        "CAGR (gross)": 6.78,
+        "CAGR (net)": -24.65,
+        "Sharpe (gross)": 0.456,
+        "Sharpe (net)": -1.455,
+        "Max DD": 21.33,
+        "Calmar": 0.318,
+        "Hit Rate": 50.2,
+        "Avg Turnover": 0.6899
+      },
+      "RandomForest": {
+        "CAGR (gross)": 4.19,
+        "CAGR (net)": -21.87,
+        "Sharpe (gross)": 0.354,
+        "Sharpe (net)": -1.578,
+        "Max DD": 27.98,
+        "Calmar": 0.15,
+        "Hit Rate": 49.32,
+        "Avg Turnover": 0.57
+      },
+      "LightGBM": {
+        "CAGR (gross)": 3.17,
+        "CAGR (net)": -22.15,
+        "Sharpe (gross)": 0.279,
+        "Sharpe (net)": -1.522,
+        "Max DD": 24.26,
+        "Calmar": 0.131,
+        "Hit Rate": 48.84,
+        "Avg Turnover": 0.5579
+      },
+      "MLP": {
+        "CAGR (gross)": 11.72,
+        "CAGR (net)": -14.26,
+        "Sharpe (gross)": 0.779,
+        "Sharpe (net)": -0.872,
+        "Max DD": 21.2,
+        "Calmar": 0.553,
+        "Hit Rate": 50.6,
+        "Avg Turnover": 0.5242
+      },
+      "LSTM": {
+        "CAGR (gross)": 12.78,
+        "CAGR (net)": -13.11,
+        "Sharpe (gross)": 0.857,
+        "Sharpe (net)": -0.81,
+        "Max DD": 14.49,
+        "Calmar": 0.882,
+        "Hit Rate": 52.04,
+        "Avg Turnover": 0.5161
+      },
+      "MomentumBaseline": {
+        "CAGR (gross)": 0.85,
+        "CAGR (net)": -14.95,
+        "Sharpe (gross)": 0.143,
+        "Sharpe (net)": -0.685,
+        "Max DD": 39.64,
+        "Calmar": 0.021,
+        "Hit Rate": 51.4,
+        "Avg Turnover": 0.3369
+      },
+      "MeanReversionBaseline": {
+        "CAGR (gross)": -4.86,
+        "CAGR (net)": -19.73,
+        "Sharpe (gross)": -0.143,
+        "Sharpe (net)": -0.978,
+        "Max DD": 45.29,
+        "Calmar": -0.107,
+        "Hit Rate": 48.44,
+        "Avg Turnover": 0.3369
+      }
+    },
+    "Volatility Spike (3\u00d7)": {
+      "LinearRegression": {
+        "CAGR (gross)": 1.42,
+        "CAGR (net)": -27.49,
+        "Sharpe (gross)": 0.171,
+        "Sharpe (net)": -1.495,
+        "Max DD": 35.53,
+        "Calmar": 0.04,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6642
+      },
+      "Ridge": {
+        "CAGR (gross)": 1.42,
+        "CAGR (net)": -27.49,
+        "Sharpe (gross)": 0.171,
+        "Sharpe (net)": -1.495,
+        "Max DD": 35.53,
+        "Calmar": 0.04,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6642
+      },
+      "LogisticRegression": {
+        "CAGR (gross)": 2.25,
+        "CAGR (net)": -27.86,
+        "Sharpe (gross)": 0.212,
+        "Sharpe (net)": -1.538,
+        "Max DD": 37.34,
+        "Calmar": 0.06,
+        "Hit Rate": 50.2,
+        "Avg Turnover": 0.69
+      },
+      "RandomForest": {
+        "CAGR (gross)": 4.35,
+        "CAGR (net)": -21.76,
+        "Sharpe (gross)": 0.354,
+        "Sharpe (net)": -1.494,
+        "Max DD": 30.98,
+        "Calmar": 0.14,
+        "Hit Rate": 49.4,
+        "Avg Turnover": 0.5701
+      },
+      "LightGBM": {
+        "CAGR (gross)": -0.89,
+        "CAGR (net)": -25.23,
+        "Sharpe (gross)": 0.033,
+        "Sharpe (net)": -1.597,
+        "Max DD": 37.72,
+        "Calmar": -0.024,
+        "Hit Rate": 49.0,
+        "Avg Turnover": 0.5581
+      },
+      "MLP": {
+        "CAGR (gross)": 8.0,
+        "CAGR (net)": -17.12,
+        "Sharpe (gross)": 0.538,
+        "Sharpe (net)": -1.001,
+        "Max DD": 29.63,
+        "Calmar": 0.27,
+        "Hit Rate": 50.52,
+        "Avg Turnover": 0.5243
+      },
+      "LSTM": {
+        "CAGR (gross)": 13.3,
+        "CAGR (net)": -12.71,
+        "Sharpe (gross)": 0.794,
+        "Sharpe (net)": -0.661,
+        "Max DD": 19.51,
+        "Calmar": 0.682,
+        "Hit Rate": 52.12,
+        "Avg Turnover": 0.5163
+      },
+      "MomentumBaseline": {
+        "CAGR (gross)": 0.42,
+        "CAGR (net)": -15.32,
+        "Sharpe (gross)": 0.129,
+        "Sharpe (net)": -0.631,
+        "Max DD": 38.91,
+        "Calmar": 0.011,
+        "Hit Rate": 51.48,
+        "Avg Turnover": 0.3372
+      },
+      "MeanReversionBaseline": {
+        "CAGR (gross)": -5.21,
+        "CAGR (net)": -20.04,
+        "Sharpe (gross)": -0.129,
+        "Sharpe (net)": -0.893,
+        "Max DD": 44.77,
+        "Calmar": -0.116,
+        "Hit Rate": 48.44,
+        "Avg Turnover": 0.3372
+      }
+    },
+    "Volatility Spike (5\u00d7)": {
+      "LinearRegression": {
+        "CAGR (gross)": 7.67,
+        "CAGR (net)": -22.99,
+        "Sharpe (gross)": 0.467,
+        "Sharpe (net)": -1.188,
+        "Max DD": 18.93,
+        "Calmar": 0.405,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6642
+      },
+      "Ridge": {
+        "CAGR (gross)": 7.67,
+        "CAGR (net)": -22.99,
+        "Sharpe (gross)": 0.467,
+        "Sharpe (net)": -1.188,
+        "Max DD": 18.93,
+        "Calmar": 0.405,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6642
+      },
+      "LogisticRegression": {
+        "CAGR (gross)": 5.81,
+        "CAGR (net)": -25.32,
+        "Sharpe (gross)": 0.37,
+        "Sharpe (net)": -1.225,
+        "Max DD": 26.78,
+        "Calmar": 0.217,
+        "Hit Rate": 50.28,
+        "Avg Turnover": 0.6899
+      },
+      "RandomForest": {
+        "CAGR (gross)": 6.94,
+        "CAGR (net)": -19.82,
+        "Sharpe (gross)": 0.459,
+        "Sharpe (net)": -1.102,
+        "Max DD": 28.55,
+        "Calmar": 0.243,
+        "Hit Rate": 49.4,
+        "Avg Turnover": 0.5702
+      },
+      "LightGBM": {
+        "CAGR (gross)": 4.78,
+        "CAGR (net)": -20.95,
+        "Sharpe (gross)": 0.337,
+        "Sharpe (net)": -1.1,
+        "Max DD": 27.26,
+        "Calmar": 0.175,
+        "Hit Rate": 49.0,
+        "Avg Turnover": 0.5582
+      },
+      "MLP": {
+        "CAGR (gross)": 17.44,
+        "CAGR (net)": -9.87,
+        "Sharpe (gross)": 0.896,
+        "Sharpe (net)": -0.408,
+        "Max DD": 21.2,
+        "Calmar": 0.823,
+        "Hit Rate": 50.52,
+        "Avg Turnover": 0.5243
+      },
+      "LSTM": {
+        "CAGR (gross)": 18.83,
+        "CAGR (net)": -8.47,
+        "Sharpe (gross)": 0.999,
+        "Sharpe (net)": -0.357,
+        "Max DD": 19.05,
+        "Calmar": 0.988,
+        "Hit Rate": 52.2,
+        "Avg Turnover": 0.5165
+      },
+      "MomentumBaseline": {
+        "CAGR (gross)": -4.54,
+        "CAGR (net)": -19.5,
+        "Sharpe (gross)": -0.091,
+        "Sharpe (net)": -0.829,
+        "Max DD": 53.49,
+        "Calmar": -0.085,
+        "Hit Rate": 51.4,
+        "Avg Turnover": 0.3371
+      },
+      "MeanReversionBaseline": {
+        "CAGR (gross)": -0.54,
+        "CAGR (net)": -16.09,
+        "Sharpe (gross)": 0.091,
+        "Sharpe (net)": -0.656,
+        "Max DD": 45.42,
+        "Calmar": -0.012,
+        "Hit Rate": 48.52,
+        "Avg Turnover": 0.3371
+      }
+    },
+    "Gap & Reversal": {
+      "LinearRegression": {
+        "CAGR (gross)": 6.73,
+        "CAGR (net)": -23.67,
+        "Sharpe (gross)": 0.461,
+        "Sharpe (net)": -1.44,
+        "Max DD": 18.93,
+        "Calmar": 0.355,
+        "Hit Rate": 51.16,
+        "Avg Turnover": 0.664
+      },
+      "Ridge": {
+        "CAGR (gross)": 6.73,
+        "CAGR (net)": -23.67,
+        "Sharpe (gross)": 0.461,
+        "Sharpe (net)": -1.44,
+        "Max DD": 18.93,
+        "Calmar": 0.355,
+        "Hit Rate": 51.16,
+        "Avg Turnover": 0.664
+      },
+      "LogisticRegression": {
+        "CAGR (gross)": 7.03,
+        "CAGR (net)": -24.47,
+        "Sharpe (gross)": 0.47,
+        "Sharpe (net)": -1.446,
+        "Max DD": 21.33,
+        "Calmar": 0.329,
+        "Hit Rate": 50.04,
+        "Avg Turnover": 0.6899
+      },
+      "RandomForest": {
+        "CAGR (gross)": 4.86,
+        "CAGR (net)": -21.37,
+        "Sharpe (gross)": 0.398,
+        "Sharpe (net)": -1.536,
+        "Max DD": 28.19,
+        "Calmar": 0.173,
+        "Hit Rate": 49.24,
+        "Avg Turnover": 0.5699
+      },
+      "LightGBM": {
+        "CAGR (gross)": 2.98,
+        "CAGR (net)": -22.3,
+        "Sharpe (gross)": 0.267,
+        "Sharpe (net)": -1.537,
+        "Max DD": 24.41,
+        "Calmar": 0.122,
+        "Hit Rate": 48.52,
+        "Avg Turnover": 0.5579
+      },
+      "MLP": {
+        "CAGR (gross)": 11.17,
+        "CAGR (net)": -14.68,
+        "Sharpe (gross)": 0.749,
+        "Sharpe (net)": -0.904,
+        "Max DD": 21.2,
+        "Calmar": 0.527,
+        "Hit Rate": 50.28,
+        "Avg Turnover": 0.5241
+      },
+      "LSTM": {
+        "CAGR (gross)": 12.59,
+        "CAGR (net)": -13.25,
+        "Sharpe (gross)": 0.848,
+        "Sharpe (net)": -0.822,
+        "Max DD": 14.27,
+        "Calmar": 0.882,
+        "Hit Rate": 51.96,
+        "Avg Turnover": 0.5161
+      },
+      "MomentumBaseline": {
+        "CAGR (gross)": 0.61,
+        "CAGR (net)": -15.15,
+        "Sharpe (gross)": 0.131,
+        "Sharpe (net)": -0.698,
+        "Max DD": 39.39,
+        "Calmar": 0.015,
+        "Hit Rate": 51.32,
+        "Avg Turnover": 0.3369
+      },
+      "MeanReversionBaseline": {
+        "CAGR (gross)": -4.61,
+        "CAGR (net)": -19.52,
+        "Sharpe (gross)": -0.131,
+        "Sharpe (net)": -0.967,
+        "Max DD": 45.85,
+        "Calmar": -0.101,
+        "Hit Rate": 48.12,
+        "Avg Turnover": 0.3369
+      }
+    }
+  },
+  "label_poisoning": {
+    "LinearRegression": {
+      "0.0": {
+        "IC": 0.0147,
+        "ICIR": 0.0514,
+        "CAGR (gross)": 6.21,
+        "CAGR (net)": -24.05,
+        "Sharpe (gross)": 0.432,
+        "Sharpe (net)": -1.461,
+        "Max DD": 18.93,
+        "Calmar": 0.328,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6641
+      },
+      "0.02": {
+        "IC": 0.0151,
+        "ICIR": 0.0526,
+        "CAGR (gross)": 5.87,
+        "CAGR (net)": -24.36,
+        "Sharpe (gross)": 0.415,
+        "Sharpe (net)": -1.487,
+        "Max DD": 20.46,
+        "Calmar": 0.287,
+        "Hit Rate": 51.48,
+        "Avg Turnover": 0.6658
+      },
+      "0.05": {
+        "IC": 0.014,
+        "ICIR": 0.0486,
+        "CAGR (gross)": 6.41,
+        "CAGR (net)": -24.03,
+        "Sharpe (gross)": 0.443,
+        "Sharpe (net)": -1.456,
+        "Max DD": 19.65,
+        "Calmar": 0.326,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6672
+      },
+      "0.1": {
+        "IC": 0.0148,
+        "ICIR": 0.0514,
+        "CAGR (gross)": 4.93,
+        "CAGR (net)": -24.6,
+        "Sharpe (gross)": 0.364,
+        "Sharpe (net)": -1.519,
+        "Max DD": 20.06,
+        "Calmar": 0.246,
+        "Hit Rate": 51.16,
+        "Avg Turnover": 0.6548
+      },
+      "0.2": {
+        "IC": 0.0167,
+        "ICIR": 0.0578,
+        "CAGR (gross)": 5.88,
+        "CAGR (net)": -23.28,
+        "Sharpe (gross)": 0.415,
+        "Sharpe (net)": -1.412,
+        "Max DD": 19.01,
+        "Calmar": 0.309,
+        "Hit Rate": 52.04,
+        "Avg Turnover": 0.638
+      }
+    },
+    "Ridge": {
+      "0.0": {
+        "IC": 0.0147,
+        "ICIR": 0.0514,
+        "CAGR (gross)": 6.21,
+        "CAGR (net)": -24.05,
+        "Sharpe (gross)": 0.432,
+        "Sharpe (net)": -1.461,
+        "Max DD": 18.93,
+        "Calmar": 0.328,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.6641
+      },
+      "0.02": {
+        "IC": 0.0147,
+        "ICIR": 0.0512,
+        "CAGR (gross)": 7.01,
+        "CAGR (net)": -23.41,
+        "Sharpe (gross)": 0.478,
+        "Sharpe (net)": -1.425,
+        "Max DD": 17.14,
+        "Calmar": 0.409,
+        "Hit Rate": 51.48,
+        "Avg Turnover": 0.6623
+      },
+      "0.05": {
+        "IC": 0.0134,
+        "ICIR": 0.047,
+        "CAGR (gross)": 6.36,
+        "CAGR (net)": -23.92,
+        "Sharpe (gross)": 0.44,
+        "Sharpe (net)": -1.449,
+        "Max DD": 18.16,
+        "Calmar": 0.35,
+        "Hit Rate": 50.76,
+        "Avg Turnover": 0.6634
+      },
+      "0.1": {
+        "IC": 0.0154,
+        "ICIR": 0.0537,
+        "CAGR (gross)": 8.8,
+        "CAGR (net)": -22.47,
+        "Sharpe (gross)": 0.57,
+        "Sharpe (net)": -1.343,
+        "Max DD": 20.59,
+        "Calmar": 0.427,
+        "Hit Rate": 52.52,
+        "Avg Turnover": 0.6711
+      },
+      "0.2": {
+        "IC": 0.0104,
+        "ICIR": 0.0366,
+        "CAGR (gross)": 8.02,
+        "CAGR (net)": -21.5,
+        "Sharpe (gross)": 0.524,
+        "Sharpe (net)": -1.255,
+        "Max DD": 16.66,
+        "Calmar": 0.481,
+        "Hit Rate": 51.88,
+        "Avg Turnover": 0.6323
+      }
+    },
+    "LogisticRegression": {
+      "0.0": {
+        "IC": 0.0104,
+        "ICIR": 0.037,
+        "CAGR (gross)": 7.04,
+        "CAGR (net)": -24.46,
+        "Sharpe (gross)": 0.469,
+        "Sharpe (net)": -1.439,
+        "Max DD": 21.33,
+        "Calmar": 0.33,
+        "Hit Rate": 50.2,
+        "Avg Turnover": 0.6899
+      },
+      "0.02": {
+        "IC": 0.0103,
+        "ICIR": 0.0369,
+        "CAGR (gross)": 6.25,
+        "CAGR (net)": -24.77,
+        "Sharpe (gross)": 0.427,
+        "Sharpe (net)": -1.456,
+        "Max DD": 25.09,
+        "Calmar": 0.249,
+        "Hit Rate": 51.0,
+        "Avg Turnover": 0.6834
+      },
+      "0.05": {
+        "IC": 0.0107,
+        "ICIR": 0.0384,
+        "CAGR (gross)": 8.68,
+        "CAGR (net)": -23.41,
+        "Sharpe (gross)": 0.564,
+        "Sharpe (net)": -1.404,
+        "Max DD": 22.35,
+        "Calmar": 0.388,
+        "Hit Rate": 50.76,
+        "Avg Turnover": 0.6927
+      },
+      "0.1": {
+        "IC": 0.0116,
+        "ICIR": 0.0414,
+        "CAGR (gross)": 9.25,
+        "CAGR (net)": -22.62,
+        "Sharpe (gross)": 0.596,
+        "Sharpe (net)": -1.355,
+        "Max DD": 17.51,
+        "Calmar": 0.528,
+        "Hit Rate": 51.16,
+        "Avg Turnover": 0.6827
+      },
+      "0.2": {
+        "IC": 0.0119,
+        "ICIR": 0.0425,
+        "CAGR (gross)": 9.26,
+        "CAGR (net)": -22.38,
+        "Sharpe (gross)": 0.598,
+        "Sharpe (net)": -1.348,
+        "Max DD": 18.57,
+        "Calmar": 0.499,
+        "Hit Rate": 52.36,
+        "Avg Turnover": 0.6769
+      }
+    },
+    "RandomForest": {
+      "0.0": {
+        "IC": 0.0045,
+        "ICIR": 0.0192,
+        "CAGR (gross)": 4.47,
+        "CAGR (net)": -21.66,
+        "Sharpe (gross)": 0.372,
+        "Sharpe (net)": -1.557,
+        "Max DD": 28.55,
+        "Calmar": 0.157,
+        "Hit Rate": 49.4,
+        "Avg Turnover": 0.57
+      },
+      "0.02": {
+        "IC": 0.0061,
+        "ICIR": 0.0261,
+        "CAGR (gross)": 7.99,
+        "CAGR (net)": -19.29,
+        "Sharpe (gross)": 0.602,
+        "Sharpe (net)": -1.362,
+        "Max DD": 27.53,
+        "Calmar": 0.29,
+        "Hit Rate": 50.2,
+        "Avg Turnover": 0.5765
+      },
+      "0.05": {
+        "IC": 0.0044,
+        "ICIR": 0.0186,
+        "CAGR (gross)": 9.7,
+        "CAGR (net)": -18.07,
+        "Sharpe (gross)": 0.716,
+        "Sharpe (net)": -1.279,
+        "Max DD": 18.66,
+        "Calmar": 0.52,
+        "Hit Rate": 51.64,
+        "Avg Turnover": 0.578
+      },
+      "0.1": {
+        "IC": 0.0089,
+        "ICIR": 0.0366,
+        "CAGR (gross)": 8.98,
+        "CAGR (net)": -18.81,
+        "Sharpe (gross)": 0.653,
+        "Sharpe (net)": -1.29,
+        "Max DD": 23.05,
+        "Calmar": 0.389,
+        "Hit Rate": 50.36,
+        "Avg Turnover": 0.5826
+      },
+      "0.2": {
+        "IC": 0.0157,
+        "ICIR": 0.0624,
+        "CAGR (gross)": 9.33,
+        "CAGR (net)": -19.25,
+        "Sharpe (gross)": 0.667,
+        "Sharpe (net)": -1.314,
+        "Max DD": 17.22,
+        "Calmar": 0.542,
+        "Hit Rate": 50.52,
+        "Avg Turnover": 0.6001
+      }
+    },
+    "LightGBM": {
+      "0.0": {
+        "IC": 0.0072,
+        "ICIR": 0.0279,
+        "CAGR (gross)": 3.34,
+        "CAGR (net)": -22.02,
+        "Sharpe (gross)": 0.29,
+        "Sharpe (net)": -1.511,
+        "Max DD": 24.02,
+        "Calmar": 0.139,
+        "Hit Rate": 49.0,
+        "Avg Turnover": 0.5579
+      },
+      "0.02": {
+        "IC": 0.0054,
+        "ICIR": 0.0209,
+        "CAGR (gross)": 0.74,
+        "CAGR (net)": -23.84,
+        "Sharpe (gross)": 0.123,
+        "Sharpe (net)": -1.722,
+        "Max DD": 25.83,
+        "Calmar": 0.029,
+        "Hit Rate": 48.52,
+        "Avg Turnover": 0.5539
+      },
+      "0.05": {
+        "IC": 0.0103,
+        "ICIR": 0.0392,
+        "CAGR (gross)": 2.87,
+        "CAGR (net)": -21.75,
+        "Sharpe (gross)": 0.261,
+        "Sharpe (net)": -1.518,
+        "Max DD": 19.48,
+        "Calmar": 0.147,
+        "Hit Rate": 48.44,
+        "Avg Turnover": 0.5421
+      },
+      "0.1": {
+        "IC": 0.0068,
+        "ICIR": 0.0263,
+        "CAGR (gross)": 4.0,
+        "CAGR (net)": -20.6,
+        "Sharpe (gross)": 0.338,
+        "Sharpe (net)": -1.457,
+        "Max DD": 18.59,
+        "Calmar": 0.215,
+        "Hit Rate": 48.76,
+        "Avg Turnover": 0.5347
+      },
+      "0.2": {
+        "IC": 0.0137,
+        "ICIR": 0.0529,
+        "CAGR (gross)": -2.6,
+        "CAGR (net)": -27.31,
+        "Sharpe (gross)": -0.101,
+        "Sharpe (net)": -2.025,
+        "Max DD": 29.13,
+        "Calmar": -0.089,
+        "Hit Rate": 50.44,
+        "Avg Turnover": 0.5795
+      }
+    },
+    "MLP": {
+      "0.0": {
+        "IC": 0.0165,
+        "ICIR": 0.071,
+        "CAGR (gross)": 13.96,
+        "CAGR (net)": -13.95,
+        "Sharpe (gross)": 0.876,
+        "Sharpe (net)": -0.809,
+        "Max DD": 21.62,
+        "Calmar": 0.646,
+        "Hit Rate": 52.12,
+        "Avg Turnover": 0.5562
+      },
+      "0.02": {
+        "IC": 0.0127,
+        "ICIR": 0.0527,
+        "CAGR (gross)": 7.7,
+        "CAGR (net)": -20.76,
+        "Sharpe (gross)": 0.529,
+        "Sharpe (net)": -1.275,
+        "Max DD": 27.58,
+        "Calmar": 0.279,
+        "Hit Rate": 50.92,
+        "Avg Turnover": 0.6073
+      },
+      "0.05": {
+        "IC": 0.018,
+        "ICIR": 0.0809,
+        "CAGR (gross)": 9.51,
+        "CAGR (net)": -13.81,
+        "Sharpe (gross)": 0.654,
+        "Sharpe (net)": -0.851,
+        "Max DD": 21.32,
+        "Calmar": 0.446,
+        "Hit Rate": 52.04,
+        "Avg Turnover": 0.4745
+      },
+      "0.1": {
+        "IC": 0.0077,
+        "ICIR": 0.0369,
+        "CAGR (gross)": 9.79,
+        "CAGR (net)": -11.97,
+        "Sharpe (gross)": 0.668,
+        "Sharpe (net)": -0.713,
+        "Max DD": 16.59,
+        "Calmar": 0.59,
+        "Hit Rate": 51.56,
+        "Avg Turnover": 0.4377
+      },
+      "0.2": {
+        "IC": 0.0215,
+        "ICIR": 0.0961,
+        "CAGR (gross)": 10.58,
+        "CAGR (net)": -16.91,
+        "Sharpe (gross)": 0.81,
+        "Sharpe (net)": -1.265,
+        "Max DD": 12.64,
+        "Calmar": 0.837,
+        "Hit Rate": 50.92,
+        "Avg Turnover": 0.5662
+      }
+    },
+    "LSTM": {
+      "0.0": {
+        "IC": 0.0379,
+        "ICIR": 0.1567,
+        "CAGR (gross)": 19.07,
+        "CAGR (net)": -9.79,
+        "Sharpe (gross)": 1.193,
+        "Sharpe (net)": -0.56,
+        "Max DD": 20.91,
+        "Calmar": 0.912,
+        "Hit Rate": 53.64,
+        "Avg Turnover": 0.5495
+      },
+      "0.02": {
+        "IC": 0.0092,
+        "ICIR": 0.039,
+        "CAGR (gross)": 5.94,
+        "CAGR (net)": -19.34,
+        "Sharpe (gross)": 0.43,
+        "Sharpe (net)": -1.18,
+        "Max DD": 19.22,
+        "Calmar": 0.309,
+        "Hit Rate": 50.36,
+        "Avg Turnover": 0.5395
+      },
+      "0.05": {
+        "IC": 0.018,
+        "ICIR": 0.0742,
+        "CAGR (gross)": 4.92,
+        "CAGR (net)": -18.76,
+        "Sharpe (gross)": 0.379,
+        "Sharpe (net)": -1.184,
+        "Max DD": 25.51,
+        "Calmar": 0.193,
+        "Hit Rate": 52.6,
+        "Avg Turnover": 0.5064
+      },
+      "0.1": {
+        "IC": 0.023,
+        "ICIR": 0.0923,
+        "CAGR (gross)": 15.29,
+        "CAGR (net)": -12.08,
+        "Sharpe (gross)": 0.924,
+        "Sharpe (net)": -0.662,
+        "Max DD": 28.72,
+        "Calmar": 0.532,
+        "Hit Rate": 52.76,
+        "Avg Turnover": 0.537
+      },
+      "0.2": {
+        "IC": 0.0277,
+        "ICIR": 0.1103,
+        "CAGR (gross)": 12.42,
+        "CAGR (net)": -15.69,
+        "Sharpe (gross)": 0.776,
+        "Sharpe (net)": -0.898,
+        "Max DD": 23.85,
+        "Calmar": 0.521,
+        "Hit Rate": 51.48,
+        "Avg Turnover": 0.5697
+      }
+    }
+  },
+  "alpha_decay": {
+    "LinearRegression": [
+      {
+        "horizon": 1,
+        "IC": 0.0194,
+        "ICIR": 0.0659
+      },
+      {
+        "horizon": 2,
+        "IC": 0.0225,
+        "ICIR": 0.0765
+      },
+      {
+        "horizon": 3,
+        "IC": 0.0205,
+        "ICIR": 0.0702
+      },
+      {
+        "horizon": 5,
+        "IC": 0.0153,
+        "ICIR": 0.0533
+      },
+      {
+        "horizon": 7,
+        "IC": 0.0151,
+        "ICIR": 0.0523
+      },
+      {
+        "horizon": 10,
+        "IC": 0.0129,
+        "ICIR": 0.0455
+      },
+      {
+        "horizon": 15,
+        "IC": 0.0021,
+        "ICIR": 0.0073
+      },
+      {
+        "horizon": 20,
+        "IC": -0.0161,
+        "ICIR": -0.0585
+      }
+    ],
+    "Ridge": [
+      {
+        "horizon": 1,
+        "IC": 0.0194,
+        "ICIR": 0.0659
+      },
+      {
+        "horizon": 2,
+        "IC": 0.0225,
+        "ICIR": 0.0765
+      },
+      {
+        "horizon": 3,
+        "IC": 0.0204,
+        "ICIR": 0.0702
+      },
+      {
+        "horizon": 5,
+        "IC": 0.0153,
+        "ICIR": 0.0533
+      },
+      {
+        "horizon": 7,
+        "IC": 0.0151,
+        "ICIR": 0.0523
+      },
+      {
+        "horizon": 10,
+        "IC": 0.0129,
+        "ICIR": 0.0454
+      },
+      {
+        "horizon": 15,
+        "IC": 0.0021,
+        "ICIR": 0.0073
+      },
+      {
+        "horizon": 20,
+        "IC": -0.0161,
+        "ICIR": -0.0585
+      }
+    ],
+    "LogisticRegression": [
+      {
+        "horizon": 1,
+        "IC": 0.0247,
+        "ICIR": 0.0878
+      },
+      {
+        "horizon": 2,
+        "IC": 0.0232,
+        "ICIR": 0.085
+      },
+      {
+        "horizon": 3,
+        "IC": 0.023,
+        "ICIR": 0.0815
+      },
+      {
+        "horizon": 5,
+        "IC": 0.011,
+        "ICIR": 0.0394
+      },
+      {
+        "horizon": 7,
+        "IC": 0.0117,
+        "ICIR": 0.0425
+      },
+      {
+        "horizon": 10,
+        "IC": 0.0039,
+        "ICIR": 0.0152
+      },
+      {
+        "horizon": 15,
+        "IC": -0.0197,
+        "ICIR": -0.0735
+      },
+      {
+        "horizon": 20,
+        "IC": -0.0372,
+        "ICIR": -0.1346
+      }
+    ],
+    "RandomForest": [
+      {
+        "horizon": 1,
+        "IC": 0.0231,
+        "ICIR": 0.0825
+      },
+      {
+        "horizon": 2,
+        "IC": 0.0235,
+        "ICIR": 0.0881
+      },
+      {
+        "horizon": 3,
+        "IC": 0.0105,
+        "ICIR": 0.0413
+      },
+      {
+        "horizon": 5,
+        "IC": 0.0048,
+        "ICIR": 0.0206
+      },
+      {
+        "horizon": 7,
+        "IC": 0.0041,
+        "ICIR": 0.018
+      },
+      {
+        "horizon": 10,
+        "IC": 0.0124,
+        "ICIR": 0.0554
+      },
+      {
+        "horizon": 15,
+        "IC": 0.0088,
+        "ICIR": 0.0391
+      },
+      {
+        "horizon": 20,
+        "IC": 0.0027,
+        "ICIR": 0.0127
+      }
+    ],
+    "LightGBM": [
+      {
+        "horizon": 1,
+        "IC": 0.021,
+        "ICIR": 0.0818
+      },
+      {
+        "horizon": 2,
+        "IC": 0.0203,
+        "ICIR": 0.0786
+      },
+      {
+        "horizon": 3,
+        "IC": 0.0212,
+        "ICIR": 0.0804
+      },
+      {
+        "horizon": 5,
+        "IC": 0.0088,
+        "ICIR": 0.034
+      },
+      {
+        "horizon": 7,
+        "IC": 0.0144,
+        "ICIR": 0.0753
+      },
+      {
+        "horizon": 10,
+        "IC": 0.0034,
+        "ICIR": 0.0159
+      },
+      {
+        "horizon": 15,
+        "IC": -0.0018,
+        "ICIR": -0.0081
+      },
+      {
+        "horizon": 20,
+        "IC": 0.0087,
+        "ICIR": 0.0401
+      }
+    ],
+    "MLP": [
+      {
+        "horizon": 1,
+        "IC": 0.0146,
+        "ICIR": 0.0674
+      },
+      {
+        "horizon": 2,
+        "IC": 0.0064,
+        "ICIR": 0.0263
+      },
+      {
+        "horizon": 3,
+        "IC": 0.0056,
+        "ICIR": 0.023
+      },
+      {
+        "horizon": 5,
+        "IC": 0.026,
+        "ICIR": 0.1102
+      },
+      {
+        "horizon": 7,
+        "IC": 0.0016,
+        "ICIR": 0.0072
+      },
+      {
+        "horizon": 10,
+        "IC": 0.0128,
+        "ICIR": 0.0558
+      },
+      {
+        "horizon": 15,
+        "IC": -0.006,
+        "ICIR": -0.0258
+      },
+      {
+        "horizon": 20,
+        "IC": 0.0098,
+        "ICIR": 0.0428
+      }
+    ]
+  }
+}

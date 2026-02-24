@@ -13,10 +13,14 @@ class APIModel:
         
     def __req(self, text, temperature, max_try = 5):
         url = f"{self.__api_url}"
-        pay_load_dict = {"model": f"{self.model}","messages": [{
+        pay_load_dict = {
+            "model": f"{self.model}",
+            "messages": [{
                 "role": "user",
-                "temperature":temperature,
-                "content": f"{text}"}]}
+                "content": f"{text}"
+            }],
+            "temperature": temperature
+        }
         payload = json.dumps(pay_load_dict)
         headers = {
         'Accept': 'application/json',
@@ -26,13 +30,31 @@ class APIModel:
         }
         try:
             response = requests.request("POST", url, headers=headers, data=payload)
-            return json.loads(response.text)['choices'][0]['message']['content']
-        except:
+            if response.status_code != 200:
+                try:
+                    print(f"API error {response.status_code}: {response.text}")
+                except Exception:
+                    pass
+                return None
+            data = response.json()
+            if isinstance(data, dict) and 'choices' in data and data['choices']:
+                return data['choices'][0]['message']['content']
+            return None
+        except Exception:
             for _ in range(max_try):
                 try:
                     response = requests.request("POST", url, headers=headers, data=payload)
-                    return json.loads(response.text)['choices'][0]['message']['content']
-                except:
+                    if response.status_code != 200:
+                        try:
+                            print(f"API error {response.status_code}: {response.text}")
+                        except Exception:
+                            pass
+                        time.sleep(0.2)
+                        continue
+                    data = response.json()
+                    if isinstance(data, dict) and 'choices' in data and data['choices']:
+                        return data['choices'][0]['message']['content']
+                except Exception:
                     pass
                 time.sleep(0.2)
             return None
