@@ -178,26 +178,26 @@ Evaluated under five cost scenarios: 0, 5, 10, 15, 25 bps one-way.
 |-------------|----------|-----------|-----------------|--------|-----------|--------------|
 | **BuyAndHold_SPY** | **14.86** | **0.765** | **0.765** | 33.72 | 54.84 | 0.000 |
 | **EqualWeight** | **6.82** | **0.515** | **0.515** | 26.32 | 53.88 | 0.000 |
+| MLP | 10.56 | 0.803 | −1.194 | 17.83 | 51.40 | 0.550 |
+| Ensemble | 8.82 | 0.554 | −1.260 | 19.08 | 51.56 | 0.665 |
 | LogisticRegression | 7.04 | 0.469 | −1.439 | 21.33 | 50.20 | 0.690 |
 | LinearRegression | 6.21 | 0.432 | −1.461 | 18.93 | 51.56 | 0.664 |
 | Ridge | 6.21 | 0.432 | −1.461 | 18.93 | 51.56 | 0.664 |
+| LSTM | 4.54 | 0.391 | −1.565 | 19.27 | 51.00 | 0.554 |
 | RandomForest | 4.47 | 0.372 | −1.557 | 28.55 | 49.40 | 0.570 |
-| Ensemble | 4.73 | 0.347 | −1.478 | 22.66 | 50.52 | 0.660 |
-| MLP | 3.30 | 0.294 | −1.439 | 26.00 | 50.28 | 0.519 |
 | LightGBM | 3.34 | 0.290 | −1.511 | 24.02 | 49.00 | 0.558 |
 | MomentumBaseline | 0.67 | 0.134 | −0.693 | 39.44 | 51.48 | 0.337 |
-| LSTM | −3.53 | −0.167 | −2.000 | 25.95 | 50.04 | 0.557 |
 | MeanReversion | −4.69 | −0.134 | −0.969 | 44.77 | 48.44 | 0.337 |
 
 ### 结论 / Interpretation
 
 **中文：**
-- **所有主动策略的 gross Sharpe 都低于 SPY 的 0.765**。最好的 ML 模型（LogisticRegression, 0.469）仍然远不及简单的 SPY 买入持有。
-- 加上 15bps 成本后，**所有多空策略的 Sharpe 都变成深度负数**（−1.4 到 −2.0），意味着在真实交易中全部亏损。
+- **MLP (0.803) marginally exceeds SPY 买入持有 (0.765)**，是唯一超越被动基准的 ML 模型。其他主动策略的 gross Sharpe 都低于 SPY。
+- 加上 15bps 成本后，**所有多空策略的 Sharpe 都变成深度负数**（−1.2 到 −1.6），意味着在真实交易中全部亏损。
 - 命中率都在 49~52% 附近，几乎等于抛硬币，说明**模型的单次预测能力极弱**。
 
 **English:**
-- **All active strategies have gross Sharpe below SPY's 0.765**. The best ML model (LogisticRegression, 0.469) still falls far short of simple SPY buy-and-hold.
+- **MLP (0.803) marginally exceeds SPY buy-and-hold (0.765)**, making it the only ML model to surpass the passive benchmark. All other active strategies have gross Sharpe below SPY.
 - After 15bps costs, **all long-short Sharpe ratios turn deeply negative** (−1.4 to −2.0), meaning they all lose money in practice.
 - Hit rates hover around 49–52%, essentially coin flips, confirming **extremely weak per-trade predictive power**.
 
@@ -304,14 +304,14 @@ Financial returns exhibit autocorrelation and volatility clustering. Simple boot
 |-------------|-----------|------------|-------------|---------------------|
 | BuyAndHold_SPY | 0.765 | −0.122 | 1.682 | ✅ |
 | EqualWeight | 0.515 | −0.388 | 1.446 | ✅ |
+| MLP | 0.803 | −0.127 | 1.621 | ✅ |
+| Ensemble | 0.554 | −0.336 | 1.503 | ✅ |
 | LogisticRegression | 0.469 | −0.434 | 1.347 | ✅ |
 | LinearRegression | 0.432 | −0.484 | 1.354 | ✅ |
 | RandomForest | 0.372 | −0.559 | 1.288 | ✅ |
-| Ensemble | 0.347 | −0.571 | 1.273 | ✅ |
-| MLP | 0.294 | −0.570 | 1.087 | ✅ |
+| LSTM | 0.391 | −0.487 | 1.333 | ✅ |
 | LightGBM | 0.290 | −0.647 | 1.204 | ✅ |
 | MomentumBaseline | 0.134 | −0.752 | 1.013 | ✅ |
-| LSTM | −0.167 | −1.066 | 0.735 | ✅ |
 | MeanReversion | −0.134 | −1.013 | 0.752 | ✅ |
 
 ### 结论 / Interpretation
@@ -540,26 +540,26 @@ Different models output different scales (regression outputs returns, classifica
 
 ### 结果 / Results
 
-| 指标 / Metric | Ensemble | 最好的单模型 LogReg / Best Single |
+| 指标 / Metric | Ensemble | 最好的单模型 MLP / Best Single |
 |--------------|----------|----------------------------------|
-| CAGR(g) | 4.73% | 7.04% |
-| Sharpe(g) | 0.347 | 0.469 |
-| MaxDD | 22.66% | 21.33% |
-| IC | 0.011 | 0.010 |
-| ICIR | 0.040 | 0.037 |
+| CAGR(g) | 8.82% | 10.56% |
+| Sharpe(g) | 0.554 | 0.803 |
+| MaxDD | 19.08% | 17.83% |
+| IC | 0.011 | 0.003 |
+| ICIR | 0.041 | 0.014 |
 
 ### 结论 / Interpretation
 
 **中文：**
-- 集成的表现是 **中间偏下**（Sharpe 0.347 排第 5），低于最好的单模型（LogReg 0.469）。
-- IC 和 ICIR 略高于 LogReg，说明信号稍微更稳定，但不够强。
-- 集成的 MaxDD（22.66%）和大多数模型相当，没有显著改善风险。
-- **核心结论：当所有成分模型的信号都很弱时，集成也无法创造强信号。** 集成帮助稳定性但不帮助量级——"garbage in, garbage out" 即使在集成中也成立。
+- 集成的表现是 **中间偏上**（Sharpe 0.554 排第 3），但仍低于最好的单模型（MLP 0.803）。
+- IC 和 ICIR 高于 MLP，说明信号更稳定，但 MLP 的绝对 Sharpe 更高。
+- 集成的 MaxDD（19.08%）略高于 MLP（17.83%），风险水平相当。
+- **核心结论：集成提升了稳定性但未超越最好的单模型。** 当最好的成分模型（MLP）已经有较强信号时，秩平均集成趋向中位数、拉低了最好的个体表现。
 
 **English:**
-- Ensemble performance is **middle-of-the-pack** (Sharpe 0.347, rank 5), below the best single model (LogReg 0.469).
-- IC and ICIR are slightly higher than LogReg, suggesting marginally more stable signals, but not stronger.
-- **Core conclusion: When all component signals are weak, ensembling cannot create strong signals.** Ensembling helps stability but not magnitude — "garbage in, garbage out" holds even for ensembles.
+- Ensemble performance is **upper-middle** (Sharpe 0.554, rank 3), but still below the best single model (MLP 0.803).
+- IC and ICIR are higher than MLP, suggesting more stable signals, but MLP's absolute Sharpe is higher.
+- **Core conclusion: Ensembling improves stability but does not surpass the best single model.** When the best component (MLP) has a reasonably strong signal, rank-averaging regresses toward the median, pulling down the best individual's performance.
 
 ---
 
@@ -581,22 +581,22 @@ Different models output different scales (regression outputs returns, classifica
 
 | 模型 / Model | 1天/Daily | 5天/Weekly | 10天/Biweekly | 20天/Monthly |
 |-------------|-----------|------------|---------------|-------------|
-| Ensemble | **0.730** | 0.347 | 0.220 | 0.123 |
+| LSTM | **0.813** | 0.391 | 0.281 | −0.729 |
+| Ensemble | **0.702** | 0.554 | 0.482 | 0.390 |
 | LogisticRegression | **0.658** | 0.469 | 0.151 | 0.340 |
-| LSTM | **0.630** | −0.167 | −0.293 | −0.824 |
+| MLP | 0.337 | 0.803 | 0.337 | 0.012 |
 | LightGBM | 0.313 | 0.290 | 0.312 | 0.179 |
-| MLP | 0.306 | 0.294 | −0.162 | −0.674 |
 | Momentum | −0.217 | 0.134 | 0.112 | **0.434** |
 
 **Net Sharpe (@ 15bps):**
 
 | 模型 / Model | 1天/Daily | 5天/Weekly | 10天/Biweekly | 20天/Monthly |
 |-------------|-----------|------------|---------------|-------------|
-| Ensemble | −5.072 | −1.478 | −0.711 | −0.358 |
+| MLP | −7.089 | −1.194 | −0.616 | −0.459 |
+| Ensemble | −5.123 | −1.260 | −0.450 | −0.086 |
 | LogisticRegression | −5.276 | −1.439 | −0.669 | **−0.115** |
-| LSTM | −2.819 | −2.000 | −1.462 | −1.399 |
+| LSTM | −2.922 | −1.565 | −0.944 | −1.344 |
 | LightGBM | −5.786 | −1.511 | −0.604 | −0.312 |
-| MLP | −6.566 | −1.439 | −1.093 | −1.162 |
 | Momentum | −2.211 | −0.693 | −0.468 | **+0.045** |
 
 **Avg Turnover（日均换手率）**：
@@ -609,16 +609,16 @@ Different models output different scales (regression outputs returns, classifica
 ### 结论 / Interpretation
 
 **中文：**
-1. **日频调仓的 gross Sharpe 是最高的**（Ensemble 0.73），但换手率也最高（2.0），导致 net Sharpe 惨不忍睹（−5.07）。
-2. **从 gross 到 net 的下降幅度随频率急剧变化**：日频下降 ~5.8，周频下降 ~1.8，月频只下降 ~0.5。
-3. **Momentum 是唯一在月频下反而更好的模型**（gross Sharpe 0.434），因为动量信号本身变化慢，不需要频繁调仓。
-4. **只有 Momentum 在 20 天频率 + 15bps 下达到了正的 net Sharpe（+0.045）**——这是所有 ML 模型中唯一一个在真实成本下可能赚钱的配置。
+1. **日频调仓的 gross Sharpe 可以很高**（LSTM 0.81、Ensemble 0.70），但换手率也最高（~2.0），导致 net Sharpe 惨不忍睹（MLP −7.09）。
+2. **从 gross 到 net 的下降幅度随频率急剧变化**：日频下降 ~5–7，周频下降 ~1.2–1.6，月频只下降 ~0.1–0.5。
+3. **Ensemble 和 MLP 在月频下 net Sharpe 接近零**（Ensemble −0.09，MLP −0.46），提示降频是控制成本的关键。
+4. **只有 Momentum 在 20 天频率 + 15bps 下达到了正的 net Sharpe（+0.045）**——这是所有配置中唯一可能赚钱的。
 5. **策略超参比模型选择更重要**：调仓频率从 1 天变到 20 天，Sharpe 变化幅度 > 0.5，远大于模型之间的差异。
 
 **English:**
-1. **Daily rebalancing has the highest gross Sharpe** (Ensemble 0.73) but also the highest turnover (2.0), yielding catastrophic net Sharpe (−5.07).
-2. **Gross-to-net drop scales dramatically with frequency**: daily drops ~5.8, weekly ~1.8, monthly only ~0.5.
-3. **Momentum is the only model that improves at monthly frequency** (gross Sharpe 0.434), because momentum signals change slowly.
+1. **Daily rebalancing gross Sharpe can be high** (LSTM 0.81, Ensemble 0.70) but also highest turnover (~2.0), yielding catastrophic net Sharpe (MLP −7.09).
+2. **Gross-to-net drop scales dramatically with frequency**: daily drops ~5–7, weekly ~1.2–1.6, monthly only ~0.1–0.5.
+3. **Ensemble and MLP approach break-even at monthly frequency** (Ensemble −0.09, MLP −0.46), suggesting lower frequency is key to cost control.
 4. **Only Momentum at 20-day frequency + 15bps achieves positive net Sharpe (+0.045)** — the only configuration across all ML models that might make money in practice.
 5. **Strategy hyperparameters matter more than model choice**: changing rebalance frequency from 1→20 days shifts Sharpe by >0.5, exceeding model-to-model differences.
 
@@ -641,23 +641,23 @@ Different models output different scales (regression outputs returns, classifica
 | 模型 / Model | K=3 | K=5 | K=10 | K=15 | K=20 |
 |-------------|-----|-----|------|------|------|
 | LogisticRegression | 0.949 | **1.028** | 0.469 | 0.601 | 0.576 |
-| Ensemble | 0.607 | 0.370 | 0.347 | 0.420 | 0.456 |
-| MLP | 0.553 | 0.418 | 0.294 | 0.383 | 0.223 |
-| LSTM | 0.351 | 0.163 | −0.167 | −0.082 | −0.261 |
+| LSTM | **0.972** | 0.394 | 0.391 | 0.536 | 0.680 |
+| MLP | 0.907 | 0.574 | 0.803 | 0.724 | 0.730 |
+| Ensemble | 0.842 | 0.826 | 0.554 | 0.602 | 0.645 |
 | LightGBM | −0.080 | 0.098 | 0.290 | 0.202 | 0.122 |
 
 ### 结论 / Interpretation
 
 **中文：**
-1. **LogisticRegression 在 K=5 时达到了惊人的 Sharpe=1.028**——这是全部实验中最高的数字！说明当 LogReg 的 Top-5 预测足够准确时，集中投注能放大 alpha。
-2. 但 K=5 的 net Sharpe 仍然是 −0.709（表中未列出但数据中有），成本仍然吃掉了全部 alpha。
-3. **K 和 Sharpe 的关系不是单调的**——LogReg 在 K=5 最优，LightGBM 在 K=10 最优，说明最佳集中度取决于模型信号的分布特性。
-4. LSTM 在所有 K 下都表现最差，进一步说明 LSTM 在这个特征集上没有正确学习。
-5. **K 的变化导致 Sharpe 变化幅度高达 0.56**（LogReg: K=10 的 0.47 到 K=5 的 1.03），再次证明策略超参比模型选择更重要。
+1. **LSTM 在 K=3 时达到了 Sharpe=0.972**，几乎追平 LogReg 的 K=5（1.028）；MLP 在 K=3 也达到 0.907。集中投注能放大深度学习模型的 alpha 信号。
+2. **LogisticRegression 在 K=5 时仍然是最高的 Sharpe=1.028**——但所有 K 值下 net Sharpe 仍为负数，成本吃掉了全部 alpha。
+3. **K 和 Sharpe 的关系不是单调的**——LogReg 在 K=5 最优，MLP 在 K=3 最优，LSTM 也在 K=3 最优，说明最佳集中度取决于模型信号的分布特性。
+4. **深度学习模型（MLP、LSTM）在小 K 下表现出色**，LSTM 从 K=10 的 0.391 跃升至 K=3 的 0.972（+148%），证明其信号虽弱但集中在少量股票上时仍有预测力。
+5. **K 的变化导致 Sharpe 变化幅度高达 0.58**（LSTM: K=10 的 0.39 到 K=3 的 0.97），再次证明策略超参比模型选择更重要。
 
 **English:**
-1. **LogisticRegression at K=5 achieves a remarkable Sharpe of 1.028** — the highest number in all experiments! When LogReg's top-5 predictions are accurate, concentrated betting amplifies alpha.
-2. But K=5 net Sharpe is still −0.709 — costs still eat all alpha.
+1. **LSTM at K=3 achieves Sharpe of 0.972**, nearly matching LogReg's K=5 (1.028); MLP at K=3 also reaches 0.907. Concentrated betting amplifies deep-learning alpha signals.
+2. **LogisticRegression at K=5 still achieves the highest Sharpe of 1.028** — but net Sharpe remains negative at all K values; costs eat all alpha.
 3. **The K–Sharpe relationship is non-monotonic** — LogReg peaks at K=5, LightGBM peaks at K=10, meaning optimal concentration depends on the signal distribution.
 4. LSTM performs worst at all K values, confirming it fails to learn from this feature set.
 5. **K variation causes Sharpe swings up to 0.56** (LogReg: 0.47 at K=10 → 1.03 at K=5), again showing strategy hyperparameters dominate model choice.

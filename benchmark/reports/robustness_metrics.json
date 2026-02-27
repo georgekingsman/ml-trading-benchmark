@@ -262,106 +262,106 @@
     },
     "MLP": {
       "0.01": {
-        "signal_flip_rate": 0.0063,
-        "rank_correlation": 0.9765,
-        "prediction_rmse": 0.000326,
-        "sharpe_clean": 0.755,
-        "sharpe_adversarial": 0.355,
-        "sharpe_drop_%": 53.0,
-        "max_dd_clean": 21.2,
-        "max_dd_adversarial": 23.29
+        "signal_flip_rate": 0.0323,
+        "rank_correlation": 0.9759,
+        "prediction_rmse": 0.000535,
+        "sharpe_clean": 0.803,
+        "sharpe_adversarial": 0.009,
+        "sharpe_drop_%": 98.9,
+        "max_dd_clean": 17.83,
+        "max_dd_adversarial": 33.5
       },
       "0.05": {
-        "signal_flip_rate": 0.0293,
-        "rank_correlation": 0.8762,
-        "prediction_rmse": 0.001592,
-        "sharpe_clean": 0.755,
-        "sharpe_adversarial": -0.988,
-        "sharpe_drop_%": 230.9,
-        "max_dd_clean": 21.2,
-        "max_dd_adversarial": 57.84
+        "signal_flip_rate": 0.1014,
+        "rank_correlation": 0.8498,
+        "prediction_rmse": 0.002477,
+        "sharpe_clean": 0.803,
+        "sharpe_adversarial": -2.509,
+        "sharpe_drop_%": 412.5,
+        "max_dd_clean": 17.83,
+        "max_dd_adversarial": 84.81
       },
       "0.1": {
-        "signal_flip_rate": 0.0553,
-        "rank_correlation": 0.7681,
-        "prediction_rmse": 0.003115,
-        "sharpe_clean": 0.755,
-        "sharpe_adversarial": -2.154,
-        "sharpe_drop_%": 385.3,
-        "max_dd_clean": 21.2,
-        "max_dd_adversarial": 83.01
+        "signal_flip_rate": 0.1558,
+        "rank_correlation": 0.7111,
+        "prediction_rmse": 0.004598,
+        "sharpe_clean": 0.803,
+        "sharpe_adversarial": -3.857,
+        "sharpe_drop_%": 580.3,
+        "max_dd_clean": 17.83,
+        "max_dd_adversarial": 94.53
       },
       "0.2": {
-        "signal_flip_rate": 0.0826,
-        "rank_correlation": 0.626,
-        "prediction_rmse": 0.00611,
-        "sharpe_clean": 0.755,
-        "sharpe_adversarial": -3.092,
-        "sharpe_drop_%": 509.5,
-        "max_dd_clean": 21.2,
-        "max_dd_adversarial": 91.89
+        "signal_flip_rate": 0.2153,
+        "rank_correlation": 0.5419,
+        "prediction_rmse": 0.008277,
+        "sharpe_clean": 0.803,
+        "sharpe_adversarial": -4.402,
+        "sharpe_drop_%": 648.2,
+        "max_dd_clean": 17.83,
+        "max_dd_adversarial": 96.45
       },
       "0.5": {
-        "signal_flip_rate": 0.1328,
-        "rank_correlation": 0.426,
-        "prediction_rmse": 0.015053,
-        "sharpe_clean": 0.755,
-        "sharpe_adversarial": -4.073,
-        "sharpe_drop_%": 639.5,
-        "max_dd_clean": 21.2,
-        "max_dd_adversarial": 96.03
+        "signal_flip_rate": 0.2835,
+        "rank_correlation": 0.3448,
+        "prediction_rmse": 0.017379,
+        "sharpe_clean": 0.803,
+        "sharpe_adversarial": -5.152,
+        "sharpe_drop_%": 741.6,
+        "max_dd_clean": 17.83,
+        "max_dd_adversarial": 97.36
       }
     },
     "LSTM": {
       "0.01": {
-        "signal_flip_rate": 0.0135,
-        "rank_correlation": 0.9989,
-        "prediction_rmse": 0.000453,
-        "sharpe_clean": 0.849,
-        "sharpe_adversarial": 0.515,
-        "sharpe_drop_%": 39.3,
-        "max_dd_clean": 14.49,
-        "max_dd_adversarial": 17.0
+        "signal_flip_rate": 0.0187,
+        "rank_correlation": 0.9973,
+        "prediction_rmse": 0.00109,
+        "sharpe_clean": 0.391,
+        "sharpe_adversarial": -0.241,
+        "sharpe_drop_%": 161.6,
+        "max_dd_clean": 19.27,
+        "max_dd_adversarial": 26.73
       },
       "0.05": {
-        "signal_flip_rate": 0.0595,
-        "rank_correlation": 0.9768,
-        "prediction_rmse": 0.002381,
-        "sharpe_clean": 0.849,
-        "sharpe_adversarial": -0.775,
-        "sharpe_drop_%": 191.3,
-        "max_dd_clean": 14.49,
-        "max_dd_adversarial": 47.51
+        "signal_flip_rate": 0.0803,
+        "rank_correlation": 0.9568,
+        "prediction_rmse": 0.005742,
+        "sharpe_clean": 0.391,
+        "sharpe_adversarial": -2.144,
+        "sharpe_drop_%": 648.3,
+        "max_dd_clean": 19.27,
+        "max_dd_adversarial": 77.68
       },
       "0.1": {
-        "signal_flip_rate": 0.1099,
-        "rank_correlation": 0.9279,
-        "prediction_rmse": 0.005136,
-        "sharpe_clean": 0.849,
-        "sharpe_adversarial": -2.39,
-        "sharpe_drop_%": 381.5,
-        "max_dd_clean": 14.49,
-        "max_dd_adversarial": 82.84
+        "signal_flip_rate": 0.1296,
+        "rank_correlation": 0.8942,
+        "prediction_rmse": 0.011527,
+        "sharpe_clean": 0.391,
+        "sharpe_adversarial": -3.178,
+        "sharpe_drop_%": 912.8,
+        "max_dd_clean": 19.27,
+        "max_dd_adversarial": 89.05
       },
       "0.2": {
-        "signal_flip_rate": 0.1839,
-        "rank_correlation": 0.8184,
-        "prediction_rmse": 0.011526,
-        "sharpe_clean": 0.849,
-        "sharpe_adversarial": -3.566,
-        "sharpe_drop_%": 520.0,
-        "max_dd_clean": 14.49,
-        "max_dd_adversarial": 93.06
+        "signal_flip_rate": 0.1881,
+        "rank_correlation": 0.8026,
+        "prediction_rmse": 0.020636,
+        "sharpe_clean": 0.391,
+        "sharpe_adversarial": -4.134,
+        "sharpe_drop_%": 1157.3,
+        "max_dd_clean": 19.27,
+        "max_dd_adversarial": 94.33
       },
       "0.5": {
-        "signal_flip_rate": 0.3049,
-        "rank_correlation": 0.5961,
-        "prediction_rmse": 0.030428,
-        "sharpe_clean": 0.849,
-        "sharpe_adversarial": -4.329,
-        "sharpe_drop_%": 609.9,
-        "max_dd_clean": 14.49,
-        "max_dd_adversarial": 96.52
+        "signal_flip_rate": 0.2568,
+        "rank_correlation": 0.6653,
+        "prediction_rmse": 0.034695,
+        "sharpe_clean": 0.391,
+        "sharpe_adversarial": -5.085,
+        "sharpe_drop_%": 1400.5,
+        "max_dd_clean": 19.27,
+        "max_dd_adversarial": 96.7
       }
     },
     "MomentumBaseline": {
@@ -522,24 +522,24 @@
         "Avg Turnover": 0.5579
       },
       "MLP": {
-        "CAGR (gross)": 11.32,
-        "CAGR (net)": -14.57,
-        "Sharpe (gross)": 0.755,
-        "Sharpe (net)": -0.894,
-        "Max DD": 21.2,
-        "Calmar": 0.534,
-        "Hit Rate": 50.52,
-        "Avg Turnover": 0.5242
+        "CAGR (gross)": 10.56,
+        "CAGR (net)": -16.26,
+        "Sharpe (gross)": 0.803,
+        "Sharpe (net)": -1.194,
+        "Max DD": 17.83,
+        "Calmar": 0.592,
+        "Hit Rate": 51.4,
+        "Avg Turnover": 0.5502
       },
       "LSTM": {
-        "CAGR (gross)": 12.63,
-        "CAGR (net)": -13.22,
-        "Sharpe (gross)": 0.849,
-        "Sharpe (net)": -0.818,
-        "Max DD": 14.49,
-        "Calmar": 0.872,
-        "Hit Rate": 52.12,
-        "Avg Turnover": 0.5161
+        "CAGR (gross)": 4.54,
+        "CAGR (net)": -21.0,
+        "Sharpe (gross)": 0.391,
+        "Sharpe (net)": -1.565,
+        "Max DD": 19.27,
+        "Calmar": 0.236,
+        "Hit Rate": 51.0,
+        "Avg Turnover": 0.5541
       },
       "MomentumBaseline": {
         "CAGR (gross)": 0.67,
@@ -614,24 +614,24 @@
         "Avg Turnover": 0.5579
       },
       "MLP": {
-        "CAGR (gross)": 11.56,
-        "CAGR (net)": -14.38,
-        "Sharpe (gross)": 0.772,
-        "Sharpe (net)": -0.884,
-        "Max DD": 21.2,
-        "Calmar": 0.545,
-        "Hit Rate": 50.52,
-        "Avg Turnover": 0.5242
+        "CAGR (gross)": 10.35,
+        "CAGR (net)": -16.42,
+        "Sharpe (gross)": 0.791,
+        "Sharpe (net)": -1.214,
+        "Max DD": 17.83,
+        "Calmar": 0.58,
+        "Hit Rate": 51.16,
+        "Avg Turnover": 0.5502
       },
       "LSTM": {
-        "CAGR (gross)": 12.33,
-        "CAGR (net)": -13.45,
-        "Sharpe (gross)": 0.832,
-        "Sharpe (net)": -0.836,
-        "Max DD": 14.49,
-        "Calmar": 0.851,
-        "Hit Rate": 52.28,
-        "Avg Turnover": 0.5161
+        "CAGR (gross)": 4.36,
+        "CAGR (net)": -21.14,
+        "Sharpe (gross)": 0.379,
+        "Sharpe (net)": -1.582,
+        "Max DD": 19.27,
+        "Calmar": 0.226,
+        "Hit Rate": 51.0,
+        "Avg Turnover": 0.554
       },
       "MomentumBaseline": {
         "CAGR (gross)": 0.19,
@@ -706,24 +706,24 @@
         "Avg Turnover": 0.5579
       },
       "MLP": {
-        "CAGR (gross)": 11.72,
-        "CAGR (net)": -14.26,
-        "Sharpe (gross)": 0.779,
-        "Sharpe (net)": -0.872,
-        "Max DD": 21.2,
-        "Calmar": 0.553,
-        "Hit Rate": 50.6,
-        "Avg Turnover": 0.5242
+        "CAGR (gross)": 10.94,
+        "CAGR (net)": -15.97,
+        "Sharpe (gross)": 0.828,
+        "Sharpe (net)": -1.17,
+        "Max DD": 17.39,
+        "Calmar": 0.629,
+        "Hit Rate": 51.48,
+        "Avg Turnover": 0.5502
       },
       "LSTM": {
-        "CAGR (gross)": 12.78,
-        "CAGR (net)": -13.11,
-        "Sharpe (gross)": 0.857,
-        "Sharpe (net)": -0.81,
-        "Max DD": 14.49,
-        "Calmar": 0.882,
-        "Hit Rate": 52.04,
-        "Avg Turnover": 0.5161
+        "CAGR (gross)": 4.94,
+        "CAGR (net)": -20.7,
+        "Sharpe (gross)": 0.419,
+        "Sharpe (net)": -1.54,
+        "Max DD": 19.27,
+        "Calmar": 0.257,
+        "Hit Rate": 51.0,
+        "Avg Turnover": 0.554
       },
       "MomentumBaseline": {
         "CAGR (gross)": 0.85,
@@ -798,24 +798,24 @@
         "Avg Turnover": 0.5581
       },
       "MLP": {
-        "CAGR (gross)": 8.0,
-        "CAGR (net)": -17.12,
-        "Sharpe (gross)": 0.538,
-        "Sharpe (net)": -1.001,
-        "Max DD": 29.63,
-        "Calmar": 0.27,
-        "Hit Rate": 50.52,
-        "Avg Turnover": 0.5243
+        "CAGR (gross)": 7.73,
+        "CAGR (net)": -18.41,
+        "Sharpe (gross)": 0.579,
+        "Sharpe (net)": -1.272,
+        "Max DD": 23.92,
+        "Calmar": 0.323,
+        "Hit Rate": 51.48,
+        "Avg Turnover": 0.5503
       },
       "LSTM": {
-        "CAGR (gross)": 13.3,
-        "CAGR (net)": -12.71,
-        "Sharpe (gross)": 0.794,
-        "Sharpe (net)": -0.661,
-        "Max DD": 19.51,
-        "Calmar": 0.682,
-        "Hit Rate": 52.12,
-        "Avg Turnover": 0.5163
+        "CAGR (gross)": 4.76,
+        "CAGR (net)": -20.85,
+        "Sharpe (gross)": 0.39,
+        "Sharpe (net)": -1.453,
+        "Max DD": 19.66,
+        "Calmar": 0.242,
+        "Hit Rate": 51.0,
+        "Avg Turnover": 0.5541
       },
       "MomentumBaseline": {
         "CAGR (gross)": 0.42,
@@ -890,24 +890,24 @@
         "Avg Turnover": 0.5582
       },
       "MLP": {
-        "CAGR (gross)": 17.44,
-        "CAGR (net)": -9.87,
-        "Sharpe (gross)": 0.896,
-        "Sharpe (net)": -0.408,
-        "Max DD": 21.2,
-        "Calmar": 0.823,
-        "Hit Rate": 50.52,
-        "Avg Turnover": 0.5243
+        "CAGR (gross)": 8.51,
+        "CAGR (net)": -17.82,
+        "Sharpe (gross)": 0.523,
+        "Sharpe (net)": -0.925,
+        "Max DD": 44.84,
+        "Calmar": 0.19,
+        "Hit Rate": 51.4,
+        "Avg Turnover": 0.5505
       },
       "LSTM": {
-        "CAGR (gross)": 18.83,
-        "CAGR (net)": -8.47,
-        "Sharpe (gross)": 0.999,
-        "Sharpe (net)": -0.357,
-        "Max DD": 19.05,
-        "Calmar": 0.988,
-        "Hit Rate": 52.2,
-        "Avg Turnover": 0.5165
+        "CAGR (gross)": 4.47,
+        "CAGR (net)": -21.07,
+        "Sharpe (gross)": 0.323,
+        "Sharpe (net)": -1.1,
+        "Max DD": 22.6,
+        "Calmar": 0.198,
+        "Hit Rate": 50.92,
+        "Avg Turnover": 0.5544
       },
       "MomentumBaseline": {
         "CAGR (gross)": -4.54,
@@ -982,24 +982,24 @@
         "Avg Turnover": 0.5579
       },
       "MLP": {
-        "CAGR (gross)": 11.17,
-        "CAGR (net)": -14.68,
-        "Sharpe (gross)": 0.749,
-        "Sharpe (net)": -0.904,
-        "Max DD": 21.2,
-        "Calmar": 0.527,
-        "Hit Rate": 50.28,
-        "Avg Turnover": 0.5241
+        "CAGR (gross)": 10.92,
+        "CAGR (net)": -15.99,
+        "Sharpe (gross)": 0.829,
+        "Sharpe (net)": -1.178,
+        "Max DD": 15.41,
+        "Calmar": 0.708,
+        "Hit Rate": 51.24,
+        "Avg Turnover": 0.5502
       },
       "LSTM": {
-        "CAGR (gross)": 12.59,
-        "CAGR (net)": -13.25,
-        "Sharpe (gross)": 0.848,
-        "Sharpe (net)": -0.822,
-        "Max DD": 14.27,
-        "Calmar": 0.882,
-        "Hit Rate": 51.96,
-        "Avg Turnover": 0.5161
+        "CAGR (gross)": 4.77,
+        "CAGR (net)": -20.82,
+        "Sharpe (gross)": 0.407,
+        "Sharpe (net)": -1.552,
+        "Max DD": 19.27,
+        "Calmar": 0.248,
+        "Hit Rate": 50.84,
+        "Avg Turnover": 0.554
       },
       "MomentumBaseline": {
         "CAGR (gross)": 0.61,
@@ -1336,126 +1336,126 @@
     },
     "MLP": {
       "0.0": {
-        "IC": 0.0165,
-        "ICIR": 0.071,
-        "CAGR (gross)": 13.96,
-        "CAGR (net)": -13.95,
-        "Sharpe (gross)": 0.876,
-        "Sharpe (net)": -0.809,
-        "Max DD": 21.62,
-        "Calmar": 0.646,
-        "Hit Rate": 52.12,
-        "Avg Turnover": 0.5562
+        "IC": 0.0223,
+        "ICIR": 0.0933,
+        "CAGR (gross)": 20.99,
+        "CAGR (net)": -8.27,
+        "Sharpe (gross)": 1.324,
+        "Sharpe (net)": -0.477,
+        "Max DD": 16.5,
+        "Calmar": 1.272,
+        "Hit Rate": 51.8,
+        "Avg Turnover": 0.5484
       },
       "0.02": {
-        "IC": 0.0127,
-        "ICIR": 0.0527,
-        "CAGR (gross)": 7.7,
-        "CAGR (net)": -20.76,
-        "Sharpe (gross)": 0.529,
-        "Sharpe (net)": -1.275,
-        "Max DD": 27.58,
-        "Calmar": 0.279,
-        "Hit Rate": 50.92,
-        "Avg Turnover": 0.6073
+        "IC": 0.0097,
+        "ICIR": 0.0411,
+        "CAGR (gross)": 12.71,
+        "CAGR (net)": -15.67,
+        "Sharpe (gross)": 0.827,
+        "Sharpe (net)": -0.957,
+        "Max DD": 16.96,
+        "Calmar": 0.749,
+        "Hit Rate": 52.44,
+        "Avg Turnover": 0.5742
       },
       "0.05": {
-        "IC": 0.018,
-        "ICIR": 0.0809,
-        "CAGR (gross)": 9.51,
-        "CAGR (net)": -13.81,
-        "Sharpe (gross)": 0.654,
-        "Sharpe (net)": -0.851,
-        "Max DD": 21.32,
-        "Calmar": 0.446,
-        "Hit Rate": 52.04,
-        "Avg Turnover": 0.4745
+        "IC": 0.0107,
+        "ICIR": 0.0437,
+        "CAGR (gross)": 18.52,
+        "CAGR (net)": -10.63,
+        "Sharpe (gross)": 1.192,
+        "Sharpe (net)": -0.643,
+        "Max DD": 14.25,
+        "Calmar": 1.3,
+        "Hit Rate": 52.28,
+        "Avg Turnover": 0.5589
       },
       "0.1": {
-        "IC": 0.0077,
-        "ICIR": 0.0369,
-        "CAGR (gross)": 9.79,
-        "CAGR (net)": -11.97,
-        "Sharpe (gross)": 0.668,
-        "Sharpe (net)": -0.713,
-        "Max DD": 16.59,
-        "Calmar": 0.59,
-        "Hit Rate": 51.56,
-        "Avg Turnover": 0.4377
+        "IC": 0.0132,
+        "ICIR": 0.056,
+        "CAGR (gross)": 5.33,
+        "CAGR (net)": -21.98,
+        "Sharpe (gross)": 0.398,
+        "Sharpe (net)": -1.397,
+        "Max DD": 19.62,
+        "Calmar": 0.272,
+        "Hit Rate": 50.52,
+        "Avg Turnover": 0.5945
       },
       "0.2": {
-        "IC": 0.0215,
-        "ICIR": 0.0961,
-        "CAGR (gross)": 10.58,
-        "CAGR (net)": -16.91,
-        "Sharpe (gross)": 0.81,
-        "Sharpe (net)": -1.265,
-        "Max DD": 12.64,
-        "Calmar": 0.837,
-        "Hit Rate": 50.92,
-        "Avg Turnover": 0.5662
+        "IC": -0.0016,
+        "ICIR": -0.0074,
+        "CAGR (gross)": 6.44,
+        "CAGR (net)": -14.22,
+        "Sharpe (gross)": 0.531,
+        "Sharpe (net)": -1.055,
+        "Max DD": 14.2,
+        "Calmar": 0.453,
+        "Hit Rate": 51.32,
+        "Avg Turnover": 0.4275
       }
     },
     "LSTM": {
       "0.0": {
-        "IC": 0.0379,
-        "ICIR": 0.1567,
-        "CAGR (gross)": 19.07,
-        "CAGR (net)": -9.79,
-        "Sharpe (gross)": 1.193,
-        "Sharpe (net)": -0.56,
-        "Max DD": 20.91,
-        "Calmar": 0.912,
-        "Hit Rate": 53.64,
-        "Avg Turnover": 0.5495
+        "IC": 0.0071,
+        "ICIR": 0.0304,
+        "CAGR (gross)": 7.89,
+        "CAGR (net)": -17.01,
+        "Sharpe (gross)": 0.577,
+        "Sharpe (net)": -1.123,
+        "Max DD": 18.71,
+        "Calmar": 0.422,
+        "Hit Rate": 50.52,
+        "Avg Turnover": 0.5194
       },
       "0.02": {
-        "IC": 0.0092,
-        "ICIR": 0.039,
-        "CAGR (gross)": 5.94,
-        "CAGR (net)": -19.34,
-        "Sharpe (gross)": 0.43,
-        "Sharpe (net)": -1.18,
-        "Max DD": 19.22,
-        "Calmar": 0.309,
-        "Hit Rate": 50.36,
-        "Avg Turnover": 0.5395
+        "IC": 0.0204,
+        "ICIR": 0.0861,
+        "CAGR (gross)": 17.17,
+        "CAGR (net)": -11.65,
+        "Sharpe (gross)": 1.165,
+        "Sharpe (net)": -0.756,
+        "Max DD": 16.62,
+        "Calmar": 1.033,
+        "Hit Rate": 53.4,
+        "Avg Turnover": 0.5592
       },
       "0.05": {
-        "IC": 0.018,
-        "ICIR": 0.0742,
-        "CAGR (gross)": 4.92,
-        "CAGR (net)": -18.76,
-        "Sharpe (gross)": 0.379,
-        "Sharpe (net)": -1.184,
-        "Max DD": 25.51,
-        "Calmar": 0.193,
-        "Hit Rate": 52.6,
-        "Avg Turnover": 0.5064
+        "IC": 0.0271,
+        "ICIR": 0.1083,
+        "CAGR (gross)": 11.39,
+        "CAGR (net)": -13.48,
+        "Sharpe (gross)": 0.755,
+        "Sharpe (net)": -0.807,
+        "Max DD": 21.12,
+        "Calmar": 0.539,
+        "Hit Rate": 51.08,
+        "Avg Turnover": 0.5002
       },
       "0.1": {
-        "IC": 0.023,
-        "ICIR": 0.0923,
-        "CAGR (gross)": 15.29,
-        "CAGR (net)": -12.08,
-        "Sharpe (gross)": 0.924,
-        "Sharpe (net)": -0.662,
-        "Max DD": 28.72,
-        "Calmar": 0.532,
-        "Hit Rate": 52.76,
-        "Avg Turnover": 0.537
+        "IC": 0.0201,
+        "ICIR": 0.0816,
+        "CAGR (gross)": 4.68,
+        "CAGR (net)": -21.74,
+        "Sharpe (gross)": 0.357,
+        "Sharpe (net)": -1.338,
+        "Max DD": 36.6,
+        "Calmar": 0.128,
+        "Hit Rate": 53.16,
+        "Avg Turnover": 0.5755
       },
       "0.2": {
-        "IC": 0.0277,
-        "ICIR": 0.1103,
-        "CAGR (gross)": 12.42,
-        "CAGR (net)": -15.69,
-        "Sharpe (gross)": 0.776,
-        "Sharpe (net)": -0.898,
-        "Max DD": 23.85,
-        "Calmar": 0.521,
-        "Hit Rate": 51.48,
-        "Avg Turnover": 0.5697
+        "IC": 0.0101,
+        "ICIR": 0.0363,
+        "CAGR (gross)": 9.09,
+        "CAGR (net)": -14.17,
+        "Sharpe (gross)": 0.626,
+        "Sharpe (net)": -0.869,
+        "Max DD": 23.34,
+        "Calmar": 0.39,
+        "Hit Rate": 51.16,
+        "Avg Turnover": 0.4753
       }
     }
   },
@@ -1673,43 +1673,43 @@
     "MLP": [
       {
         "horizon": 1,
-        "IC": 0.0146,
-        "ICIR": 0.0674
+        "IC": 0.0237,
+        "ICIR": 0.0916
       },
       {
         "horizon": 2,
-        "IC": 0.0064,
-        "ICIR": 0.0263
+        "IC": 0.0214,
+        "ICIR": 0.09
       },
       {
         "horizon": 3,
-        "IC": 0.0056,
-        "ICIR": 0.023
+        "IC": 0.0208,
+        "ICIR": 0.0855
       },
       {
         "horizon": 5,
-        "IC": 0.026,
-        "ICIR": 0.1102
+        "IC": 0.0142,
+        "ICIR": 0.0601
       },
       {
         "horizon": 7,
-        "IC": 0.0016,
-        "ICIR": 0.0072
+        "IC": 0.0201,
+        "ICIR": 0.088
       },
       {
         "horizon": 10,
-        "IC": 0.0128,
-        "ICIR": 0.0558
+        "IC": 0.0157,
+        "ICIR": 0.07
       },
       {
         "horizon": 15,
-        "IC": -0.006,
-        "ICIR": -0.0258
+        "IC": 0.0047,
+        "ICIR": 0.0191
       },
       {
         "horizon": 20,
-        "IC": 0.0098,
-        "ICIR": 0.0428
+        "IC": -0.0111,
+        "ICIR": -0.0477
       }
     ]
   }

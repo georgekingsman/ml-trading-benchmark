@@ -3,50 +3,48 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: ml_trading_benchmark_EAAI.aux
 The style file: elsarticle-num.bst
 Database file #1: references_eswa_core60_filled.bib
-Warning--empty pages in ref41
-Warning--empty year in ref14
-Warning--empty year in ref16
-Warning--empty year in ref15
-Warning--empty year in ref11
-You've used 15 entries,
+Warning--empty pages in ref_goodfellow_fgsm
+Warning--empty pages in ref_madry_pgd
+Warning--empty pages in ref11
+You've used 17 entries,
             2952 wiz_defined-function locations,
-            757 strings with 7919 characters,
-and the built_in function-call counts, 3937 in all, are:
-= -- 376
-> -- 102
-< -- 0
-+ -- 44
-- -- 29
-* -- 287
-:= -- 537
-add.period$ -- 25
-call.type$ -- 15
-change.case$ -- 15
+            785 strings with 8925 characters,
+and the built_in function-call counts, 5487 in all, are:
+= -- 536
+> -- 170
+< -- 1
++ -- 68
+- -- 51
+* -- 438
+:= -- 771
+add.period$ -- 30
+call.type$ -- 17
+change.case$ -- 17
 chr.to.int$ -- 0
 cite$ -- 20
-duplicate$ -- 131
-empty$ -- 477
-format.name$ -- 39
-if$ -- 1036
+duplicate$ -- 177
+empty$ -- 631
+format.name$ -- 67
+if$ -- 1418
 int.to.chr$ -- 0
-int.to.str$ -- 15
-missing$ -- 11
-newline$ -- 71
-num.names$ -- 11
-pop$ -- 100
+int.to.str$ -- 17
+missing$ -- 17
+newline$ -- 83
+num.names$ -- 17
+pop$ -- 115
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 269
+skip$ -- 334
 stack$ -- 0
-substring$ -- 101
-swap$ -- 38
-text.length$ -- 0
+substring$ -- 195
+swap$ -- 57
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 5
-while$ -- 21
-width$ -- 17
-write$ -- 144
-(There were 5 warnings)
+warning$ -- 3
+while$ -- 34
+width$ -- 19
+write$ -- 182
+(There were 3 warnings)

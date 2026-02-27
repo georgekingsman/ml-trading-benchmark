@@ -84,6 +84,12 @@ from scripts.report import (
     plot_topk_sensitivity,
     plot_dm_heatmap,
 )
+from scripts.paper_tables import (
+    write_main_table,
+    write_regime_table,
+    write_sensitivity_table,
+    write_longonly_table,
+)
 
 
 def load_config(path: str) -> dict:
@@ -203,6 +209,14 @@ def main():
         model = build_model(name, params)
         model.fit(X_train, y_train, X_val, y_val)
         trained_models[name] = model
+
+        # Save checkpoint for PyTorch models (ensures cross-script consistency)
+        ckpt_path = f"models/{name}_checkpoint.pt"
+        try:
+            model.save_checkpoint(ckpt_path)
+            print(f"    ✓ Checkpoint saved: {ckpt_path}")
+        except NotImplementedError:
+            pass  # Traditional ML models don't need checkpointing
 
         preds = model.predict(X_test)
         pred_df = test_df[["date", "ticker"]].copy()
@@ -546,6 +560,15 @@ def main():
 
     # Table 8: Top-K sensitivity
     generate_topk_sensitivity_table(topk_results, output_dir)
+
+    # ── Paper-format tables (for \input{} in manuscript) ──
+    paper_dir = os.path.join(output_dir, "tables", "paper")
+    os.makedirs(paper_dir, exist_ok=True)
+    print("\n  Generating paper-format tables...")
+    write_main_table(all_metrics_main, paper_dir)
+    write_regime_table(regime_results, paper_dir)
+    write_sensitivity_table(rebal_results, topk_results, paper_dir)
+    write_longonly_table(all_metrics_main, all_metrics_lo, paper_dir)
 
     # Figures 1-6
     plot_walk_forward_timeline(output_dir)

@@ -7,99 +7,166 @@
 \Newlabel{hku}{a}
 \citation{ref7,ref13,ref8}
 \citation{ref41,ref42,ref5}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
-\newlabel{sec:intro}{{1}{2}{Introduction}{section.1}{}}
+\citation{ref_goodfellow_fgsm,ref_madry_pgd}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{3}{Introduction}{section.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Contributions.}{3}{section*.1}\protected@file@percent }
 \citation{ref_dm}
 \citation{ref_bh}
 \citation{ref14,ref16}
 \citation{ref7,ref10}
 \citation{ref15}
-\@writefile{toc}{\contentsline {paragraph}{Contributions.}{3}{section*.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Paper organisation.}{3}{section*.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{3}{section.2}\protected@file@percent }
-\newlabel{sec:related}{{2}{3}{Related Work}{section.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{ML for trading surveys.}{3}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Paper organisation.}{4}{section*.2}\protected@file@percent }
 \citation{ref11}
 \citation{ref81}
 \citation{ref42,ref5}
 \citation{ref_dm}
 \citation{ref_bh}
 \citation{ref_harvey}
-\@writefile{toc}{\contentsline {paragraph}{Quantitative trading platforms.}{4}{section*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Evaluation methodology.}{4}{section*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Positioning.}{4}{section*.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Benchmark Design}{5}{section.3}\protected@file@percent }
-\newlabel{sec:design}{{3}{5}{Benchmark Design}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Universe and Data}{5}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Data statement.}{5}{section*.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Features and Labels}{5}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Walk-Forward Split with Embargo}{6}{subsection.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Walk-forward evaluation protocol with embargo gaps. No information from downstream periods can influence upstream training or normalisation.}}{7}{figure.1}\protected@file@percent }
-\newlabel{fig:timeline}{{1}{7}{Walk-forward evaluation protocol with embargo gaps. No information from downstream periods can influence upstream training or normalisation}{figure.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Cost Model}{7}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Models and Strategies}{7}{section.4}\protected@file@percent }
-\newlabel{sec:models}{{4}{7}{Models and Strategies}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Model Families}{7}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Traditional ML (5 models).}{7}{section*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Deep Learning (2 models).}{8}{section*.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Naive Strategies (2 baselines).}{8}{section*.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ensemble.}{8}{section*.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Passive Benchmarks.}{8}{section*.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Strategy Construction}{9}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Evaluation Methodology}{9}{section.5}\protected@file@percent }
-\newlabel{sec:evaluation}{{5}{9}{Evaluation Methodology}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Performance Metrics}{9}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Signal-Level Metrics}{9}{subsection.5.2}\protected@file@percent }
+\citation{ref_goodfellow_fgsm}
+\citation{ref_madry_pgd}
+\citation{ref14}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{5}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{5}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{ML for trading surveys.}{5}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Quantitative trading platforms.}{5}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Evaluation methodology.}{5}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Adversarial robustness and distribution shift.}{5}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Positioning.}{6}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Benchmark Design}{6}{section.3}\protected@file@percent }
+\newlabel{sec:design}{{3}{6}{Benchmark Design}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Universe and Data}{6}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Data statement.}{7}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Features and Labels}{7}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Walk-Forward Split with Embargo}{8}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Walk-forward evaluation protocol with embargo gaps. No information from downstream periods can influence upstream training or normalisation.}}{9}{figure.1}\protected@file@percent }
+\newlabel{fig:timeline}{{1}{9}{Walk-forward evaluation protocol with embargo gaps. No information from downstream periods can influence upstream training or normalisation}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Cost Model}{9}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Models and Strategies}{9}{section.4}\protected@file@percent }
+\newlabel{sec:models}{{4}{9}{Models and Strategies}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Model Families}{9}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Traditional ML (5 models).}{9}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Deep Learning (2 models).}{10}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Naive Strategies (2 baselines).}{10}{section*.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ensemble.}{10}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Passive Benchmarks.}{10}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Strategy Construction}{11}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Evaluation Methodology}{11}{section.5}\protected@file@percent }
+\newlabel{sec:evaluation}{{5}{11}{Evaluation Methodology}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Performance Metrics}{11}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Signal-Level Metrics}{11}{subsection.5.2}\protected@file@percent }
 \citation{ref_dm}
 \citation{ref_bh}
 \citation{ref_harvey}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Bootstrap Confidence Intervals}{10}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Diebold--Mariano Test with FDR Correction}{10}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Multiple testing correction.}{10}{section*.13}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Regime Decomposition}{10}{subsection.5.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Hyperparameter Sensitivity}{11}{subsection.5.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{11}{section.6}\protected@file@percent }
-\newlabel{sec:results}{{6}{11}{Results}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Main Results}{11}{subsection.6.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Main benchmark results. Sharpe CI denotes the 95\% bootstrap confidence interval on the gross Sharpe ratio. IC and ICIR are computed cross-sectionally.}}{12}{table.1}\protected@file@percent }
-\newlabel{tab:main}{{1}{12}{Main benchmark results. Sharpe CI denotes the 95\% bootstrap confidence interval on the gross Sharpe ratio. IC and ICIR are computed cross-sectionally}{table.1}{}}
-\@writefile{toc}{\contentsline {paragraph}{Observations.}{12}{section*.14}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Cost Sensitivity}{13}{subsection.6.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Net Sharpe ratio vs.\ one-way transaction cost (bps). Passive benchmarks are flat because they incur zero turnover. The steep decline illustrates the ``alpha cliff'': small costs erase small signals.}}{13}{figure.2}\protected@file@percent }
-\newlabel{fig:cost}{{2}{13}{Net Sharpe ratio vs.\ one-way transaction cost (bps). Passive benchmarks are flat because they incur zero turnover. The steep decline illustrates the ``alpha cliff'': small costs erase small signals}{figure.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Regime Analysis}{13}{subsection.6.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Gross Sharpe ratio by regime.}}{14}{table.2}\protected@file@percent }
-\newlabel{tab:regime}{{2}{14}{Gross Sharpe ratio by regime}{table.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{Observations.}{14}{section*.15}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Hyperparameter Sensitivity}{14}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Bootstrap Confidence Intervals}{12}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Diebold--Mariano Test with FDR Correction}{12}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Multiple testing correction.}{12}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Regime Decomposition}{12}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Hyperparameter Sensitivity}{13}{subsection.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Robustness Analysis Methodology}{13}{section.6}\protected@file@percent }
+\newlabel{sec:robustness_method}{{6}{13}{Robustness Analysis Methodology}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Direction 1: Adversarial Feature Perturbation}{13}{subsection.6.1}\protected@file@percent }
+\newlabel{sec:adv_method}{{6.1}{13}{Direction 1: Adversarial Feature Perturbation}{subsection.6.1}{}}
+\citation{ref_goodfellow_fgsm}
+\citation{ref_madry_pgd}
+\@writefile{toc}{\contentsline {paragraph}{Threat model.}{14}{section*.15}\protected@file@percent }
+\newlabel{eq:adv_threat}{{2}{14}{Threat model}{equation.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Attack methods.}{14}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Metrics.}{14}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Direction 2: Synthetic Market Fuzzing}{14}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:fuzz_method}{{6.2}{14}{Direction 2: Synthetic Market Fuzzing}{subsection.6.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Fuzzing scenarios.}{15}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Output.}{15}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Direction 3: Concept Drift \& Feature Decay}{15}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:drift_method}{{6.3}{15}{Direction 3: Concept Drift \& Feature Decay}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{3a: Label poisoning.}{16}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{3b: Alpha decay half-life.}{16}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Benchmark Results}{16}{section.7}\protected@file@percent }
+\newlabel{sec:results}{{7}{16}{Benchmark Results}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Main Results}{16}{subsection.7.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Main benchmark results. Sharpe CI denotes the 95\% bootstrap confidence interval on the gross Sharpe ratio. IC and ICIR are computed cross-sectionally.}}{17}{table.1}\protected@file@percent }
+\newlabel{tab:main}{{1}{17}{Main benchmark results. Sharpe CI denotes the 95\% bootstrap confidence interval on the gross Sharpe ratio. IC and ICIR are computed cross-sectionally}{table.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Observations.}{17}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Cost Sensitivity}{18}{subsection.7.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Net Sharpe ratio vs.\ one-way transaction cost (bps). Passive benchmarks are flat because they incur zero turnover. The steep decline illustrates the ``alpha cliff'': small costs erase small signals.}}{18}{figure.2}\protected@file@percent }
+\newlabel{fig:cost}{{2}{18}{Net Sharpe ratio vs.\ one-way transaction cost (bps). Passive benchmarks are flat because they incur zero turnover. The steep decline illustrates the ``alpha cliff'': small costs erase small signals}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Regime Analysis}{18}{subsection.7.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Gross Sharpe ratio by regime.}}{19}{table.2}\protected@file@percent }
+\newlabel{tab:regime}{{2}{19}{Gross Sharpe ratio by regime}{table.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Observations.}{19}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Hyperparameter Sensitivity}{19}{subsection.7.4}\protected@file@percent }
 \citation{ref_dm}
 \citation{ref_bh}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Gross Sharpe ratio under different rebalance frequencies (days) and top-$K$ values.}}{15}{table.3}\protected@file@percent }
-\newlabel{tab:sensitivity}{{3}{15}{Gross Sharpe ratio under different rebalance frequencies (days) and top-$K$ values}{table.3}{}}
-\@writefile{toc}{\contentsline {paragraph}{Observations.}{15}{section*.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Statistical Significance}{15}{subsection.6.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Raw results.}{15}{section*.17}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{After BH correction.}{15}{section*.18}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Long-Only Variant}{16}{subsection.6.6}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Long-short (LS) vs.\ long-only (LO) comparison at 15\,bps.}}{16}{table.4}\protected@file@percent }
-\newlabel{tab:longonly}{{4}{16}{Long-short (LS) vs.\ long-only (LO) comparison at 15\,bps}{table.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Equity Curves}{16}{subsection.6.7}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Cumulative gross returns with drawdown subplot. Shaded bands: COVID crash (red), rate hikes (orange). Passive benchmarks shown as dashed lines.}}{17}{figure.3}\protected@file@percent }
-\newlabel{fig:equity}{{3}{17}{Cumulative gross returns with drawdown subplot. Shaded bands: COVID crash (red), rate hikes (orange). Passive benchmarks shown as dashed lines}{figure.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Reproducibility Package}{17}{section.7}\protected@file@percent }
-\newlabel{sec:reproducibility}{{7}{17}{Reproducibility Package}{section.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Pipeline Overview}{17}{subsection.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Runtime and Environment}{18}{subsection.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Output}{18}{subsection.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Code and License}{18}{subsection.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Shortest reproduction path.}{19}{section*.19}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Discussion and Limitations}{19}{section.8}\protected@file@percent }
-\newlabel{sec:discussion}{{8}{19}{Discussion and Limitations}{section.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Key Takeaways}{19}{subsection.8.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Implications for the Research Community}{20}{subsection.8.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Limitations}{20}{subsection.8.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Future Work}{21}{subsection.8.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{21}{section.9}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Gross Sharpe ratio under different rebalance frequencies (days) and top-$K$ values.}}{20}{table.3}\protected@file@percent }
+\newlabel{tab:sensitivity}{{3}{20}{Gross Sharpe ratio under different rebalance frequencies (days) and top-$K$ values}{table.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Observations.}{20}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Statistical Significance}{20}{subsection.7.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Raw results.}{20}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{After BH correction.}{20}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Long-Only Variant}{21}{subsection.7.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Long-short (LS) vs.\ long-only (LO) comparison at 15\,bps.}}{21}{table.4}\protected@file@percent }
+\newlabel{tab:longonly}{{4}{21}{Long-short (LS) vs.\ long-only (LO) comparison at 15\,bps}{table.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.7}Equity Curves}{21}{subsection.7.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Cumulative gross returns with drawdown subplot. Shaded bands: COVID crash (red), rate hikes (orange). Passive benchmarks shown as dashed lines.}}{22}{figure.3}\protected@file@percent }
+\newlabel{fig:equity}{{3}{22}{Cumulative gross returns with drawdown subplot. Shaded bands: COVID crash (red), rate hikes (orange). Passive benchmarks shown as dashed lines}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Robustness Analysis Results}{22}{section.8}\protected@file@percent }
+\newlabel{sec:robustness_results}{{8}{22}{Robustness Analysis Results}{section.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Adversarial Perturbation Results}{22}{subsection.8.1}\protected@file@percent }
+\newlabel{sec:adv_results}{{8.1}{22}{Adversarial Perturbation Results}{subsection.8.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Adversarial robustness at $\varepsilon = 0.10\sigma $. Signal Flip Rate = fraction of trading signals that change sign; Rank Corr.\ = Spearman correlation between clean and adversarial prediction rankings; Sharpe Drop = relative Sharpe degradation. Models sorted by vulnerability (highest Sharpe drop first).}}{23}{table.5}\protected@file@percent }
+\newlabel{tab:adversarial}{{5}{23}{Adversarial robustness at $\varepsilon = 0.10\sigma $. Signal Flip Rate = fraction of trading signals that change sign; Rank Corr.\ = Spearman correlation between clean and adversarial prediction rankings; Sharpe Drop = relative Sharpe degradation. Models sorted by vulnerability (highest Sharpe drop first)}{table.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Key findings.}{23}{section*.27}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces (a)~Adversarial Sharpe Ratio vs.\ perturbation budget $\varepsilon $. (b)~Relative Sharpe degradation (\%). Deep models (MLP, LSTM) degrade steeply; linear models remain stable.}}{24}{figure.4}\protected@file@percent }
+\newlabel{fig:adv_sharpe}{{4}{24}{(a)~Adversarial Sharpe Ratio vs.\ perturbation budget $\varepsilon $. (b)~Relative Sharpe degradation (\%). Deep models (MLP, LSTM) degrade steeply; linear models remain stable}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Performance Collapse Curve. (a)~Adversarial Sharpe Ratio: LSTM and MLP collapse from positive Sharpe to $< -2.0$ at $\varepsilon = 0.10\sigma $, while linear and tree models remain stable. (b)~Signal Stability Rate (SSR): the fraction of trading signals that retain their sign under perturbation. Deep models approach the random baseline (50\%) at high~$\varepsilon $.}}{25}{figure.5}\protected@file@percent }
+\newlabel{fig:collapse_curve}{{5}{25}{Performance Collapse Curve. (a)~Adversarial Sharpe Ratio: LSTM and MLP collapse from positive Sharpe to $< -2.0$ at $\varepsilon = 0.10\sigma $, while linear and tree models remain stable. (b)~Signal Stability Rate (SSR): the fraction of trading signals that retain their sign under perturbation. Deep models approach the random baseline (50\%) at high~$\varepsilon $}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Synthetic Market Fuzzing Results}{25}{subsection.8.2}\protected@file@percent }
+\newlabel{sec:fuzz_results}{{8.2}{25}{Synthetic Market Fuzzing Results}{subsection.8.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Model Fragility Heatmap: Sharpe ratio (gross) under synthetic stress scenarios. ``Clean'' = unmodified test data. Colour gradient from green (robust) to red (fragile) in the full-colour PDF.}}{26}{table.6}\protected@file@percent }
+\newlabel{tab:fuzzing}{{6}{26}{Model Fragility Heatmap: Sharpe ratio (gross) under synthetic stress scenarios. ``Clean'' = unmodified test data. Colour gradient from green (robust) to red (fragile) in the full-colour PDF}{table.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Key findings.}{26}{section*.28}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Model Fragility Heatmap: Sharpe ratio across synthetic stress scenarios. Green = robust, red = fragile.}}{27}{figure.6}\protected@file@percent }
+\newlabel{fig:fuzzing_heatmap}{{6}{27}{Model Fragility Heatmap: Sharpe ratio across synthetic stress scenarios. Green = robust, red = fragile}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Concept Drift Results}{27}{subsection.8.3}\protected@file@percent }
+\newlabel{sec:drift_results}{{8.3}{27}{Concept Drift Results}{subsection.8.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Label poisoning.}{27}{section*.29}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Label poisoning resilience: IC under corrupted training labels.}}{28}{table.7}\protected@file@percent }
+\newlabel{tab:poisoning}{{7}{28}{Label poisoning resilience: IC under corrupted training labels}{table.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{Key findings.}{28}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Alpha decay.}{28}{section*.31}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Alpha Decay Curve. (a)~IC vs.\ prediction horizon. (b)~ICIR vs.\ horizon. Dashed lines: exponential fit $\text  {IC}(h) = \text  {IC}_0 \cdot e^{-\lambda h}$.}}{29}{figure.7}\protected@file@percent }
+\newlabel{fig:alpha_decay}{{7}{29}{Alpha Decay Curve. (a)~IC vs.\ prediction horizon. (b)~ICIR vs.\ horizon. Dashed lines: exponential fit $\text {IC}(h) = \text {IC}_0 \cdot e^{-\lambda h}$}{figure.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{Key findings.}{29}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Robustness Summary}{29}{subsection.8.4}\protected@file@percent }
+\citation{ref_madry_pgd}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Composite robustness dashboard. (a)~Adversarial vulnerability at $\varepsilon =0.10\sigma $. (b)~Stress-test Sharpe heatmap. (c)~Label poisoning resilience. (d)~Alpha decay curves.}}{30}{figure.8}\protected@file@percent }
+\newlabel{fig:robustness_summary}{{8}{30}{Composite robustness dashboard. (a)~Adversarial vulnerability at $\varepsilon =0.10\sigma $. (b)~Stress-test Sharpe heatmap. (c)~Label poisoning resilience. (d)~Alpha decay curves}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}Adversarial Training Defense}{31}{subsection.8.5}\protected@file@percent }
+\newlabel{sec:adv_defense}{{8.5}{31}{Adversarial Training Defense}{subsection.8.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Adversarial Training Defense: Standard vs.\ Adversarial-Trained models at $\varepsilon = 0.10\sigma $. SSR = Signal Stability Rate (fraction of signals retaining their sign under attack). Higher SSR and lower Sharpe Drop indicate more robust models. }}{31}{table.8}\protected@file@percent }
+\newlabel{tab:adv_defense}{{8}{31}{Adversarial Training Defense: Standard vs.\ Adversarial-Trained models at $\varepsilon = 0.10\sigma $. SSR = Signal Stability Rate (fraction of signals retaining their sign under attack). Higher SSR and lower Sharpe Drop indicate more robust models}{table.8}{}}
+\citation{ref_madry_pgd}
+\@writefile{toc}{\contentsline {paragraph}{Key findings.}{32}{section*.33}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Adversarial Training Defense Effectiveness. (a)~Signal Stability Rate at $\varepsilon =0.10\sigma $: adversarial training raises MLP SSR by +13.4~pp and LSTM SSR by +9.7~pp. (b)~Clean-data Sharpe Ratio: adversarial-trained LSTM improves its clean Sharpe by 53\% ($0.391 \to 0.600$), revealing a regularisation effect; MLP shows a modest trade-off ($0.803 \to 0.698$, $-$13\%).}}{33}{figure.9}\protected@file@percent }
+\newlabel{fig:defense_effectiveness}{{9}{33}{Adversarial Training Defense Effectiveness. (a)~Signal Stability Rate at $\varepsilon =0.10\sigma $: adversarial training raises MLP SSR by +13.4~pp and LSTM SSR by +9.7~pp. (b)~Clean-data Sharpe Ratio: adversarial-trained LSTM improves its clean Sharpe by 53\% ($0.391 \to 0.600$), revealing a regularisation effect; MLP shows a modest trade-off ($0.803 \to 0.698$, $-$13\%)}{figure.9}{}}
+\citation{ref_goodfellow_fgsm}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Robustness Frontier. (a)~Adversarial Sharpe vs.\ perturbation budget: adversarial-trained models (solid) degrade more gracefully than standard models (dashed). The shaded area represents the robustness gain. (b)~Signal Stability Rate across $\varepsilon $: adversarial-trained MLP maintains $>$99\% SSR even at $\varepsilon =0.20\sigma $, vs.\ 81.9\% for standard training.}}{34}{figure.10}\protected@file@percent }
+\newlabel{fig:robustness_frontier}{{10}{34}{Robustness Frontier. (a)~Adversarial Sharpe vs.\ perturbation budget: adversarial-trained models (solid) degrade more gracefully than standard models (dashed). The shaded area represents the robustness gain. (b)~Signal Stability Rate across $\varepsilon $: adversarial-trained MLP maintains $>$99\% SSR even at $\varepsilon =0.20\sigma $, vs.\ 81.9\% for standard training}{figure.10}{}}
+\@writefile{toc}{\contentsline {paragraph}{The regularisation interpretation.}{34}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Reproducibility Package}{35}{section.9}\protected@file@percent }
+\newlabel{sec:reproducibility}{{9}{35}{Reproducibility Package}{section.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Pipeline Overview}{35}{subsection.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Runtime and Environment}{35}{subsection.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Output}{36}{subsection.9.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Code and License}{36}{subsection.9.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Shortest reproduction path.}{36}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Discussion and Limitations}{37}{section.10}\protected@file@percent }
+\newlabel{sec:discussion}{{10}{37}{Discussion and Limitations}{section.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Key Takeaways}{37}{subsection.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Implications for the Research Community}{39}{subsection.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Limitations}{40}{subsection.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Future Work}{41}{subsection.10.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion}{41}{section.11}\protected@file@percent }
 \bibstyle{elsarticle-num}
 \bibdata{references_eswa_core60_filled}
 \bibcite{ref7}{{1}{}{{}}{{}}}
@@ -108,14 +175,16 @@
 \bibcite{ref41}{{4}{}{{}}{{}}}
 \bibcite{ref42}{{5}{}{{}}{{}}}
 \bibcite{ref5}{{6}{}{{}}{{}}}
-\bibcite{ref_dm}{{7}{}{{}}{{}}}
-\bibcite{ref_bh}{{8}{}{{}}{{}}}
-\bibcite{ref14}{{9}{}{{}}{{}}}
-\bibcite{ref16}{{10}{}{{}}{{}}}
-\bibcite{ref10}{{11}{}{{}}{{}}}
-\bibcite{ref15}{{12}{}{{}}{{}}}
-\bibcite{ref11}{{13}{}{{}}{{}}}
-\bibcite{ref81}{{14}{}{{}}{{}}}
-\bibcite{ref_harvey}{{15}{}{{}}{{}}}
+\bibcite{ref_goodfellow_fgsm}{{7}{}{{}}{{}}}
+\bibcite{ref_madry_pgd}{{8}{}{{}}{{}}}
+\bibcite{ref_dm}{{9}{}{{}}{{}}}
+\bibcite{ref_bh}{{10}{}{{}}{{}}}
+\bibcite{ref14}{{11}{}{{}}{{}}}
+\bibcite{ref16}{{12}{}{{}}{{}}}
+\bibcite{ref10}{{13}{}{{}}{{}}}
+\bibcite{ref15}{{14}{}{{}}{{}}}
+\bibcite{ref11}{{15}{}{{}}{{}}}
+\bibcite{ref81}{{16}{}{{}}{{}}}
+\bibcite{ref_harvey}{{17}{}{{}}{{}}}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
-\gdef \@abspage@last{25}
+\gdef \@abspage@last{47}

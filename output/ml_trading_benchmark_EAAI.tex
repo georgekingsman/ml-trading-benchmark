@@ -27,9 +27,9 @@
 
 \begin{frontmatter}
 
-\title{Towards Robust Quantitative Trading:\\
-Benchmarking Machine Learning Models under\\
-Adversarial Perturbations, Synthetic Stress, and Market Concept Drift}
+\title{From Fragility to Robustness: Benchmarking and Enhancing\\
+Machine Learning Models for Quantitative Trading under\\
+Adversarial Perturbations, Synthetic Stress, and Concept Drift}
 
 \author[hku]{Zhang Yuchen}
 \ead{u3663696@connect.hku.hk}
@@ -39,18 +39,18 @@ Adversarial Perturbations, Synthetic Stress, and Market Concept Drift}
   The University of Hong Kong, Hong Kong SAR, China}
 
 \begin{abstract}
-Machine learning (ML) models for quantitative trading are routinely evaluated under conditions that inflate reported performance: costs are ignored, splits leak future information, and---crucially---robustness to adversarial perturbations, synthetic market stress, and temporal concept drift is never tested.
-We present \textbf{ML Trading Bench}, a unified evaluation protocol and open-source toolkit that combines (i)~a reproducible benchmark with walk-forward splitting, configurable costs, and rigorous statistical testing, with (ii)~a novel \emph{algorithmic robustness analysis} framework that applies adversarial perturbation, synthetic market fuzzing, and concept-drift diagnostics to financial ML models.
+Machine learning (ML) models for quantitative trading are routinely evaluated under conditions that inflate reported performance: transaction costs are ignored, data splits leak future information, and---crucially---robustness to adversarial perturbations, synthetic market stress, and temporal concept drift is never tested.
+We present \textbf{ML Trading Bench}, a unified evaluation protocol and open-source toolkit that combines (i)~a reproducible benchmark with walk-forward splitting, configurable costs, and rigorous statistical testing, with (ii)~a novel \emph{algorithmic robustness analysis} framework for financial ML models.
 
-Using 50 US-listed ETFs over 2005--2024, we evaluate 9~models (linear, tree, and deep-learning families) plus 2~passive baselines across 5~cost scenarios, 4~market regimes, and multiple strategy hyperparameters.
-Beyond conventional metrics, we introduce three robustness dimensions:
-(a)~\textbf{Adversarial Perturbation}: gradient-based attacks (FGSM, PGD) reveal that deep-learning models suffer up to 85\% Sharpe degradation under perturbations bounded within $0.1\sigma$ of historical feature variability---perturbations that are statistically indistinguishable from normal market noise---while simple linear models prove remarkably resilient;
-(b)~\textbf{Synthetic Market Fuzzing}: injecting flash-crash, volatility-spike, and gap-reversal scenarios into the test period produces a model-fragility heatmap, enabling standardised stress testing for ML trading systems;
-(c)~\textbf{Concept Drift \& Feature Decay}: label-poisoning experiments quantify each model's self-healing capacity under corrupted training data, and alpha-decay half-life analysis demonstrates that ML-extracted signals decay exponentially with prediction horizon.
+Using 50 US-listed ETFs over 2005--2024, we evaluate 9~models (linear, tree, and deep-learning families) plus 2~passive baselines.
+Our rigorous evaluation reveals three critical findings:
+(1)~\textbf{The Profitability Illusion}: under realistic transaction costs (15\,bps) and multiple-testing corrections, no ML model statistically outperforms a passive benchmark.
+(2)~\textbf{Extreme Fragility}: gradient-based attacks (FGSM, PGD) cause deep-learning models to suffer Sharpe degradation exceeding 500\% under perturbations bounded within $0.1\sigma$ of historical feature variability---perturbations statistically indistinguishable from normal market noise---while simple linear models prove remarkably resilient.
+(3)~\textbf{The Regularisation Surprise}: we introduce adversarial training as a defense mechanism and discover that it dramatically improves signal stability (MLP SSR $+13.4$\,pp; LSTM SSR $+9.7$\,pp) and, for LSTM, also \emph{increases} the clean-data Sharpe ratio by 53\% ($0.391 \to 0.600$), suggesting that adversarial training acts as a powerful regulariser against the low signal-to-noise ratio of financial data---particularly for recurrent architectures prone to temporal noise accumulation.
 
-We propose a new metric---the \textbf{Adversarial Sharpe Ratio}---to quantify decision-boundary fragility, and establish a standardised robustness-testing protocol for ML-driven quantitative strategies.
-The full pipeline---benchmark plus robustness suite---runs via \texttt{python run\_all.py} followed by \texttt{python run\_robustness.py}.
-Code, data, and configuration are released under MIT license at \url{https://github.com/georgekingsman/ml-trading-benchmark}.
+Additionally, synthetic market fuzzing exposes model-specific vulnerabilities invisible to historical analysis, and alpha-decay experiments confirm that ML-extracted signals have half-lives of only 2--5 trading days.
+We propose new metrics---the \textbf{Adversarial Sharpe Ratio}, \textbf{Signal Flip Rate}, and \textbf{Alpha Decay Half-Life}---as standard evaluation components.
+The full pipeline (benchmark + robustness + defense suites, producing 13~tables and 17~figures) is released under MIT license at \url{https://github.com/georgekingsman/ml-trading-benchmark}.
 \end{abstract}
 
 \begin{keyword}
@@ -406,31 +406,13 @@ Table~\ref{tab:main} reports the core metrics on the test period (January 2020 -
 \caption{Main benchmark results. Sharpe CI denotes the 95\% bootstrap confidence interval on the gross Sharpe ratio. IC and ICIR are computed cross-sectionally.}
 \label{tab:main}
 \footnotesize
-\begin{tabular}{l r r r r r r r r}
-\toprule
-Model & \multicolumn{1}{c}{CAGR} & \multicolumn{1}{c}{Sharpe} & \multicolumn{1}{c}{Sharpe} & \multicolumn{1}{c}{Max DD} & \multicolumn{1}{c}{IC} & \multicolumn{1}{c}{ICIR} & \multicolumn{2}{c}{Sharpe 95\% CI} \\
-      & \multicolumn{1}{c}{(g, \%)} & \multicolumn{1}{c}{(gross)} & \multicolumn{1}{c}{(net)} & \multicolumn{1}{c}{(\%)} & & & \multicolumn{1}{c}{lo} & \multicolumn{1}{c}{hi} \\
-\midrule
-\textit{BuyAndHold\_SPY} & \textit{14.86} & \textit{0.765} & \textit{0.765} & \textit{33.72} & \textit{---} & \textit{---} & \textit{$-$0.12} & \textit{1.68} \\
-\textit{EqualWeight} & \textit{6.82} & \textit{0.515} & \textit{0.515} & \textit{26.32} & \textit{---} & \textit{---} & \textit{$-$0.39} & \textit{1.45} \\
-\midrule
-LogisticRegression  & 7.04  & 0.469 & $-$1.44 & 21.33 & 0.010 & 0.037 & $-$0.43 & 1.35 \\
-LinearRegression    & 6.21  & 0.432 & $-$1.46 & 18.93 & 0.015 & 0.051 & $-$0.48 & 1.35 \\
-RandomForest        & 4.47  & 0.372 & $-$1.56 & 28.55 & 0.005 & 0.019 & $-$0.56 & 1.29 \\
-Ensemble            & 4.73  & 0.347 & $-$1.48 & 22.66 & 0.011 & 0.040 & $-$0.57 & 1.27 \\
-MLP                 & 3.30  & 0.294 & $-$1.44 & 26.00 & 0.005 & 0.024 & $-$0.57 & 1.09 \\
-LightGBM            & 3.34  & 0.290 & $-$1.51 & 24.02 & 0.007 & 0.028 & $-$0.65 & 1.20 \\
-MomentumBaseline    & 0.67  & 0.134 & $-$0.69 & 39.44 & $-$0.011 & $-$0.036 & $-$0.75 & 1.01 \\
-LSTM                & $-$3.53 & $-$0.167 & $-$2.00 & 25.95 & 0.009 & 0.042 & $-$1.07 & 0.74 \\
-MeanReversion       & $-$4.69 & $-$0.134 & $-$0.97 & 44.77 & 0.011 & 0.036 & $-$1.01 & 0.75 \\
-\bottomrule
-\end{tabular}
+\input{../benchmark/reports/tables/paper/tab_main.tex}
 \end{table}
 
 \paragraph{Observations.}
 \begin{enumerate}[leftmargin=1.6em]
   \item Most ML models exhibit weakly positive cross-sectional IC ($\sim$0.005--0.015), confirming marginal predictive content; MomentumBaseline's IC is slightly negative ($-$0.011).
-  \item Every active strategy's gross Sharpe falls below SPY buy-and-hold (0.765) and most fall below equal-weight (0.515).
+  \item Only MLP (0.803) marginally exceeds SPY buy-and-hold (0.765) in gross Sharpe; all other active strategies fall below this passive benchmark, and most fall below equal-weight (0.515).
   \item At 15\,bps cost, all long-short strategies produce deeply negative net Sharpe ratios.
   \item \textbf{All bootstrap 95\% CIs include zero}---no model's gross performance is statistically distinguishable from zero at the 5\% level.
 \end{enumerate}
@@ -456,21 +438,7 @@ Table~\ref{tab:regime} decomposes performance across four regimes.
 \caption{Gross Sharpe ratio by regime.}
 \label{tab:regime}
 \footnotesize
-\begin{tabular}{l r r r r}
-\toprule
-Model & COVID Crash & Recovery & Rate Hikes & Normalisation \\
-\midrule
-BuyAndHold\_SPY       & $+$0.08   & $+$2.19  & $-$0.71 & $+$1.93 \\
-EqualWeight           & $-$0.04   & $+$2.05  & $-$0.68 & $+$1.07 \\
-LogisticRegression    & $+$0.74   & $+$1.47  & $+$0.69 & $-$0.53 \\
-RandomForest          & $+$1.87   & $+$0.24  & $+$0.38 & $-$0.19 \\
-LightGBM              & $+$1.41   & $+$0.54  & $+$0.23 & $-$0.30 \\
-MLP                   & $+$1.21   & $+$0.42  & $+$0.17 & $+$0.05 \\
-LSTM                  & $+$0.23   & $-$0.18  & $-$0.22 & $-$0.18 \\
-Ensemble              & $+$1.31   & $+$0.86  & $+$0.47 & $-$0.57 \\
-MomentumBaseline      & $+$1.02   & $+$0.88  & $-$1.44 & $-$0.19 \\
-\bottomrule
-\end{tabular}
+\input{../benchmark/reports/tables/paper/tab_regime.tex}
 \end{table}
 
 \paragraph{Observations.}
@@ -487,23 +455,12 @@ Table~\ref{tab:sensitivity} reports gross Sharpe under varying rebalance frequen
 \caption{Gross Sharpe ratio under different rebalance frequencies (days) and top-$K$ values.}
 \label{tab:sensitivity}
 \footnotesize
-\begin{tabular}{l r r r r | r r r r r}
-\toprule
- & \multicolumn{4}{c|}{Rebalance Frequency (days)} & \multicolumn{5}{c}{Top-$K$} \\
-Model & 1 & 5 & 10 & 20 & 3 & 5 & 10 & 15 & 20 \\
-\midrule
-LogisticRegression & 0.66 & 0.47 & 0.15 & 0.34 & 0.95 & 1.03 & 0.47 & 0.60 & 0.58 \\
-LightGBM           & 0.31 & 0.29 & 0.31 & 0.18 & $-$0.08 & 0.10 & 0.29 & 0.20 & 0.12 \\
-MLP                & 0.31 & 0.29 & $-$0.16 & $-$0.67 & 0.55 & 0.42 & 0.29 & 0.38 & 0.22 \\
-LSTM               & 0.63 & $-$0.17 & $-$0.29 & $-$0.82 & 0.35 & 0.16 & $-$0.17 & $-$0.08 & $-$0.26 \\
-Ensemble           & 0.73 & 0.35 & 0.22 & 0.12 & 0.61 & 0.37 & 0.35 & 0.42 & 0.46 \\
-\bottomrule
-\end{tabular}
+\input{../benchmark/reports/tables/paper/tab_sensitivity.tex}
 \end{table}
 
 \paragraph{Observations.}
-Daily rebalancing yields substantially higher gross Sharpe for most models (Ensemble: 0.73 vs.\ 0.35 at 5-day), but this comes with proportionally higher turnover---and therefore worse net performance.
-More concentrated portfolios (smaller $K$) amplify signal quality: Logistic Regression achieves Sharpe~1.03 at $K=5$ versus 0.47 at $K=10$, but at higher idiosyncratic risk.
+Rebalance frequency strongly affects performance: MLP peaks at 5-day rebalancing (0.80) but drops sharply to 0.01 at 20-day; LSTM peaks at daily (0.81) but collapses to $-$0.73 at 20-day.
+More concentrated portfolios (smaller $K$) amplify signal quality: Logistic Regression achieves Sharpe~1.03 at $K=5$ versus 0.47 at $K=10$, and MLP reaches 0.91 at $K=3$.
 \textbf{These hyperparameters shift Sharpe by $>$0.5---more than the difference between model families.}
 Yet they are rarely stress-tested in ML trading papers.
 
@@ -512,11 +469,11 @@ Yet they are rarely stress-tested in ML trading papers.
 We apply the DM test~\citep{ref_dm} pairwise across all 12 models (66 pairs).
 
 \paragraph{Raw results.}
-At $\alpha = 0.05$, only \textbf{3 pairs} are significant, and all involve the passive SPY benchmark.
+At $\alpha = 0.05$, only \textbf{2 pairs} are significant, and both involve the passive SPY benchmark.
 No ML-vs-ML comparison achieves significance.
 
 \paragraph{After BH correction.}
-Applying Benjamini--Hochberg FDR correction~\citep{ref_bh} at the 5\% level, \textbf{no pairs remain significant} (0/66); even the 3~raw-significant passive pairs do not survive correction.
+Applying Benjamini--Hochberg FDR correction~\citep{ref_bh} at the 5\% level, \textbf{no pairs remain significant} (0/66); even the 2~raw-significant passive pairs do not survive correction.
 No ML-vs-ML pair survives correction.
 
 This result carries a stark implication: \textbf{model comparisons in the literature, when evaluated under proper cost and split protocols, may not be meaningfully distinguishable.}
@@ -530,23 +487,12 @@ Table~\ref{tab:longonly} compares long-short and long-only strategies.
 \caption{Long-short (LS) vs.\ long-only (LO) comparison at 15\,bps.}
 \label{tab:longonly}
 \footnotesize
-\begin{tabular}{l r r r r r r}
-\toprule
- & \multicolumn{3}{c}{Long-Short} & \multicolumn{3}{c}{Long-Only} \\
-Model & Sharpe(g) & Sharpe(n) & CAGR(g,\%) & Sharpe(g) & Sharpe(n) & CAGR(g,\%) \\
-\midrule
-LogisticRegression & 0.47 & $-$1.44 & 7.04 & 0.68 & $-$0.35 & 10.57 \\
-LightGBM           & 0.29 & $-$1.51 & 3.34 & 0.65 & $-$0.13 & 10.55 \\
-MLP                & 0.29 & $-$1.44 & 3.30 & 0.62 & $-$0.19 & 9.88 \\
-LSTM               & $-$0.17 & $-$2.00 & $-$3.53 & 0.22 & $-$0.54 & 2.44 \\
-Ensemble           & 0.35 & $-$1.48 & 4.73 & 0.65 & $-$0.34 & 10.19 \\
-BuyAndHold\_SPY    & 0.77 & 0.77 & 14.86 & --- & --- & --- \\
-\bottomrule
-\end{tabular}
+\input{../benchmark/reports/tables/paper/tab_longonly.tex}
 \end{table}
 
-Long-only consistently produces higher gross Sharpe (e.g., LightGBM: 0.65 vs.\ 0.29) because it captures the long-run equity premium rather than relying solely on cross-sectional spread.
-This suggests that, for most ML signals in this setting, the short leg destroys more value than it creates.
+Long-only consistently produces comparable or higher gross Sharpe for most models (e.g., LightGBM: 0.65 vs.\ 0.29), as it captures the long-run equity premium.
+The exception is MLP, where long-short and long-only Sharpe are nearly identical (0.80 vs.\ 0.80), suggesting MLP's signal is balanced across both legs.
+For most other models, the short leg destroys more value than it creates.
 
 \subsection{Equity Curves}
 
@@ -579,31 +525,16 @@ Signal Flip Rate = fraction of trading signals that change sign; Rank Corr.\ = S
 Models sorted by vulnerability (highest Sharpe drop first).}
 \label{tab:adversarial}
 \footnotesize
-\begin{tabular}{l r r r r r r}
-\toprule
-Model & Signal Flip & Rank & Sharpe & Sharpe & Sharpe & Max DD \\
-      & Rate & Corr.\ & (clean) & (adv.) & Drop \% & (adv., \%) \\
-\midrule
-MLP                 & 0.0553 & 0.768 & 0.755  & $-2.154$ & 385.3  & 83.01 \\
-LSTM                & 0.1099 & 0.928 & 0.849  & $-2.390$ & 381.5  & 82.84 \\
-MeanReversionBase.  & 0.0236 & 0.998 & $-0.134$ & $-0.232$ & 73.1 & 47.08 \\
-LightGBM            & 0.0020 & 0.943 & 0.290  & 0.270    & 6.9    & 24.68 \\
-LogisticRegression  & 0.0043 & 0.994 & 0.469  & 0.453    & 3.4    & 26.53 \\
-LinearRegression    & 0.0161 & 0.997 & 0.432  & 0.431    & 0.2    & 18.80 \\
-Ridge               & 0.0161 & 0.997 & 0.432  & 0.431    & 0.2    & 18.80 \\
-RandomForest        & 0.0155 & 0.955 & 0.372  & 0.565    & $-51.9$  & 28.10 \\
-MomentumBaseline    & 0.0236 & 0.998 & 0.134  & 0.232    & $-73.1$  & 36.64 \\
-\bottomrule
-\end{tabular}
+\input{../benchmark/reports/tables/paper/tab_adversarial.tex}
 \end{table}
 
 \paragraph{Key findings.}
 \begin{enumerate}[leftmargin=1.6em]
-  \item \textbf{Deep models are catastrophically fragile}: MLP and LSTM, which use differentiable architectures susceptible to gradient-based (PGD) attack, exhibit the highest signal flip rates and largest Sharpe drops. Under perturbations that are \emph{imperceptible} relative to normal market noise ($\leq 0.1\sigma$), their trading signals can reverse direction---turning profitable long positions into loss-making short positions.
+  \item \textbf{Deep models are catastrophically fragile}: MLP and LSTM, which use differentiable architectures susceptible to gradient-based (PGD) attack, exhibit the highest signal flip rates (15.6\% and 13.0\%) and largest Sharpe drops (580\% and 913\%). Under perturbations that are \emph{imperceptible} relative to normal market noise ($\leq 0.1\sigma$), their trading signals can reverse direction---turning profitable long positions into loss-making short positions.
   
   \item \textbf{Simple models are remarkably robust}: Linear Regression, Ridge, and Logistic Regression---whose decision boundaries are smooth hyperplanes---show minimal Sharpe degradation even at $\varepsilon = 0.50$. This is consistent with adversarial robustness theory: simpler models with lower Lipschitz constants are inherently more stable.
   
-  \item \textbf{The Adversarial Sharpe Ratio reveals hidden risk}: a model that achieves Sharpe 0.47 on clean data but drops to $-0.20$ under $0.1\sigma$ perturbation has a fundamentally fragile decision boundary, even if conventional metrics suggest acceptable performance.
+  \item \textbf{The Adversarial Sharpe Ratio reveals hidden risk}: a model that achieves Sharpe 0.80 on clean data but drops to $-3.86$ under $0.1\sigma$ perturbation has a fundamentally fragile decision boundary, even if conventional metrics suggest strong performance.
 \end{enumerate}
 
 Figure~\ref{fig:adv_sharpe} plots Sharpe degradation curves across all $\varepsilon$ levels, and Figure~\ref{fig:collapse_curve} provides a dual-panel ``Collapse Curve'' visualisation highlighting the divergence between deep and traditional models in both Sharpe Ratio and Signal Stability Rate.
@@ -634,22 +565,7 @@ Table~\ref{tab:fuzzing} presents the model fragility heatmap---Sharpe ratios und
 Colour gradient from green (robust) to red (fragile) in the full-colour PDF.}
 \label{tab:fuzzing}
 \footnotesize
-\begin{tabular}{l r r r r r r}
-\toprule
-Model & Clean & Flash & Flash & Vol Spike & Vol Spike & Gap \& \\
-      &       & $-10\%$ & $-20\%$ & $3\times$ & $5\times$ & Reversal \\
-\midrule
-LSTM                & 0.849  & 0.832  & 0.857  & 0.794  & 0.999   & 0.848 \\
-MLP                 & 0.755  & 0.772  & 0.779  & 0.538  & 0.896   & 0.749 \\
-LogisticRegression  & 0.469  & 0.490  & 0.456  & 0.212  & 0.370   & 0.470 \\
-LinearRegression    & 0.432  & 0.454  & 0.414  & 0.171  & 0.467   & 0.461 \\
-Ridge               & 0.432  & 0.454  & 0.414  & 0.171  & 0.467   & 0.461 \\
-RandomForest        & 0.372  & 0.388  & 0.354  & 0.354  & 0.459   & 0.398 \\
-LightGBM            & 0.290  & 0.267  & 0.279  & 0.033  & 0.337   & 0.267 \\
-MomentumBaseline    & 0.134  & 0.110  & 0.143  & 0.129  & $-0.091$ & 0.131 \\
-MeanReversionBase.  & $-0.134$ & $-0.110$ & $-0.143$ & $-0.129$ & 0.091 & $-0.131$ \\
-\bottomrule
-\end{tabular}
+\input{../benchmark/reports/tables/paper/tab_fuzzing.tex}
 \end{table}
 
 \paragraph{Key findings.}
@@ -681,19 +597,7 @@ Table~\ref{tab:poisoning} reports IC and Sharpe under varying levels of training
 \caption{Label poisoning resilience: IC under corrupted training labels.}
 \label{tab:poisoning}
 \footnotesize
-\begin{tabular}{l r r r r r}
-\toprule
-Model & 0\% & 2\% & 5\% & 10\% & 20\% \\
-\midrule
-LSTM                & 0.0379 & 0.0092 & 0.0180 & 0.0230 & 0.0277 \\
-MLP                 & 0.0165 & 0.0127 & 0.0180 & 0.0077 & 0.0215 \\
-LinearRegression    & 0.0147 & 0.0151 & 0.0140 & 0.0148 & 0.0167 \\
-Ridge               & 0.0147 & 0.0147 & 0.0134 & 0.0154 & 0.0104 \\
-LogisticRegression  & 0.0104 & 0.0103 & 0.0107 & 0.0116 & 0.0119 \\
-LightGBM            & 0.0072 & 0.0054 & 0.0103 & 0.0068 & 0.0137 \\
-RandomForest        & 0.0045 & 0.0061 & 0.0044 & 0.0089 & 0.0157 \\
-\bottomrule
-\end{tabular}
+\input{../benchmark/reports/tables/paper/tab_poisoning.tex}
 \end{table}
 
 \paragraph{Key findings.}
@@ -739,6 +643,69 @@ A central insight emerges across all three dimensions: \textbf{model complexity 
 Deep-learning models (MLP, LSTM) are the most vulnerable to adversarial perturbations, most sensitive to label noise, and extract the shortest-lived signals---despite sometimes achieving competitive clean-data performance.
 This ``robustness--complexity trade-off'' suggests that practitioners should weight robustness metrics alongside conventional performance metrics when selecting models for deployment, particularly in adversarial or non-stationary environments.
 
+\subsection{Adversarial Training Defense}
+\label{sec:adv_defense}
+
+Having established the vulnerability of deep models in Section~\ref{sec:adv_results}, a natural question arises: \emph{can adversarial training mitigate this fragility?}
+We implement the min-max adversarial training procedure of Madry et al.~\citep{ref_madry_pgd}:
+\begin{equation}
+  \min_\theta \;\; \mathbb{E}_{(x,y)} \Big[ \lambda \cdot \max_{\|\delta\|_\infty \leq \varepsilon} \mathcal{L}\big(f_\theta(x+\delta), y\big) + (1-\lambda) \cdot \mathcal{L}\big(f_\theta(x), y\big) \Big],
+\end{equation}
+where $\lambda = 0.5$ (equal weighting of clean and adversarial loss), $\varepsilon = 0.1 \cdot \max(\sigma_{\text{feature}})$, and the inner maximisation is solved by 7-step PGD (3 steps for LSTM to manage computational cost).\footnote{For the ``Standard Training'' baseline in Table~\ref{tab:adv_defense}, we load model weights saved during the main benchmark (Section~\ref{sec:results}) via checkpointing, ensuring that the clean-data Sharpe ratios are consistent across Tables~\ref{tab:main} and~\ref{tab:adv_defense}. The ``Adversarial Training'' models are then re-trained from scratch using the same architecture and hyperparameters. All models use the same walk-forward data split, backtest protocol ($K=10$, 5-day rebalancing, 15\,bps cost + 5\,bps slippage), and random seed (42).}
+Both MLP and LSTM are re-trained from scratch with this procedure and then evaluated under the same PGD attack protocol used in Table~\ref{tab:adversarial}.
+
+Table~\ref{tab:adv_defense} presents the results.
+
+\begin{table}[H]
+\centering
+\caption{Adversarial Training Defense: Standard vs.\ Adversarial-Trained models at $\varepsilon = 0.10\sigma$.
+SSR = Signal Stability Rate (fraction of signals retaining their sign under attack).
+Higher SSR and lower Sharpe Drop indicate more robust models.
+}
+\label{tab:adv_defense}
+\footnotesize
+\input{../benchmark/reports/tables/paper/tab_adv_defense.tex}
+\end{table}
+
+\paragraph{Key findings.}
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{Signal stability substantially improves}: adversarial training raises the Signal Stability Rate (SSR) for MLP from 85.7\% to 99.1\% (\textbf{+13.4~pp}) and for LSTM from 65.1\% to 74.8\% (\textbf{+9.7~pp}) at $\varepsilon = 0.10\sigma$. The signal flip rate for MLP drops from 14.3\% to 0.9\%, a 16-fold reduction.
+
+  \item \textbf{Adversarial training improves clean-data Sharpe for LSTM}: the adversarial-trained LSTM achieves a clean Sharpe of 0.600 vs.\ 0.391 for the standard LSTM (\textbf{+53\%}), suggesting that the regularisation effect of adversarial training can improve generalisation, not just robustness.
+
+  \item \textbf{Classic accuracy--robustness trade-off for MLP}: adversarial training dramatically improves MLP's signal stability (SSR +13.4~pp) but at the cost of a modest reduction in clean Sharpe (0.803 $\to$ 0.698, $-$13\%), illustrating the classic accuracy--robustness trade-off~\citep{ref_madry_pgd}.
+
+  \item \textbf{Absolute adversarial Sharpe remains negative}: even with adversarial training, both models still exhibit negative Sharpe under attack. This suggests that adversarial training is a partial mitigation---\emph{not a complete solution}---and that certified defense methods (e.g., randomised smoothing) warrant future investigation.
+\end{enumerate}
+
+Figure~\ref{fig:defense_effectiveness} visualises the defense effectiveness at $\varepsilon = 0.10\sigma$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../benchmark/reports/figures/fig16_defense_effectiveness.pdf}
+\caption{Adversarial Training Defense Effectiveness. (a)~Signal Stability Rate at $\varepsilon=0.10\sigma$: adversarial training raises MLP SSR by +13.4~pp and LSTM SSR by +9.7~pp. (b)~Clean-data Sharpe Ratio: adversarial-trained LSTM improves its clean Sharpe by 53\% ($0.391 \to 0.600$), revealing a regularisation effect; MLP shows a modest trade-off ($0.803 \to 0.698$, $-$13\%).}
+\label{fig:defense_effectiveness}
+\end{figure}
+
+Figure~\ref{fig:robustness_frontier} presents the \emph{robustness frontier}---showing how each model's Sharpe ratio and signal stability degrade as the perturbation budget $\varepsilon$ increases.
+The gap between the standard (dashed) and adversarial-trained (solid) lines represents the robustness gain from adversarial training.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../benchmark/reports/figures/fig17_robustness_frontier.pdf}
+\caption{Robustness Frontier. (a)~Adversarial Sharpe vs.\ perturbation budget: adversarial-trained models (solid) degrade more gracefully than standard models (dashed). The shaded area represents the robustness gain. (b)~Signal Stability Rate across $\varepsilon$: adversarial-trained MLP maintains $>$99\% SSR even at $\varepsilon=0.20\sigma$, vs.\ 81.9\% for standard training.}
+\label{fig:robustness_frontier}
+\end{figure}
+
+\paragraph{The regularisation interpretation.}
+The most surprising result in Table~\ref{tab:adv_defense} is that adversarial training \emph{improves} the LSTM's clean-data Sharpe by 53\% (0.391 $\to$ 0.600), while simultaneously boosting MLP's signal stability from 85.7\% to 99.1\%.
+This partial regularisation effect---where adversarial training improves generalisation for LSTM but trades off a modest amount of clean-data performance for MLP---is consistent with the hypothesis that adversarial training acts as an \textbf{implicit regulariser} in noisy financial data.
+The key mechanism is signal-to-noise ratio (SNR): standard training on financial features leads to overfitting on transient market noise, producing unstable predictions.
+Adversarial training forces the model to become invariant to small input perturbations---effectively suppressing overfitting to noise.
+For LSTM, whose recurrent architecture is particularly prone to compounding noise across timesteps, this denoising effect is strong enough to \emph{improve} clean-data performance.
+For MLP, whose standard-trained clean Sharpe is already high (0.803), the regularisation benefit manifests primarily in signal stability (+13.4\,pp SSR) rather than Sharpe improvement.
+This interpretation aligns with theoretical results on the regularisation properties of adversarial training~\citep{ref_goodfellow_fgsm}, and suggests that \textbf{adversarial training is a dual-purpose tool for financial ML}---simultaneously improving robustness and, in architectures susceptible to temporal noise accumulation, also improving generalisation.
+
 
 % ================================================================== %
 \section{Reproducibility Package}
@@ -751,9 +718,10 @@ The full benchmark is executed via:
     pip install -r requirements.txt
     python run_all.py               # Standard benchmark (Tables 1-8)
     python run_robustness.py         # Robustness analysis (Tables 9-12)
+    python run_adversarial_defense.py # Defense experiment (Table 13)
 \end{verbatim}
 
-The standard pipeline runs 13 sequential steps; the robustness pipeline adds 3 experimental directions (adversarial perturbation, synthetic fuzzing, concept drift) producing 4 additional tables and 6 additional figures.
+The standard pipeline runs 13 sequential steps; the robustness pipeline adds 3 experimental directions (adversarial perturbation, synthetic fuzzing, concept drift) producing 4 additional tables and 6 additional figures; the defense pipeline adds 1~table and 1~figure.
 
 \subsection{Runtime and Environment}
 
@@ -770,9 +738,9 @@ The standard pipeline runs 13 sequential steps; the robustness pipeline adds 3 e
 
 The pipeline produces:
 \begin{itemize}[leftmargin=1.4em]
-  \item \textbf{12 tables}: standard benchmark (Tables~1--8) + robustness analysis (Tables~9--12) in CSV + \LaTeX
-  \item \textbf{15 figures}: standard benchmark (Figures~1--9) + robustness analysis (Figures~10--15) in PDF
-  \item \textbf{JSON summaries}: \texttt{all\_metrics.json} (standard) + \texttt{robustness\_metrics.json} (robustness)
+  \item \textbf{13 tables}: standard benchmark (Tables~1--8) + robustness analysis (Tables~9--12) + adversarial defense (Table~13) in CSV + \LaTeX
+  \item \textbf{17 figures}: standard benchmark (Figures~1--9) + robustness analysis (Figures~10--15) + defense comparison (Figures~16--17) in PDF
+  \item \textbf{JSON summaries}: \texttt{all\_metrics.json} (standard) + \texttt{robustness\_metrics.json} (robustness) + \texttt{adversarial\_defense\_metrics.json} (defense)
 \end{itemize}
 
 \subsection{Code and License}
@@ -784,7 +752,8 @@ The repository includes \texttt{REPRODUCIBILITY.md} (step-by-step instructions),
 After installing dependencies (\texttt{pip install -r requirements.txt}), two commands reproduce every result in this paper:
 \begin{center}
 \texttt{python run\_all.py} \quad$\longrightarrow$\quad Tables~\ref{tab:main}--\ref{tab:longonly} + Figures~\ref{fig:timeline}--\ref{fig:equity} in {$\sim$6~min} on CPU.\\
-\texttt{python run\_robustness.py} \quad$\longrightarrow$\quad Tables~\ref{tab:adversarial}--\ref{tab:poisoning} + Figures~\ref{fig:adv_sharpe}--\ref{fig:robustness_summary} in {$\sim$20~min}.
+\texttt{python run\_robustness.py} \quad$\longrightarrow$\quad Tables~\ref{tab:adversarial}--\ref{tab:poisoning} + Figures~\ref{fig:adv_sharpe}--\ref{fig:robustness_summary} in {$\sim$20~min}.\\
+\texttt{python run\_adversarial\_defense.py} \quad$\longrightarrow$\quad Table~\ref{tab:adv_defense} + Figures~\ref{fig:defense_effectiveness}--\ref{fig:robustness_frontier} in {$\sim$8~min}.
 \end{center}
 
 
@@ -809,7 +778,9 @@ The benchmark yields several implications that we believe are generalisable beyo
 
   \item \textbf{Multiple testing matters}: after BH-FDR correction, no ML-vs-ML pair is distinguishable, reinforcing the need for correction when comparing many models.
 
-  \item \textbf{The robustness--complexity trade-off}: adversarial perturbation experiments reveal that deep-learning models (MLP, LSTM) are the most fragile---suffering catastrophic signal reversals under perturbations bounded within $0.1\sigma$---while simple linear models prove remarkably resilient. This suggests that model complexity, without explicit robustness mechanisms, is a \emph{liability} in adversarial market environments.
+  \item \textbf{The robustness--complexity trade-off}: adversarial perturbation experiments reveal that deep-learning models (MLP, LSTM) are the most fragile---suffering catastrophic signal reversals under perturbations bounded within $0.1\sigma$---while simple linear models prove remarkably resilient. Adversarial training partially mitigates this vulnerability (MLP SSR improves from 85.7\% to 99.1\%; LSTM SSR from 65.1\% to 74.8\%), but does not fully close the gap, suggesting that model complexity without explicit robustness mechanisms is a \emph{liability} in adversarial market environments.
+
+  \item \textbf{Adversarial training as a financial regulariser}: a notable finding is that adversarial training \emph{improves} LSTM's clean-data Sharpe by 53\% (0.391 $\to$ 0.600), while for MLP it produces a modest trade-off (0.803 $\to$ 0.698, $-$13\%) accompanied by dramatic signal stability gains (+13.4\,pp SSR). We attribute the LSTM improvement to the extremely low signal-to-noise ratio (SNR) of financial data: standard empirical risk minimisation (ERM) tends to overfit high-frequency noise because noise components also reduce training loss. Adversarial perturbations simulate exactly these noise fluctuations; by forcing the model to remain invariant to them, adversarial training effectively ``denoises'' the optimisation landscape. For LSTM, whose recurrent architecture compounds noise across timesteps, this denoising effect is strong enough to improve both robustness \emph{and} clean-data performance simultaneously. This positions adversarial training as a dual-purpose tool---especially valuable for recurrent architectures in noisy financial settings---and opens a promising research direction at the intersection of robust optimisation and financial signal extraction.
 
   \item \textbf{Synthetic stress testing reveals unseen vulnerabilities}: fuzzing experiments expose model-specific fragilities (momentum models fail under flash crashes; all models struggle with gap-reversals) that are invisible to historical regime analysis.
 
@@ -853,11 +824,12 @@ Natural extensions include:
 (i)~expanding to individual stocks with survivorship-free data (e.g., CRSP);
 (ii)~adding fundamental and alternative-data features;
 (iii)~incorporating certified robustness bounds (e.g., randomised smoothing adapted to financial features);
-(iv)~developing adversarial training procedures specifically designed for trading signal robustness;
+(iv)~extending the adversarial training defense demonstrated in Section~\ref{sec:adv_defense} with certified robustness methods (e.g., randomised smoothing adapted to financial features) to achieve provable guarantees rather than empirical mitigation;
 (v)~extending fuzzing to include order-book-level liquidity simulation;
 (vi)~integrating online/continual learning methods to mitigate concept drift;
 (vii)~including reinforcement learning agents in the robustness analysis;
-and (viii)~adding intraday/LOB evaluation protocols.
+(viii)~adding intraday/LOB evaluation protocols;
+and (ix)~investigating the regularisation properties of adversarial training across different financial asset classes, model architectures, and data frequencies to determine whether the clean-data performance improvement observed for LSTM generalises beyond the ETF cross-sectional setting.
 
 \section{Conclusion}
 
@@ -866,10 +838,12 @@ Beyond conventional findings---that transaction costs eliminate apparent alpha, 
 (i)~deep-learning models are catastrophically fragile under adversarial perturbations that are indistinguishable from normal market noise;
 (ii)~synthetic stress testing exposes model-specific vulnerabilities invisible to historical analysis;
 and (iii)~ML-extracted trading signals decay exponentially with prediction horizon, with half-lives of only 2--5 days.
+Critically, we go beyond problem identification to demonstrate that \textbf{adversarial training} (Madry et al., 2018) can substantially mitigate deep-model fragility---improving MLP signal stability by +13.4 percentage points and LSTM by +9.7 percentage points---and, for LSTM, adversarial training also \emph{increases} the clean-data Sharpe ratio by 53\% (0.391 $\to$ 0.600), acting as a powerful regulariser against temporal noise accumulation. Residual vulnerability remains, motivating future work on certified defenses.
 
 These findings establish a \textbf{robustness--complexity trade-off} in financial ML: model capacity that improves clean-data performance often \emph{degrades} robustness.
-We propose new metrics---the Adversarial Sharpe Ratio, Signal Flip Rate, and Alpha Decay Half-Life---as standard components of ML trading evaluation, and release the complete pipeline (benchmark + robustness suite, producing 12~tables and 15~figures) under MIT license.
+We propose new metrics---the Adversarial Sharpe Ratio, Signal Flip Rate, and Alpha Decay Half-Life---as standard components of ML trading evaluation, and release the complete pipeline (benchmark + robustness + defense suites, producing 13~tables and 17~figures) under MIT license.
 We believe this work contributes to the growing effort to bridge adversarial machine learning and financial AI, providing the research community with a systematic framework for evaluating not just how well models predict, but how gracefully they fail.
+Our finding that adversarial training serves as both a defense mechanism \emph{and} a generalisation enhancer for LSTM in noisy financial data opens a promising research direction at the intersection of robust optimisation and financial ML.
 
 
 % ================================================================== %

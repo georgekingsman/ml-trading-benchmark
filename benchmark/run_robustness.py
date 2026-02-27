@@ -68,6 +68,11 @@ from scripts.robustness_report import (
     plot_alpha_decay_curve,
     plot_robustness_summary,
 )
+from scripts.paper_tables import (
+    write_adversarial_table as write_paper_adversarial,
+    write_fuzzing_table as write_paper_fuzzing,
+    write_poisoning_table as write_paper_poisoning,
+)
 
 
 def load_config(path: str) -> dict:
@@ -171,9 +176,10 @@ def main():
 
     model_configs = [m for m in cfg["models"] if m.get("enabled", True)]
 
-    # Reduce deep-model epochs for robustness pipeline (we care about
-    # relative performance differences, not absolute accuracy, so fewer
-    # epochs are sufficient and dramatically speed up the many re-trainings).
+    # If model checkpoints exist from run_all.py, load them for consistency.
+    # Otherwise fall back to retraining with reduced epochs for speed.
+    # 如果 run_all.py 的模型 checkpoint 存在，则加载以保持一致性。
+    # 否则用较少 epoch 重新训练以加快速度。
     ROBUSTNESS_EPOCH_OVERRIDE = {"MLP": 10, "LSTM": 8}
     for mcfg in model_configs:
         name = mcfg["name"]
@@ -183,15 +189,24 @@ def main():
 
     trained_models = {}
     all_predictions = {}
+    input_dim = X_train.shape[1]
 
     from tqdm import tqdm
     for mcfg in tqdm(model_configs, desc="Training models"):
         name = mcfg["name"]
         params = mcfg.get("params", {})
-        print(f"  Training: {name} (epochs={params.get('epochs', 'N/A')})")
 
-        model = build_model(name, params)
-        model.fit(X_train, y_train, X_val, y_val)
+        # Try loading checkpoint from run_all.py for DL models
+        ckpt_path = f"models/{name}_checkpoint.pt"
+        if name in ("MLP", "LSTM") and os.path.exists(ckpt_path):
+            print(f"  Loading checkpoint: {name} ← {ckpt_path} (consistent with Table 1)")
+            model = build_model(name, params)
+            model.load_checkpoint(ckpt_path, input_dim=input_dim)
+        else:
+            print(f"  Training: {name} (epochs={params.get('epochs', 'N/A')})")
+            model = build_model(name, params)
+            model.fit(X_train, y_train, X_val, y_val)
+
         trained_models[name] = model
 
         preds = model.predict(X_test)
@@ -250,6 +265,11 @@ def main():
         plot_adversarial_sharpe_degradation(adv_results, output_dir)
         plot_signal_flip_rate(adv_results, output_dir)
 
+        # Paper-format table
+        paper_dir = os.path.join(output_dir, "tables", "paper")
+        os.makedirs(paper_dir, exist_ok=True)
+        write_paper_adversarial(adv_results, paper_dir, primary_epsilon=0.10)
+
         all_robustness_results["adversarial"] = {
             model: {str(eps): metrics for eps, metrics in eps_dict.items()}
             for model, eps_dict in adv_results.items()
@@ -280,6 +300,11 @@ def main():
         print("\n  Generating fuzzing reports...")
         generate_fuzzing_table(fuzzing_results, output_dir)
         plot_fuzzing_heatmap(fuzzing_results, output_dir)
+
+        # Paper-format table
+        paper_dir = os.path.join(output_dir, "tables", "paper")
+        os.makedirs(paper_dir, exist_ok=True)
+        write_paper_fuzzing(fuzzing_results, paper_dir)
 
         all_robustness_results["fuzzing"] = {
             scenario: {model: metrics for model, metrics in m_dict.items()}
@@ -325,6 +350,11 @@ def main():
 
         generate_poisoning_table(poison_results, output_dir)
         plot_poisoning_curve(poison_results, output_dir)
+
+        # Paper-format table
+        paper_dir = os.path.join(output_dir, "tables", "paper")
+        os.makedirs(paper_dir, exist_ok=True)
+        write_paper_poisoning(poison_results, paper_dir)
 
         all_robustness_results["label_poisoning"] = {
             model: {str(rate): metrics for rate, metrics in rate_dict.items()}

@@ -17,6 +17,7 @@ Strategy (2):     MomentumBaseline, MeanReversionBaseline
 
 from __future__ import annotations
 
+import os
 import warnings
 from abc import ABC, abstractmethod
 from typing import Any, Optional
@@ -47,6 +48,14 @@ class BaseModel(ABC):
     def predict(self, X: np.ndarray) -> np.ndarray:
         """Return predicted forward return (float) for each row."""
         ...
+
+    def save_checkpoint(self, path: str) -> None:
+        """Save model weights / state to disk for reproducibility."""
+        raise NotImplementedError(f"{self.name} does not support checkpointing")
+
+    def load_checkpoint(self, path: str, input_dim: int | None = None) -> "BaseModel":
+        """Load model weights / state from disk."""
+        raise NotImplementedError(f"{self.name} does not support checkpointing")
 
     def __repr__(self):
         return f"<{self.name}>"
@@ -229,6 +238,27 @@ class MLPModel(BaseModel):
             Xt = torch.tensor(X, dtype=torch.float32).to(self.device)
             return self.model(Xt).cpu().numpy().flatten()
 
+    def save_checkpoint(self, path: str) -> None:
+        import torch
+        os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+        torch.save({
+            "model_state": self.model.state_dict(),
+            "hidden_dims": self.hidden_dims,
+            "epochs": self.epochs,
+            "lr": self.lr,
+            "batch_size": self.batch_size,
+        }, path)
+
+    def load_checkpoint(self, path: str, input_dim: int | None = None) -> "MLPModel":
+        import torch
+        ckpt = torch.load(path, map_location="cpu", weights_only=False)
+        self.hidden_dims = ckpt["hidden_dims"]
+        if input_dim is not None:
+            self._build(input_dim)
+        self.model.load_state_dict(ckpt["model_state"])
+        self.model.eval()
+        return self
+
 
 class LSTMModel(BaseModel):
     name = "LSTM"
@@ -316,6 +346,31 @@ class LSTMModel(BaseModel):
             preds = self.model(Xt).cpu().numpy().flatten()
         # Pad beginning with NaN (no prediction for first seq_len-1 rows)
         return np.concatenate([np.full(self.seq_len - 1, np.nan), preds])
+
+    def save_checkpoint(self, path: str) -> None:
+        import torch
+        os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+        torch.save({
+            "model_state": self.model.state_dict(),
+            "hidden_dim": self.hidden_dim,
+            "num_layers": self.num_layers,
+            "seq_len": self.seq_len,
+            "epochs": self.epochs,
+            "lr": self.lr,
+            "batch_size": self.batch_size,
+        }, path)
+
+    def load_checkpoint(self, path: str, input_dim: int | None = None) -> "LSTMModel":
+        import torch
+        ckpt = torch.load(path, map_location="cpu", weights_only=False)
+        self.hidden_dim = ckpt["hidden_dim"]
+        self.num_layers = ckpt["num_layers"]
+        self.seq_len = ckpt["seq_len"]
+        if input_dim is not None:
+            self._build(input_dim)
+        self.model.load_state_dict(ckpt["model_state"])
+        self.model.eval()
+        return self
 
 
 # ================================================================== #
