@@ -1,0 +1,14 @@
+% Auto-generated paper-format tabular for tab:sensitivity
+% 自动生成的论文格式表格 tab:sensitivity (敏感性分析)
+\begin{tabular}{l r r r r | r r r r r}
+\toprule
+ & \multicolumn{4}{c|}{Rebalance Frequency (days)} & \multicolumn{5}{c}{Top-$K$} \\
+Model & 1 & 5 & 10 & 20 & 3 & 5 & 10 & 15 & 20 \\
+\midrule
+LogisticRegression   & 0.66 & 0.47 & 0.15 & 0.34 & 0.95 & 1.03 & 0.47 & 0.60 & 0.58 \\
+LightGBM             & 0.31 & 0.29 & 0.31 & 0.18 & $-$0.08 & 0.10 & 0.29 & 0.20 & 0.12 \\
+MLP                  & 0.34 & 0.80 & 0.34 & 0.01 & 0.91 & 0.57 & 0.80 & 0.72 & 0.73 \\
+LSTM                 & 0.81 & 0.39 & 0.28 & $-$0.73 & 0.97 & 0.39 & 0.39 & 0.54 & 0.68 \\
+Ensemble             & 0.70 & 0.55 & 0.48 & 0.39 & 0.84 & 0.83 & 0.55 & 0.60 & 0.65 \\
+\bottomrule
+\end{tabular}

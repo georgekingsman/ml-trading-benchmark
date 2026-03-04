@@ -1,0 +1,154 @@
+{
+  "MLP_Standard": {
+    "0.01": {
+      "ssr": 0.9679,
+      "signal_flip_rate": 0.0321,
+      "rank_correlation": 0.9758,
+      "sharpe_clean": 0.803,
+      "sharpe_adv": -0.02,
+      "sharpe_drop_pct": 102.5,
+      "max_dd_adv_pct": 33.7
+    },
+    "0.05": {
+      "ssr": 0.8987,
+      "signal_flip_rate": 0.1013,
+      "rank_correlation": 0.8516,
+      "sharpe_clean": 0.803,
+      "sharpe_adv": -2.457,
+      "sharpe_drop_pct": 406.0,
+      "max_dd_adv_pct": 84.2
+    },
+    "0.1": {
+      "ssr": 0.8569,
+      "signal_flip_rate": 0.1431,
+      "rank_correlation": 0.7442,
+      "sharpe_clean": 0.803,
+      "sharpe_adv": -3.516,
+      "sharpe_drop_pct": 537.9,
+      "max_dd_adv_pct": 93.1
+    },
+    "0.2": {
+      "ssr": 0.8188,
+      "signal_flip_rate": 0.1812,
+      "rank_correlation": 0.6497,
+      "sharpe_clean": 0.803,
+      "sharpe_adv": -3.975,
+      "sharpe_drop_pct": 595.0,
+      "max_dd_adv_pct": 94.6
+    }
+  },
+  "MLP_Adversarial": {
+    "0.01": {
+      "ssr": 0.9988,
+      "signal_flip_rate": 0.0012,
+      "rank_correlation": 0.9775,
+      "sharpe_clean": 0.698,
+      "sharpe_adv": -0.347,
+      "sharpe_drop_pct": 149.7,
+      "max_dd_adv_pct": 45.9
+    },
+    "0.05": {
+      "ssr": 0.9947,
+      "signal_flip_rate": 0.0053,
+      "rank_correlation": 0.8598,
+      "sharpe_clean": 0.698,
+      "sharpe_adv": -2.725,
+      "sharpe_drop_pct": 490.4,
+      "max_dd_adv_pct": 89.3
+    },
+    "0.1": {
+      "ssr": 0.9914,
+      "signal_flip_rate": 0.0086,
+      "rank_correlation": 0.756,
+      "sharpe_clean": 0.698,
+      "sharpe_adv": -4.014,
+      "sharpe_drop_pct": 675.1,
+      "max_dd_adv_pct": 96.1
+    },
+    "0.2": {
+      "ssr": 0.9898,
+      "signal_flip_rate": 0.0102,
+      "rank_correlation": 0.6871,
+      "sharpe_clean": 0.698,
+      "sharpe_adv": -4.655,
+      "sharpe_drop_pct": 766.9,
+      "max_dd_adv_pct": 97.8
+    }
+  },
+  "LSTM_Standard": {
+    "0.01": {
+      "ssr": 0.8898,
+      "signal_flip_rate": 0.1102,
+      "rank_correlation": 0.9433,
+      "sharpe_clean": 0.391,
+      "sharpe_adv": -3.143,
+      "sharpe_drop_pct": 903.8,
+      "max_dd_adv_pct": 89.1
+    },
+    "0.05": {
+      "ssr": 0.6811,
+      "signal_flip_rate": 0.3189,
+      "rank_correlation": 0.65,
+      "sharpe_clean": 0.391,
+      "sharpe_adv": -8.228,
+      "sharpe_drop_pct": 2204.3,
+      "max_dd_adv_pct": 99.6
+    },
+    "0.1": {
+      "ssr": 0.6514,
+      "signal_flip_rate": 0.3486,
+      "rank_correlation": 0.577,
+      "sharpe_clean": 0.391,
+      "sharpe_adv": -8.921,
+      "sharpe_drop_pct": 2381.6,
+      "max_dd_adv_pct": 99.7
+    },
+    "0.2": {
+      "ssr": 0.6387,
+      "signal_flip_rate": 0.3613,
+      "rank_correlation": 0.5369,
+      "sharpe_clean": 0.391,
+      "sharpe_adv": -9.129,
+      "sharpe_drop_pct": 2434.8,
+      "max_dd_adv_pct": 99.7
+    }
+  },
+  "LSTM_Adversarial": {
+    "0.01": {
+      "ssr": 0.9675,
+      "signal_flip_rate": 0.0325,
+      "rank_correlation": 0.9968,
+      "sharpe_clean": 0.6,
+      "sharpe_adv": -0.243,
+      "sharpe_drop_pct": 140.5,
+      "max_dd_adv_pct": 41.3
+    },
+    "0.05": {
+      "ssr": 0.8446,
+      "signal_flip_rate": 0.1554,
+      "rank_correlation": 0.9292,
+      "sharpe_clean": 0.6,
+      "sharpe_adv": -3.478,
+      "sharpe_drop_pct": 679.7,
+      "max_dd_adv_pct": 94.7
+    },
+    "0.1": {
+      "ssr": 0.748,
+      "signal_flip_rate": 0.252,
+      "rank_correlation": 0.8259,
+      "sharpe_clean": 0.6,
+      "sharpe_adv": -5.513,
+      "sharpe_drop_pct": 1018.8,
+      "max_dd_adv_pct": 99.0
+    },
+    "0.2": {
+      "ssr": 0.7033,
+      "signal_flip_rate": 0.2967,
+      "rank_correlation": 0.7656,
+      "sharpe_clean": 0.6,
+      "sharpe_adv": -6.376,
+      "sharpe_drop_pct": 1162.7,
+      "max_dd_adv_pct": 99.5
+    }
+  }
+}

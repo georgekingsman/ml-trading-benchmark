@@ -1,0 +1,75 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Environment
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Archives
+*.tar.gz
+*.zip
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.out
+*.toc
+*.synctex.gz
+*.spl
+*.fls
+*.fdb_latexmk
+
+# Data files (too large for git)
+benchmark/data/raw/
+benchmark/data/processed/*.parquet
+benchmark/features/*.parquet
+
+# Model checkpoints
+benchmark/models/*.pt
+
+# Logs
+*.log
+run_output*.log
+
+# Build outputs
+*.egg-info/
+dist/
+build/
+
+# ============================================
+# AutoSurvey artifacts (NOT part of this project)
+# ============================================
+main.py
+evaluation.py
+fill_core_bibtex.py
+count_abstract.py
+build_database.ipynb
+src/
+database/
+examples/
+
+# Root requirements.txt is AutoSurvey's; benchmark has its own
+/requirements.txt
+
+# output/ is a working directory; canonical paper is in submission_EAAI/
+output/
+
+# Binary files (regenerable compiled PDFs only)
+# Keep figure PDFs in figs/ and submission_EAAI/ (needed for paper compilation)
+*.png
+!figs/*.png
+
+# Exclude compiled paper PDFs but keep figure PDFs
+submission_EAAI/ml_trading_benchmark_EAAI.pdf

@@ -1,0 +1,15 @@
+% Auto-generated paper-format tabular for tab:longonly
+% 自动生成的论文格式表格 tab:longonly (多空 vs 纯多头)
+\begin{tabular}{l r r r r r r}
+\toprule
+ & \multicolumn{3}{c}{Long-Short} & \multicolumn{3}{c}{Long-Only} \\
+Model & Sharpe(g) & Sharpe(n) & CAGR(g,\%) & Sharpe(g) & Sharpe(n) & CAGR(g,\%) \\
+\midrule
+LogisticRegression   & 0.47 & $-$1.44 & 7.04 & 0.68 & $-$0.35 & 10.57 \\
+LightGBM             & 0.29 & $-$1.51 & 3.34 & 0.65 & $-$0.13 & 10.55 \\
+MLP                  & 0.80 & $-$1.19 & 10.56 & 0.80 & $-$0.10 & 13.07 \\
+LSTM                 & 0.39 & $-$1.56 & 4.54 & 0.50 & $-$0.30 & 7.45 \\
+Ensemble             & 0.55 & $-$1.26 & 8.82 & 0.66 & $-$0.30 & 10.63 \\
+BuyAndHold\_SPY      & 0.77 & 0.77 & 14.86 & --- & --- & --- \\
+\bottomrule
+\end{tabular}

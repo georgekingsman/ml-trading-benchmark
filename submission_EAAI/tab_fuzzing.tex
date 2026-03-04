@@ -1,0 +1,18 @@
+% Auto-generated paper-format tabular for tab:fuzzing
+% 自动生成的论文格式表格 tab:fuzzing (从已保存 CSV 生成)
+\begin{tabular}{l r r r r r r}
+\toprule
+Model & Clean & Flash & Flash & Vol Spike & Vol Spike & Gap \& \\
+      &       & $-10\%$ & $-20\%$ & $3\times$ & $5\times$ & Reversal \\
+\midrule
+LSTM                   & 0.391 & 0.379 & 0.419 & 0.390 & 0.323 & 0.407 \\
+MLP                    & 0.803 & 0.791 & 0.828 & 0.579 & 0.523 & 0.829 \\
+LogisticRegression     & 0.469 & 0.490 & 0.456 & 0.212 & 0.370 & 0.470 \\
+LinearRegression       & 0.432 & 0.454 & 0.414 & 0.171 & 0.467 & 0.461 \\
+Ridge                  & 0.432 & 0.454 & 0.414 & 0.171 & 0.467 & 0.461 \\
+RandomForest           & 0.372 & 0.388 & 0.354 & 0.354 & 0.459 & 0.398 \\
+LightGBM               & 0.290 & 0.267 & 0.279 & 0.033 & 0.337 & 0.267 \\
+MomentumBaseline       & 0.134 & 0.110 & 0.143 & 0.129 & $-0.091$ & 0.131 \\
+MeanReversionBase.     & $-0.134$ & $-0.110$ & $-0.143$ & $-0.129$ & 0.091 & $-0.131$ \\
+\bottomrule
+\end{tabular}

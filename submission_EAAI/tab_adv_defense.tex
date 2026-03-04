@@ -1,0 +1,14 @@
+% Auto-generated paper-format tabular for tab:adv_defense
+% 自动生成的论文格式表格 tab:adv_defense (对抗训练防御)
+\begin{tabular}{l l r r r r r r}
+\toprule
+Model & Training & SSR & Flip Rate & Sharpe & Sharpe & Sharpe & Max DD \\
+      &          &     &           & (clean) & (adv.) & Drop \% & (adv., \%) \\
+\midrule
+LSTM & Standard & 0.651 & 0.349 & 0.391 & $-8.921$ & 2381.6 & 99.7 \\
+LSTM & Adversarial & \textbf{0.748} & \textbf{0.252} & 0.600 & $-5.513$ & \textbf{1018.8} & 99.0 \\
+\midrule
+MLP & Standard & 0.857 & 0.143 & 0.803 & $-3.516$ & \textbf{537.9} & 93.1 \\
+MLP & Adversarial & \textbf{0.991} & \textbf{0.009} & 0.698 & $-4.014$ & 675.1 & 96.1 \\
+\bottomrule
+\end{tabular}

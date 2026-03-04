@@ -1,0 +1,22 @@
+% Auto-generated paper-format tabular for tab:main
+% 自动生成的论文格式表格 tab:main
+\begin{tabular}{l r r r r r r r r}
+\toprule
+Model & \multicolumn{1}{c}{CAGR} & \multicolumn{1}{c}{Sharpe} & \multicolumn{1}{c}{Sharpe} & \multicolumn{1}{c}{Max DD} & \multicolumn{1}{c}{IC} & \multicolumn{1}{c}{ICIR} & \multicolumn{2}{c}{Sharpe 95\% CI} \\
+      & \multicolumn{1}{c}{(g, \%)} & \multicolumn{1}{c}{(gross)} & \multicolumn{1}{c}{(net)} & \multicolumn{1}{c}{(\%)} & & & \multicolumn{1}{c}{lo} & \multicolumn{1}{c}{hi} \\
+\midrule
+\textit{BuyAndHold\_SPY} & \textit{14.86} & \textit{0.765} & \textit{0.77} & \textit{33.72} & \textit{---} & \textit{---} & \textit{$-$0.12} & \textit{1.68} \\
+\textit{EqualWeight} & \textit{6.82} & \textit{0.515} & \textit{0.52} & \textit{26.32} & \textit{---} & \textit{---} & \textit{$-$0.39} & \textit{1.45} \\
+\midrule
+MLP                  & 10.56 & 0.803 & $-$1.19 & 17.83 & 0.003 & 0.014 & $-$0.13 & 1.62 \\
+Ensemble             & 8.82 & 0.554 & $-$1.26 & 19.08 & 0.011 & 0.041 & $-$0.34 & 1.50 \\
+LogisticRegression   & 7.04 & 0.469 & $-$1.44 & 21.33 & 0.010 & 0.037 & $-$0.43 & 1.35 \\
+LinearRegression     & 6.21 & 0.432 & $-$1.46 & 18.93 & 0.015 & 0.051 & $-$0.48 & 1.35 \\
+Ridge                & 6.21 & 0.432 & $-$1.46 & 18.93 & 0.015 & 0.051 & $-$0.48 & 1.35 \\
+LSTM                 & 4.54 & 0.391 & $-$1.56 & 19.27 & 0.019 & 0.090 & $-$0.49 & 1.33 \\
+RandomForest         & 4.47 & 0.372 & $-$1.56 & 28.55 & 0.004 & 0.019 & $-$0.56 & 1.29 \\
+LightGBM             & 3.34 & 0.290 & $-$1.51 & 24.02 & 0.007 & 0.028 & $-$0.65 & 1.20 \\
+MomentumBaseline     & 0.67 & 0.134 & $-$0.69 & 39.44 & $-$0.011 & $-$0.036 & $-$0.75 & 1.01 \\
+MeanReversionBaseline & $-$4.69 & $-$0.134 & $-$0.97 & 44.77 & 0.011 & 0.036 & $-$1.01 & 0.75 \\
+\bottomrule
+\end{tabular}
